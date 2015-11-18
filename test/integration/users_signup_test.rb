@@ -9,7 +9,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       post users_path, user: { name:  "", email: "user@invalid", password: "foo", password_confirmation: "bar" }
     end
     assert_template 'users/new'
-
+    assert_select 'div#error_explanation'
   end
 
   test "valid sign up" do
@@ -20,6 +20,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
         password_confirmation: "password" }
     end
     assert_template 'users/show'
+
+    # TODO - where does flash come from here?
+    assert flash.any?
   end
 
 end
