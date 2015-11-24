@@ -41,8 +41,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_template "users/show"
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
+    assert is_logged_in?
 
-    # Simulate a user clicking logout in a second window.
+    # simulate a user clicking logout in a second window.
     delete logout_path
 
   end
@@ -53,6 +54,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path, count: 0
+    refute is_logged_in?
   end
 
 end

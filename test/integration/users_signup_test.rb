@@ -23,8 +23,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
-
-    # TODO - where does flash come from here?
     assert flash.any?
   end
 
