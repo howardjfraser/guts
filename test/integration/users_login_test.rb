@@ -31,6 +31,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_nil cookies['remember_token']
   end
 
+  test "login with friendly forwarding" do
+    get edit_user_path(@user)
+    assert_equal edit_user_url(@user), session[:forwarding_url]
+    log_in_as(@user)
+    assert_redirected_to edit_user_path(@user)
+    assert_nil session[:forwarding_url]
+  end
+
   private
 
   def log_in
