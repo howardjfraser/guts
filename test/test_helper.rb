@@ -6,7 +6,7 @@ require "minitest/reporters"
 Minitest::Reporters.use!
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails'
 
 class ActiveSupport::TestCase
   fixtures :all
