@@ -16,6 +16,9 @@ gem 'bootstrap',     '4.0.0.alpha2'
 gem 'sdoc',          '0.4.0', group: :doc
 gem 'will_paginate', '3.0.7'
 
+group :development do
+  gem 'letter_opener'
+end
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
@@ -29,10 +32,6 @@ group :test do
   gem 'mini_backtrace',     '0.1.3'
   gem 'guard-minitest',     '2.3.1'
   gem 'simplecov'
-end
-
-group :development do
-  gem 'letter_opener'
 end
 
 group :production do
