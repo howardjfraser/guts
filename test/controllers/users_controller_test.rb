@@ -51,6 +51,14 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
+  test "should redirect destroy when trying to delete self" do
+    log_in_as(@user)
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user
+    end
+    assert_redirected_to users_url
+  end
+
   test "should redirect update when logged in as wrong user" do
     log_in_as(@other_user)
     patch :update, id: @user, user: { name: @user.name, email: @user.email }
