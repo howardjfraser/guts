@@ -64,7 +64,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'http://lit-oasis-4797.herokuapp.com'
+  host = 'http://enigmatic-springs-5637.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
 
   ActionMailer::Base.smtp_settings = {
