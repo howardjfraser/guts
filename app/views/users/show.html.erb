@@ -1,13 +1,7 @@
 <% provide(:title, @user.name) %>
 
-<div class="row">
-  <aside class="col-md-4">
+<h1>
+  <%= @user.name %>
+</h1>
 
-    <h1 class="p-t-md">
-      <%= @user.name %>
-    </h1>
-
-    <%= @current_user %>
-
-  </aside>
-</div>
+<%= @current_user %>

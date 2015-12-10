@@ -11,25 +11,22 @@
 
   </head>
 
-  <body class="m-t-lg">
+  <body>
 
     <%= render partial: 'layouts/header' %>
 
-    <div class="container">
+    <div>
 
       <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <%= content_tag(:div, message) %>
       <% end %>
 
       <%= yield %>
+
       <%= render partial: 'layouts/footer' %>
+
     </div>
 
-
-    <%  if Rails.env.development? %>
-      <div class="container small">
-         <%= debug(params) %>
-      </div>
-    <% end %>
   </body>
+
 </html>
