@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
+  # replace with new trial inc company name
   get 'signup' => 'users#new' # dupe
 
   get 'login' => 'sessions#new'
