@@ -15,6 +15,10 @@ class ActiveSupport::TestCase
     !session[:user_id].nil?
   end
 
+  def is_logged_in_as? user
+    session[:user_id].equal?(user.id)
+  end
+
   def log_in_as(user, options = {})
     password = options[:password] || 'password'
     remember_me = options[:remember_me] || '1'

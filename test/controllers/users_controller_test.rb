@@ -7,7 +7,11 @@ class UsersControllerTest < ActionController::TestCase
     @other_user = users(:archer)
   end
 
-  test "should get new" do
+  test "should redirect new when not logged in" do
+    get :new
+    assert_not flash.empty?
+    assert_redirected_to login_url
+    log_in_as(@user)
     get :new
     assert_response :success
   end
