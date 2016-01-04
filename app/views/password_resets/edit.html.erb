@@ -7,11 +7,11 @@
 
   <%= hidden_field_tag :email, @user.email %>
 
-  <%= f.label :password %>
+  <%= f.label :password, "New password" %>
   <%= f.password_field :password, class: 'form-control' %>
 
   <%= f.label :password_confirmation, "Confirmation" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= f.submit "Update password" %>
+  <%= f.submit "Update" %>
 <% end %>
