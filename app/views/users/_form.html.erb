@@ -13,6 +13,6 @@
   <%= f.label :password_confirmation, "Confirmation" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= f.submit "#{@user.new_record? ? 'Sign Up Now' : 'Save Changes'}" %>
+  <%= f.submit "#{@user.new_record? ? 'Add User' : 'Save Changes'}" %>
 
 <% end %>
