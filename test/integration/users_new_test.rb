@@ -29,7 +29,12 @@ class UsersNewTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size
+
     user = assigns(:user)
+
+    follow_redirect!
+    assert_template 'users/index'
+    assert_not flash.empty?
 
     check_not_activated user
     check_no_login_before_activation user
