@@ -30,16 +30,4 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'delete', count: 0
   end
 
-  test "index only includes activated users" do
-    log_in_as(@non_admin)
-    get users_path
-    assert_select 'a', text: 'Michael Example', count: 1
-    @admin.toggle!(:activated)
-    get users_path
-    assert_select 'a', text: 'Michael Example', count: 0
-
-    # redirect for unactivated users
-    get user_path @admin
-    assert_redirected_to root_path
-  end
 end
