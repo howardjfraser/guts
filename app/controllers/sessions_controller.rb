@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       if @user.activated?
         log_in @user
         remember_or_forget @user
-        redirect_back_or @user
+        redirect_back_or users_url
       else
         message  = "Account not activated. Check email for activation link."
         flash[:warning] = message
