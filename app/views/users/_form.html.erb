@@ -11,8 +11,8 @@
   <%= f.password_field :password, class: 'form-control' %>
 
   <%= f.label :password_confirmation, "Confirmation" %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
+  <%= f.password_field :password_confirmation, class: 'form-control m-b-1' %>
 
-  <%= f.submit "#{@user.new_record? ? 'Add User' : 'Save Changes'}" %>
+  <%= f.submit "#{@user.new_record? ? 'Add User' : 'Save Changes'}", class: "btn btn-secondary" %>
 
 <% end %>
