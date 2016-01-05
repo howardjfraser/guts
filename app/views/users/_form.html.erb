@@ -3,16 +3,16 @@
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control', autofocus: true  %>
 
-  <%= f.label :email %>
+  <%= f.label :email, class: "m-t-1"  %>
   <%= f.email_field :email, class: 'form-control' %>
 
   <!-- TODO replace this with reset pw by email link once initial pw is set as part of activation -->
-  <%= f.label :password %>
+  <%= f.label :password, class: "m-t-1"  %>
   <%= f.password_field :password, class: 'form-control' %>
 
-  <%= f.label :password_confirmation, "Confirmation" %>
-  <%= f.password_field :password_confirmation, class: 'form-control m-b-1' %>
+  <%= f.label :password_confirmation, "Confirmation", class: "m-t-1"  %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= f.submit "#{@user.new_record? ? 'Add User' : 'Save Changes'}", class: "btn btn-secondary" %>
+  <%= f.submit "#{@user.new_record? ? 'Add User' : 'Save Changes'}", class: "btn btn-secondary m-t-2" %>
 
 <% end %>
