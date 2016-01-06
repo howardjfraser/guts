@@ -1,10 +1,6 @@
 @import "variables";
 @import "bootstrap-app";
 
-//.container {
-//  max-width: 720px !important;
-//}
-
 .strong {
   font-weight: 600;
 }
@@ -12,7 +8,9 @@
 label {
   @extend .text-muted;
 
-  @media (min-width: 544px) {
+  margin-bottom: 0;
+
+  @media (min-width: 415px) {
     padding-top: 8px;
   }
 }
@@ -20,5 +18,9 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"], {
-  @extend .form-control
+  @extend .form-control;
+}
+
+.main {
+  min-height: 380px;
 }
