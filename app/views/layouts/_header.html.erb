@@ -1,20 +1,19 @@
-<header class="m-t-1">
+<header class="m-t-2">
 
-<%= link_to "Home", root_path, id: "logo" %>
-
-  <% if logged_in? %>
-
-    | <%= link_to "Users", users_path %>
-    | <%= link_to "Me", current_user %>
-    | <%= link_to "Log out", logout_path, method: "delete" %>
-
-  <% else %>
-
-    | <%= link_to "Sign up", signup_path %>
-    | <%= link_to "Log in", login_path %>
-
+  <% flash.each do |message_type, message| %>
+    <%= content_tag(:div, message) %>
   <% end %>
 
-  <hr>
+  <%= link_to "Home", root_path, id: "logo", style: "padding-right: 1rem;" %>
+
+  <% if logged_in? %>
+    <%= link_to "Users", users_path, style: "padding-right: 1rem;" %>
+    <%= link_to "Me", current_user %>
+  <% else %>
+    <%= link_to "Sign up", signup_path, style: "padding-right: 1rem;" %>
+    <%= link_to "Log in", login_path %>
+  <% end %>
 
 </header>
+
+<hr>

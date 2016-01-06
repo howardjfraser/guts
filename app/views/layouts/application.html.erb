@@ -17,10 +17,6 @@
 
     <div>
 
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message) %>
-      <% end %>
-
       <%= yield %>
 
       <%= render partial: 'layouts/footer' %>
