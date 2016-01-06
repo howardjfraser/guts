@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Acivation email sent."
+      flash[:info] = "We’ve emailed #{@user.name} an invitation to join Questions"
       redirect_to users_url
     else
       render 'new'
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "User updated"
+      flash[:success] = "#{@user.name} has been updated"
       redirect_to @user
     else
       render 'edit'
@@ -45,10 +45,10 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user != @current_user
       user.destroy
-      flash[:success] = "User deleted"
+      flash[:success] = "#{user.name} has been deleted :("
       redirect_to users_url
     else
-      flash[:warning] = "You can't delete yourself"
+      flash[:warning] = "You can’t delete yourself"
       redirect_to users_url
     end
   end
