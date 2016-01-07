@@ -1,7 +1,7 @@
 <footer>
-  <hr class="m-y-2">
+  <hr>
   <% if logged_in? %>
-    <div class="text-xs-right m-y-2">
+    <div class="text-xs-right m-b-1">
       <%= link_to "Log out", logout_path, method: "delete" %>
     </div>
   <% end %>
