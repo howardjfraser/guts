@@ -2,46 +2,46 @@
 
 <%= form_for(@user) do |f| %>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-3 col-lg-4 text-sm-right">
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
       <%= f.label :name %>
     </div>
-    <div class="col-xs-12 col-sm-7 col-lg-5 m-b-1">
+    <div class="std-control">
       <%= f.text_field :name, autofocus: true  %>
     </div>
   </div>
 
-  <div class="row ">
-    <div class="col-xs-12 col-sm-3 col-lg-4 text-sm-right">
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
       <%= f.label :email %>
     </div>
-    <div class="col-xs-12 col-sm-7 col-lg-5 m-b-1">
+    <div class="std-control">
       <%= f.email_field :email %>
     </div>
   </div>
 
   <!-- TODO replace these with reset pw by email link once initial pw is set as part of activation -->
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-3 col-lg-4 text-sm-right">
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
       <%= f.label :password %>
     </div>
-    <div class="col-xs-12 col-sm-7 col-lg-5 m-b-1">
+    <div class="std-control ">
       <%= f.password_field :password, class: '' %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-3 col-lg-4 text-sm-right">
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
       <%= f.label :password_confirmation, "Confirm" %>
     </div>
-    <div class="col-xs-12 col-sm-7 col-lg-5 m-b-1">
+    <div class="std-control">
       <%= f.password_field :password_confirmation %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-10 col-lg-9 col-xl-9 text-xs-right">
+    <div class="std-submit text-xs-right">
       <%= f.submit "#{@user.new_record? ? 'Add User' : 'Update'}", class: "btn btn-success" %>
     </div>
   </div>
