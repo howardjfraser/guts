@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "We’ve emailed #{@user.name} an invitation to join Questions"
+      flash[:success] = "We’ve emailed #{@user.name} an invitation to join Questions"
       redirect_to users_url
     else
       render 'new'
@@ -62,14 +62,14 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     unless current_user? @user
-      flash[:warning] = "Oi!"
+      flash[:danger] = "You’re not allowed to do that"
       redirect_to(root_url)
     end
   end
 
   def admin_user
     unless current_user.admin?
-      flash[:warning] = "Oi!"
+      flash[:danger] = "You’re not allowed to do that"
       redirect_to(root_url)
     end
   end
