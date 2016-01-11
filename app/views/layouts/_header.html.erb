@@ -1,7 +1,7 @@
 <header class="m-t-1">
 
   <% flash.each do |message_type, message| %>
-    <%= content_tag(:div, message) %>
+    <%= content_tag(:div, message, class: 'text-xs-center ') %>
   <% end %>
 
   <%= link_to "Home", root_path, id: "logo", style: "padding-right: 1rem;" %>
@@ -18,9 +18,9 @@
   <div class="text-xs-center text-muted pull-xs-right ">
     <span class="hidden-sm-up">xs</span>
     <span class="hidden-xs-down hidden-md-up">sm</span>
-    <span class="hidden-sm-down hidden-lg-up">md</span>
-    <span class="hidden-md-down hidden-xl-up">lg</span>
-    <span class="hidden-lg-down ">xl</span>
+    <span class="hidden-sm-down ">md</span>
+    <!-- <span class="hidden-md-down hidden-xl-up">lg</span>
+    <span class="hidden-lg-down ">xl</span> -->
   </div>
 
 </header>
