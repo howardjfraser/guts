@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all()
@@ -57,14 +56,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    unless current_user? @user
-      flash[:danger] = "You’re not allowed to do that"
-      redirect_to(root_url)
-    end
   end
 
   def admin_user
