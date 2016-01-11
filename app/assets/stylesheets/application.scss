@@ -7,12 +7,7 @@
 
 label {
   @extend .text-muted;
-
   margin-bottom: 2px;
-
-  @media (min-width: map-get($grid-breakpoints, sm)) {
-    padding-top: 8px;
-  }
 }
 
 input[type="text"],
@@ -37,6 +32,10 @@ input[type="password"], {
   @media (min-width: map-get($grid-breakpoints, lg)) {
     @include make-col-span(4);
   }
+
+  @media (min-width: map-get($grid-breakpoints, sm)) {
+    padding-top: 8px;
+  }
 }
 
 .std-control {
@@ -48,11 +47,43 @@ input[type="password"], {
   @media (min-width: map-get($grid-breakpoints, sm)) {
     @include make-col-span(7);
   }
-  // lg
   @media (min-width: map-get($grid-breakpoints, lg)) {
     @include make-col-span(5);
   }
 }
+
+.std-checkbox {
+  @include make-col();
+
+  @media (min-width: map-get($grid-breakpoints, xs)) {
+    @include make-col-span(2);
+  }
+  @media (min-width: map-get($grid-breakpoints, sm)) {
+    @include make-col-span(1);
+    padding-left: 0;
+  }
+  @media (min-width: map-get($grid-breakpoints, md)) {
+    @include make-col-span(1);
+  }
+}
+
+.std-checkbox-label {
+  @include make-col();
+
+  @media (min-width: map-get($grid-breakpoints, xs)) {
+    @include make-col-span(10);
+  }
+  @media (min-width: map-get($grid-breakpoints, sm)) {
+    @include make-col-span(9);
+  }
+  @media (min-width: map-get($grid-breakpoints, md)) {
+    @include make-col-span(9);
+  }
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    @include make-col-span(8);
+  }
+}
+
 
 .std-submit {
   @include make-col();
