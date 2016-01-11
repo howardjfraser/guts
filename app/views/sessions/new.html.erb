@@ -24,14 +24,12 @@
   </div>
 
   <div class="row m-b-1">
-    <div class="std-label text-sm-right">
-      &nbsp;
+    <div class="std-label text-sm-right" style="padding-top: 8px">
+        <%= f.check_box :remember_me %>
     </div>
     <div class="std-control">
       <%= f.label :remember_me do %>
-        <%= f.check_box :remember_me %>
-        <!-- TODO add inline help -->
-        <span>Remember me</span>
+        <span>Remember me on this computer</span>
       <% end %>
     </div>
   </div>

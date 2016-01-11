@@ -10,7 +10,7 @@ label {
 
   margin-bottom: 2px;
 
-  @media (min-width: 414px) {
+  @media (min-width: map-get($grid-breakpoints, sm)) {
     padding-top: 8px;
   }
 }
@@ -28,16 +28,13 @@ input[type="password"], {
 .std-label {
   @include make-col();
 
-  // xs
-  @media (min-width: 0px) {
+  @media (min-width: map-get($grid-breakpoints, xs)) {
     @include make-col-span(12);
   }
-  // sm
-  @media (min-width: 414px ) {
+  @media (min-width: map-get($grid-breakpoints, sm)) {
     @include make-col-span(3);
   }
-  // lg
-  @media (min-width: 768px) {
+  @media (min-width: map-get($grid-breakpoints, lg)) {
     @include make-col-span(4);
   }
 }
@@ -45,16 +42,14 @@ input[type="password"], {
 .std-control {
   @include make-col();
 
-  // xs
-  @media (min-width: 0px) {
+  @media (min-width: map-get($grid-breakpoints, xs)) {
     @include make-col-span(12);
   }
-  // sm
-  @media (min-width: 414px ) {
+  @media (min-width: map-get($grid-breakpoints, sm)) {
     @include make-col-span(7);
   }
   // lg
-  @media (min-width: 768px) {
+  @media (min-width: map-get($grid-breakpoints, lg)) {
     @include make-col-span(5);
   }
 }
@@ -62,16 +57,13 @@ input[type="password"], {
 .std-submit {
   @include make-col();
 
-  // xs
-  @media (min-width: 0px) {
+  @media (min-width: map-get($grid-breakpoints, xs)) {
     @include make-col-span(12);
   }
-  // sm
-  @media (min-width: 414px ) {
+  @media (min-width: map-get($grid-breakpoints, sm)) {
     @include make-col-span(10);
   }
-  // lg
-  @media (min-width: 768px) {
+  @media (min-width: map-get($grid-breakpoints, lg)) {
     @include make-col-span(9);
   }
 }
