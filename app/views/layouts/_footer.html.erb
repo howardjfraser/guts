@@ -1,8 +1,11 @@
 <footer class="">
   <hr>
-  <div class="pull-xs-left text-muted">
-    Revision <%= AppName::REVISION %>
-  </div>
+
+  <% if Rails.env.development? %>
+    <div class="pull-xs-left text-muted">
+      Revision <%= AppName::REVISION %>
+    </div>
+  <% end %>
 
   <% if logged_in? %>
     <div class="pull-xs-right m-b-1">
