@@ -1,7 +1,7 @@
-<header class="m-t-1">
+<header class="m-t-2">
 
   <% flash.each do |message_type, message| %>
-    <%= content_tag(:div, message, class: "text-xs-center text-#{message_type}") %>
+    <%= content_tag(:div, message, class: "text-xs-center text-#{message_type} m-b-1") %>
   <% end %>
 
   <%= link_to "Home", root_path, id: "logo", style: "padding-right: 1rem;" %>
