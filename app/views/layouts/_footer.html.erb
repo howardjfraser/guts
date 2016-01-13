@@ -1,7 +1,11 @@
-<footer>
+<footer class="">
   <hr>
+  <div class="pull-xs-left text-muted">
+    Revision <%= AppName::REVISION %>
+  </div>
+
   <% if logged_in? %>
-    <div class="text-xs-right m-b-1">
+    <div class="pull-xs-right m-b-1">
       <%= link_to "Log out", logout_path, method: "delete" %>
     </div>
   <% end %>
