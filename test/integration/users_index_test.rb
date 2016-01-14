@@ -24,9 +24,10 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "index as non-admin doesn't have delete links" do
+  test "index as non-admin doesn't have new and delete links" do
     log_in_as(@non_admin)
     get users_path
+    assert_select "a[href=?]", new_user_path, test: 'Add User', count: 0
     assert_select 'a', text: 'delete', count: 0
   end
 
