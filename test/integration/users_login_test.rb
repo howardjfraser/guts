@@ -6,14 +6,13 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "error flash only displays once for login fail" do
+  test "login fail" do
     get "/login"
     assert_template "sessions/new"
     post login_path, session: { email: "", password: "" }
+    follow_redirect!
     assert_template "sessions/new"
     assert flash.any?
-    get root_path
-    assert flash.empty?
   end
 
   test "login then logout" do

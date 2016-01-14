@@ -9,37 +9,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should redirect non-logged in users" do
-    get :index
-    assert_not flash.empty?
-    assert_redirected_to login_url
-
-    get :show, id: @admin
-    assert_not flash.empty?
-    assert_redirected_to login_url
-
-    get :new
-    assert_not flash.empty?
-    assert_redirected_to login_url
-
-    assert_no_difference 'User.count' do
-      patch :create, user: { name: "name", email: "new@company.com" }
-    end
-    assert_not flash.empty?
-    assert_redirected_to login_url
-
-    get :edit, id: @admin
-    assert_not flash.empty?
-    assert_redirected_to login_url
-
-    patch :update, id: @admin, user: { name: @admin.name, email: @admin.email }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-
-    assert_no_difference 'User.count' do
-      delete :destroy, id: @other
-    end
-    assert_not flash.empty?
-    assert_redirected_to login_url
+    check_login_redirect { get :index }
+    check_login_redirect { get :show, id: @admin }
+    check_login_redirect { get :new }
+    check_login_redirect { put :create, user: { name: "name", email: "new@company.com" } }
+    check_login_redirect { get :edit, id: @admin }
+    check_login_redirect { patch :update, id: @admin, user: { name: @admin.name, email: @admin.email } }
+    check_login_redirect { delete :destroy, id: @other }
   end
 
   test "should redirect new when logged in as non-admin" do
@@ -99,6 +75,12 @@ class UsersControllerTest < ActionController::TestCase
     get :edit, id: user
     assert_not flash.empty?
     assert_redirected_to root_url
+  end
+
+  def check_login_redirect
+    yield
+    assert_not flash.empty?
+    assert_redirected_to login_url
   end
 
 end
