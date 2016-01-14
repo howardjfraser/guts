@@ -1,11 +1,14 @@
 <footer class="">
   <hr>
 
-  <% if Rails.env.development? %>
-    <div class="pull-xs-left text-muted">
-      Revision <%= AppName::REVISION %>
-    </div>
-  <% end %>
+  <div class="pull-xs-left text-muted">
+    Revision
+    <% if Rails.env.development? %>
+      <%= AppName::REVISION %>
+    <% else %>
+      <%= ENV['HEROKU_SLUG_COMMIT'] %>
+    <% end %>
+  </div>
 
   <% if logged_in? %>
     <div class="pull-xs-right m-b-1">
