@@ -4,7 +4,7 @@
 
   <div class="pull-xs-left text-muted">
     <% if Rails.env.production? %>
-      Revision <%= ENV['HEROKU_SLUG_COMMIT'][0..7] %> /
+      <%= ENV['HEROKU_SLUG_COMMIT'][0..7] %> /
     <% end %>
 
     <!-- screen size debug -->
