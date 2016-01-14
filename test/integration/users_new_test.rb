@@ -7,7 +7,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "invalid sign up" do
+  test "invalid new user" do
     log_in_as(@user)
     get new_user_path
 
@@ -18,7 +18,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
     assert_select 'div.errors'
   end
 
-  test "valid signup information with account activation" do
+  test "valid new user plus account activation" do
     log_in_as(@user)
 
     get new_user_path

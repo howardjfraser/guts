@@ -7,10 +7,11 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     @non_admin = users(:archer)
   end
 
-  test "index as admin has delete links" do
+  test "index as admin has new and delete links" do
     log_in_as(@admin)
     get users_path
     assert_template 'users/index'
+    assert_select 'a[href=?]', new_user_path, text: 'Add User'
 
     User.all.each do |user|
       assert_select 'a[href=?]', user_path(user), text: user.name
