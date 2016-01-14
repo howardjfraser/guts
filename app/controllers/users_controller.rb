@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user != @current_user
       user.destroy
-      flash[:success] = "#{user.name} has been deleted :("
+      flash[:success] = "#{user.name} has been deleted"
       redirect_to users_url
     else
       flash[:warning] = "You can’t delete yourself"

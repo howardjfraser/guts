@@ -1,9 +1,1 @@
-<li>
-
-  <%= link_to user.name, user %>
-
-  <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" }, class: "small" %>
-  <% end %>
-
-</li>
+<%= link_to user.name, user, class: "p-r-2", style: "white-space: nowrap;" %>

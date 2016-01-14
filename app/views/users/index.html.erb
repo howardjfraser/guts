@@ -1,12 +1,10 @@
 <% provide(:title, "Users") %>
 
 <% if current_user.admin? %>
-  <%= link_to "Add User", new_user_path, class: "btn btn-secondary pull-xs-right" %>
+  <%= link_to "Add User", new_user_path, class: "btn btn-primary pull-xs-right" %>
 <% end %>
 
 <h1>Users</h1>
 <hr>
 
-<ul class="list list-unstyled">
 <%= render partial: @users %>
-</ul>
