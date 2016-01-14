@@ -100,5 +100,19 @@ input[type="password"], {
 }
 
 .m-b-h {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
+}
+
+.circle {
+  font-size: 1em;
+  text-align: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+
+  background: #ddd;
+  color: white;
+
+  border-radius: 50%;
 }
