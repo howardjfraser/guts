@@ -6,6 +6,12 @@
     <% if Rails.env.production? %>
       Revision <%= ENV['HEROKU_SLUG_COMMIT'][0..7] %>
     <% end %>
+
+    <!-- screen size debug -->
+    <span class="hidden-sm-up">xs</span>
+    <span class="hidden-xs-down hidden-md-up">sm</span>
+    <span class="hidden-sm-down ">md</span>
+
   </div>
 
   <% if logged_in? %>
