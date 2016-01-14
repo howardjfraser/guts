@@ -1,12 +1,10 @@
 <footer class="">
+
   <hr>
 
   <div class="pull-xs-left text-muted">
-    Revision -
-    <% if Rails.env.development? %>
-      <%= AppName::REVISION %>
-    <% else %>
-      <%= ENV['HEROKU_SLUG_COMMIT'] %>
+    <% if Rails.env.production? %>
+      Revision <%= ENV['HEROKU_SLUG_COMMIT'][0..7] %>
     <% end %>
   </div>
 
@@ -15,4 +13,5 @@
       <%= link_to "Log out", logout_path, method: "delete" %>
     </div>
   <% end %>
+
 </footer>
