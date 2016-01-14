@@ -5,6 +5,14 @@
 </h1>
 <hr>
 
+<p>
+  <%= @user.company.name %>
+</p>
+
+<p>
+  <%= @user.activated? %>
+</p>
+
 <% if current_user.admin? %>
   <%= link_to "edit", edit_user_path(@user)  %>
 <% end %>

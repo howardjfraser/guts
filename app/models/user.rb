@@ -13,7 +13,11 @@ class User < ActiveRecord::Base
 
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
+  validates :company, presence: true
+
   has_secure_password
+
+  belongs_to :company
 
   def remember
     self.remember_token = User.new_token

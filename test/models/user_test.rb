@@ -3,7 +3,8 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com", password: "foobar",
+    @company = Company.new(name: "TestCo")
+    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar",
       password_confirmation: "foobar")
   end
 
@@ -76,6 +77,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?(:remember, '')
+  end
+
+  test "user with no company should not be valid" do
+    @user.company = nil
+    refute @user.valid?
   end
 
 end
