@@ -1,5 +1,6 @@
 Company.delete_all
-company = Company.create!(name: "Smith Co")
+company = Company.new(name: "Smith Co")
+company.save(validate: false)
 
 User.delete_all
 
