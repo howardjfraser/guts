@@ -4,9 +4,21 @@
 <hr>
 
 <%= form_for(:password_reset, url: password_resets_path) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
 
-  <%= f.submit "Submit" %>
+
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
+      <%= f.label :email %>
+    </div>
+    <div class="std-control">
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+  </div>
+
+  <div class="row m-b-1">
+    <div class="std-submit text-xs-right">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
+  </div>
 
 <% end %>

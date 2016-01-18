@@ -8,11 +8,28 @@
 
   <%= hidden_field_tag :email, @user.email %>
 
-  <%= f.label :password, "New password" %>
-  <%= f.password_field :password %>
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
+      <%= f.label :password, "New password" %>
+    </div>
+    <div class="std-control">
+      <%= f.password_field :password, autofocus: true %>
+    </div>
+  </div>
 
-  <%= f.label :password_confirmation, "Confirmation" %>
-  <%= f.password_field :password_confirmation %>
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
+      <%= f.label :password_confirmation, "Confirmation" %>
+    </div>
+    <div class="std-control">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
 
-  <%= f.submit "Update" %>
+  <div class="row m-b-1">
+    <div class="std-submit text-xs-right">
+      <%= f.submit "Update", class: 'btn btn-primary' %>
+    </div>
+  </div>
+
 <% end %>
