@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
     check_login_redirect { get :index }
     check_login_redirect { get :show, id: @admin }
     check_login_redirect { get :new }
-    check_login_redirect { put :create, user: { name: "name", email: "new@company.com" } }
+    check_login_redirect { post :create, user: { name: "name", email: "new@company.com" } }
     check_login_redirect { get :edit, id: @admin }
     check_login_redirect { patch :update, id: @admin, user: { name: @admin.name, email: @admin.email } }
     check_login_redirect { delete :destroy, id: @other }
