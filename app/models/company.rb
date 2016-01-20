@@ -1,5 +1,7 @@
 class Company < ActiveRecord::Base
-  has_many :users
+
+  has_many :users, inverse_of: :company
+  accepts_nested_attributes_for :users
 
   # has owner? (or is_owner on user?)
 

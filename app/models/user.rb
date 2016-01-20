@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  belongs_to :company
+  belongs_to :company, inverse_of: :users
 
   def remember
     self.remember_token = User.new_token
