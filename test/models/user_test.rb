@@ -79,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
 
-  test "user with no company should not be valid" do
+  test "user should have company" do
     @user.company = nil
     refute @user.valid?
   end
