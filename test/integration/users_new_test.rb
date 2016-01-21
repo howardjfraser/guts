@@ -12,7 +12,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
     get new_user_path
 
     assert_no_difference 'User.count' do
-      post users_path, user: { name:  "", email: "user@invalid", password: "foo", password_confirmation: "bar" }
+      post users_path, user: { name:  "", email: "user@invalid", password: "foo" }
     end
     assert_template 'users/new'
     assert_select 'div.errors'
@@ -25,7 +25,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
 
     assert_difference 'User.count', 1 do
       post users_path, user:
-        { name:  "Example User", email: "user@example.com", password: "password", password_confirmation: "password" }
+        { name:  "Example User", email: "user@example.com", password: "password" }
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size

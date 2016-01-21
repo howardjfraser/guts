@@ -45,19 +45,14 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     user.toggle!(:activated)
 
-    # submit pw change - invalid password & confirmation
-    patch password_reset_path(user.reset_token), email: user.email,
-      user: { password: "foobaz", password_confirmation: "barquux" }
-    assert_select 'div.errors'
-
     # submit pw change - empty password
     patch password_reset_path(user.reset_token), email: user.email,
-      user: { password: "", password_confirmation: "" }
+      user: { password: "" }
     assert_select 'div.errors'
 
-    # submit pw change - valid password & confirmation
+    # submit pw change - valid password
     patch password_reset_path(user.reset_token), email: user.email,
-      user: { password: "foobaz", password_confirmation: "foobaz" }
+      user: { password: "foobaz" }
     assert is_logged_in?
     assert_not flash.empty?
     assert_redirected_to user
@@ -71,7 +66,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     user.update_attribute(:reset_sent_at, 3.hours.ago)
 
     patch password_reset_path(user.reset_token), email: user.email,
-      user: { password: "foobar", password_confirmation: "foobar" }
+      user: { password: "foobar" }
     assert_response :redirect
     follow_redirect!
     assert_not flash.empty?

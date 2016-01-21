@@ -4,8 +4,7 @@ class UserTest < ActiveSupport::TestCase
 
   def setup
     @company = Company.new(name: "TestCo")
-    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar",
-      password_confirmation: "foobar")
+    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar")
   end
 
   test "should be valid" do
@@ -66,12 +65,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "password should be non-blank" do
-    @user.password = @user.password_confirmation = " " * 6
+    @user.password = " " * 6
     assert_not @user.valid?
   end
 
   test "password should have a minimum length" do
-    @user.password = @user.password_confirmation = "a" * 5
+    @user.password = "a" * 5
     assert_not @user.valid?
   end
 

@@ -42,7 +42,7 @@ class PasswordResetsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:password)
   end
 
   def find_user

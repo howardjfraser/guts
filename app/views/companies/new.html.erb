@@ -12,7 +12,7 @@
         <%= e.label :name, "Your name" %>
       </div>
       <div class="std-control">
-        <%= e.text_field :name %>
+        <%= e.text_field :name, autofocus: true %>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
         <%= f.label :name, "Company name" %>
       </div>
       <div class="std-control">
-        <%= f.text_field :name, autofocus: true  %>
+        <%= f.text_field :name %>
       </div>
     </div>
 
@@ -40,15 +40,6 @@
       </div>
       <div class="std-control">
         <%= e.password_field :password %>
-      </div>
-    </div>
-
-    <div class="row m-b-1">
-      <div class="std-label text-sm-right">
-        <%= e.label :password_confirmation, "Confirmation" %>
-      </div>
-      <div class="std-control">
-        <%= e.password_field :password_confirmation %>
       </div>
     </div>
 

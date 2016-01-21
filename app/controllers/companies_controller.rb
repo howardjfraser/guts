@@ -23,7 +23,7 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:id, :name,
-      users_attributes: [:id, :name, :email, :password, :password_confirmation])
+      users_attributes: [:id, :name, :email, :password])
   end
 
   def set_up_owner user

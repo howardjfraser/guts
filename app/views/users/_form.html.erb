@@ -31,15 +31,6 @@
     </div>
   </div>
 
-  <div class="row m-b-1">
-    <div class="std-label text-sm-right">
-      <%= f.label :password_confirmation, "Confirm" %>
-    </div>
-    <div class="std-control">
-      <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
-
   <div class="row">
     <div class="std-submit text-xs-right">
       <%= f.submit "#{@user.new_record? ? 'Add User' : 'Update'}", class: "btn btn-primary" %>
