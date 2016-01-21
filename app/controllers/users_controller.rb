@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user.company = @current_user.company
     if @user.save
       @user.send_activation_email
-      flash[:success] = "We’ve emailed #{@user.name} an invitation to join Questions"
+      flash[:success] = "#{@user.name} has been invited"
       redirect_to users_url
     else
       render 'new'

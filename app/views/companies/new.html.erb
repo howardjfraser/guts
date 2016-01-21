@@ -1,0 +1,63 @@
+<h1>Sign up now</h1>
+<hr>
+
+<%= render 'shared/errors', object: @company %>
+
+<%= form_for(@company) do |f| %>
+
+  <%= f.fields_for :users do |e| %>
+
+    <div class="row m-b-1">
+      <div class="std-label text-sm-right">
+        <%= e.label :name, "Your name" %>
+      </div>
+      <div class="std-control">
+        <%= e.text_field :name %>
+      </div>
+    </div>
+
+    <div class="row m-b-1">
+      <div class="std-label text-sm-right">
+        <%= e.label :email %>
+      </div>
+      <div class="std-control">
+        <%= e.email_field :email %>
+      </div>
+    </div>
+
+    <div class="row m-b-1">
+      <div class="std-label text-sm-right">
+        <%= f.label :name, "Company name" %>
+      </div>
+      <div class="std-control">
+        <%= f.text_field :name, autofocus: true  %>
+      </div>
+    </div>
+
+    <div class="row m-b-1">
+      <div class="std-label text-sm-right">
+        <%= e.label :password %>
+      </div>
+      <div class="std-control">
+        <%= e.password_field :password %>
+      </div>
+    </div>
+
+    <div class="row m-b-1">
+      <div class="std-label text-sm-right">
+        <%= e.label :password_confirmation, "Confirmation" %>
+      </div>
+      <div class="std-control">
+        <%= e.password_field :password_confirmation %>
+      </div>
+    </div>
+
+  <% end %>
+
+  <div class="row">
+    <div class="std-submit text-xs-right">
+      <%= f.submit "Sign Up Now", class: "btn btn-success" %>
+    </div>
+  </div>
+
+<% end %>

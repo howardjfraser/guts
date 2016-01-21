@@ -10,7 +10,11 @@
 </p>
 
 <p>
-  <%= @user.activated? %>
+  Activated - <%= @user.activated? %>
+</p>
+
+<p>
+  Admin - <%= @user.admin? %>
 </p>
 
 <% if current_user.admin? %>
