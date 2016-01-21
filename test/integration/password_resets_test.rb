@@ -50,6 +50,11 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
       user: { password: "" }
     assert_select 'div.errors'
 
+    # submit pw change - password to short
+    patch password_reset_path(user.reset_token), email: user.email,
+      user: { password: "aaa" }
+    assert_select 'div.errors'
+
     # submit pw change - valid password
     patch password_reset_path(user.reset_token), email: user.email,
       user: { password: "foobaz" }
