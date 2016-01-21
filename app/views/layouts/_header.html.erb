@@ -4,12 +4,11 @@
     <%= content_tag(:div, message, class: "text-xs-center text-#{message_type} m-b-h") %>
   <% end %>
 
-  <%= link_to "Home", root_path, id: "logo", style: "padding-right: 1rem;" %>
-
   <% if logged_in? %>
     <%= link_to "Users", users_path, style: "padding-right: 1rem;" %>
     <%= link_to "Me", current_user %>
   <% else %>
+    <%= link_to "Welcome", root_path, id: "logo", style: "padding-right: 1rem;" %>
     <%= link_to "Sign up", signup_path, style: "padding-right: 1rem;" %>
     <%= link_to "Log in", login_path %>
   <% end %>
