@@ -1,4 +1,4 @@
-class AccountActivationsController < ApplicationController
+class ActivationsController < ApplicationController
 
   skip_before_action :require_login
 

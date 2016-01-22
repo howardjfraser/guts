@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :companies, only: [:create]
 
   resources :users
-  resources :account_activations, only: [:edit]
+  resources :activations, only: [:edit]
   resources :password_resets, except: [:index, :show, :destroy]
 
 end
