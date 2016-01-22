@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.company = @current_user.company
+    @user.company = current_user.company
     if @user.save
       @user.send_activation_email
       flash[:success] = "#{@user.name} has been invited"
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user != @current_user
+    if user != current_user
       user.destroy
       flash[:success] = "#{user.name} has been deleted"
       redirect_to users_url
