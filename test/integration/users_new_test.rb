@@ -70,6 +70,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'
     assert is_logged_in_as? user
+    assert_not user.admin?
   end
 
 end
