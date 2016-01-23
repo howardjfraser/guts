@@ -1,1 +1,17 @@
-<%= link_to user.name, user, class: "p-r-2", style: "white-space: nowrap;" %>
+<span class="p-r-2" style="white-space: nowrap;">
+
+  <%= link_to user.name, user %>
+
+  <span class="small text-muted">
+    <%= user.company.name %>
+
+    <% if !user.activated? %>
+      not activated
+    <% end %>
+
+    <% if user.admin? %>
+      admin
+    <% end %>
+  </span>
+
+</span>
