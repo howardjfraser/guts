@@ -32,11 +32,13 @@
   </div>
 
   <div class="row m-b-1">
-    <div class="std-label text-sm-right">
-      <%= f.label :password_confirmation, "Confirm" %>
+    <div class="std-checkbox-label text-sm-right">
+      <%= f.label :admin do %>
+        <span>Administrator?</span>
+      <% end %>
     </div>
-    <div class="std-control">
-      <%= f.password_field :password_confirmation %>
+    <div class="std-checkbox text-xs-right">
+      <%= f.check_box :admin %>
     </div>
   </div>
 

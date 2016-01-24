@@ -16,10 +16,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.company = @current_user.company
+    @user.company = current_user.company
     if @user.save
       @user.send_activation_email
-      flash[:success] = "We’ve emailed #{@user.name} an invitation to join Questions"
+      flash[:success] = "#{@user.name} has been invited"
       redirect_to users_url
     else
       render 'new'
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user != @current_user
+    if user != current_user
       user.destroy
       flash[:success] = "#{user.name} has been deleted"
       redirect_to users_url
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :admin)
   end
 
   def admin_user
