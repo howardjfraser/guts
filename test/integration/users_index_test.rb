@@ -3,8 +3,8 @@ require 'test_helper'
 class UsersIndexTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = users(:michael)
-    @non_admin = users(:archer)
+    @admin = users(:brent)
+    @non_admin = users(:gareth)
   end
 
   test "index as admin has new user link" do

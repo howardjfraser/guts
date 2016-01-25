@@ -1,32 +1,40 @@
-michael:
-  name: Michael Example
-  email: michael@example.com
+brent:
+  name: David Brent
+  email: david@office.com
   password_digest: <%= User.digest('password') %>
   admin: true
   activated: true
   activated_at: <%= Time.zone.now %>
-  company: :smith_co
+  company: :wernham_hogg
 
-archer:
-  name: Sterling Archer
-  email: duchess@example.gov
+gareth:
+  name: Gareth Keenan
+  email: gareth@office.com
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
-  company: :smith_co
+  company: :wernham_hogg
 
-lana:
-  name: Lana Kane
-  email: hands@example.gov
+tim:
+  name: Tim Canterbury
+  email: tim@office.com
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
-  company: :smith_co
+  company: :wernham_hogg
 
-malory:
-  name: Malory Archer
-  email: boss@example.gov
+dawn:
+  name: Dawn Tinsley
+  email: dawn@office.com
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
-  company: :smith_co
+  company: :wernham_hogg
+
+keith:
+  name: Big Keith
+  email: keith@office.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+  company: :wernham_hogg

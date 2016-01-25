@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersLoginTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:michael)
+    @user = users(:brent)
   end
 
   test "login fail" do
@@ -43,7 +43,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   def log_in
     get "/login"
     assert_template "sessions/new"
-    post login_path, session: { email: "michael@example.com", password: "password" }
+    post login_path, session: { email: "david@office.com", password: "password" }
     follow_redirect!
     assert_template "users/index"
     assert_select "a[href=?]", login_path, count: 0

@@ -3,8 +3,8 @@ require 'test_helper'
 class UsersDestroyTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = users(:michael)
-    @non_admin = users(:archer)
+    @admin = users(:brent)
+    @non_admin = users(:gareth)
   end
 
   test "admin can delete other users" do

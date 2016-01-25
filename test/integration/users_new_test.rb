@@ -4,7 +4,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
 
   def setup
     ActionMailer::Base.deliveries.clear
-    @user = users(:michael)
+    @user = users(:brent)
   end
 
   test "invalid new user" do

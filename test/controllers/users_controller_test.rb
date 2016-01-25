@@ -3,9 +3,9 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
 
   def setup
-    @admin = users(:michael)
-    @non_admin = users(:archer)
-    @other = users(:lana)
+    @admin = users(:brent)
+    @non_admin = users(:gareth)
+    @other = users(:tim)
   end
 
   test "should redirect non-logged in users" do

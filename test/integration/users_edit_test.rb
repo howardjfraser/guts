@@ -3,8 +3,8 @@ require 'test_helper'
 class UsersEditTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:michael)
-    @other = users(:archer)
+    @user = users(:brent)
+    @other = users(:gareth)
   end
 
   test "unsuccessful edit" do
@@ -23,7 +23,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "add admin rights" do
     log_in_as(@user)
-    make_archer_admin
+    make_gareth_admin
   end
 
   test "prevent removal of last admin" do
@@ -35,14 +35,14 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "allow removal of admin when multiple admins" do
     log_in_as(@user)
-    make_archer_admin # create multiple admins
+    make_gareth_admin # create multiple admins
     patch user_path(@user), user: { admin: "false" }
     check_success @user, false
   end
 
   private
 
-  def make_archer_admin
+  def make_gareth_admin
     assert_not @other.admin?
     patch user_path(@other), user: { admin: "true" }
     check_success @other, true
