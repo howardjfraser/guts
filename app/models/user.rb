@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   validates :company, presence: true
 
+  validate :at_least_one_admin, on: :update
+
   has_secure_password
 
   belongs_to :company, inverse_of: :users
@@ -75,6 +77,19 @@ class User < ActiveRecord::Base
   def create_activation_digest
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  # if the user being updated has had admin removed, check there is another admin
+  def at_least_one_admin
+    if (!self.admin? && self.admin_changed?)
+      if (colleagues.select { |u| u.admin? }.count == 0)
+        errors.add(:admin, "You can’t remove the last administrator")
+      end
+    end
+  end
+
+  def colleagues
+    self.company.users.select { |u| u != self }
   end
 
 end
