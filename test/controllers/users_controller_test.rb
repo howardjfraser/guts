@@ -3,60 +3,60 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
 
   def setup
-    @admin = users(:brent)
-    @non_admin = users(:gareth)
-    @other = users(:tim)
+    @brent = users(:brent)
+    @gareth = users(:gareth)
+    @tim = users(:tim)
   end
 
   test "should redirect non-logged in users" do
     check_login_redirect { get :index }
-    check_login_redirect { get :show, id: @admin }
+    check_login_redirect { get :show, id: @brent }
     check_login_redirect { get :new }
     check_login_redirect { post :create, user: { name: "name", email: "new@company.com" } }
-    check_login_redirect { get :edit, id: @admin }
-    check_login_redirect { patch :update, id: @admin, user: { name: @admin.name, email: @admin.email } }
-    check_login_redirect { delete :destroy, id: @other }
+    check_login_redirect { get :edit, id: @brent }
+    check_login_redirect { patch :update, id: @brent, user: { name: @brent.name, email: @brent.email } }
+    check_login_redirect { delete :destroy, id: @tim }
   end
 
   test "should redirect new when logged in as non-admin" do
-    log_in_as(@non_admin)
+    log_in_as(@gareth)
     get :new
     assert_not flash.empty?
     assert_redirected_to root_url
   end
 
   test "should redirect create when logged in as non-admin" do
-    log_in_as(@non_admin)
+    log_in_as(@gareth)
     patch :create, user: { name: "name", email: "new@company.com" }
     assert_not flash.empty?
     assert_redirected_to root_url
   end
 
   test "should redirect edit when logged in as non-admin" do
-    log_in_as(@non_admin)
-    check_edit_redirect @non_admin
-    check_edit_redirect @admin
+    log_in_as(@gareth)
+    check_edit_redirect @gareth
+    check_edit_redirect @brent
   end
 
   test "should redirect update when logged in as non-admin" do
-    log_in_as(@non_admin)
-    patch :update, id: @admin, user: { name: @admin.name, email: @admin.email }
+    log_in_as(@gareth)
+    patch :update, id: @brent, user: { name: @brent.name, email: @brent.email }
     assert_not flash.empty?
     assert_redirected_to root_url
   end
 
   test "should redirect destroy when logged in as a non-admin" do
-    log_in_as(@non_admin)
+    log_in_as(@gareth)
     assert_no_difference 'User.count' do
-      delete :destroy, id: @other
+      delete :destroy, id: @tim
     end
     assert_redirected_to root_url
   end
 
   test "should redirect destroy when trying to delete self as admin" do
-    log_in_as(@admin)
+    log_in_as(@brent)
     assert_no_difference 'User.count' do
-      delete :destroy, id: @admin
+      delete :destroy, id: @brent
     end
     assert_redirected_to users_url
   end

@@ -3,27 +3,27 @@ require 'test_helper'
 class UserMailerTest < ActionMailer::TestCase
 
   test "activation" do
-    @user = users(:brent)
-    @user.activation_token = User.new_token
-    mail = UserMailer.activation(@user)
+    @brent = users(:brent)
+    @brent.activation_token = User.new_token
+    mail = UserMailer.activation(@brent)
     assert_equal "Account activation", mail.subject
-    assert_equal [@user.email], mail.to
+    assert_equal [@brent.email], mail.to
     assert_equal ["noreply@example.com"], mail.from
-    assert_match @user.name, mail.body.encoded
-    assert_match @user.activation_token, mail.body.encoded
-    assert_match CGI::escape(@user.email), mail.body.encoded
+    assert_match @brent.name, mail.body.encoded
+    assert_match @brent.activation_token, mail.body.encoded
+    assert_match CGI::escape(@brent.email), mail.body.encoded
   end
 
   test "password_reset" do
-    @user = users(:brent)
-    @user.reset_token = User.new_token
-    mail = UserMailer.password_reset(@user)
+    @brent = users(:brent)
+    @brent.reset_token = User.new_token
+    mail = UserMailer.password_reset(@brent)
     assert_equal "Password reset", mail.subject
-    assert_equal [@user.email], mail.to
+    assert_equal [@brent.email], mail.to
     assert_equal ["noreply@example.com"], mail.from
-    assert_match @user.name, mail.body.encoded
-    assert_match @user.reset_token, mail.body.encoded
-    assert_match CGI::escape(@user.email), mail.body.encoded
+    assert_match @brent.name, mail.body.encoded
+    assert_match @brent.reset_token, mail.body.encoded
+    assert_match CGI::escape(@brent.email), mail.body.encoded
   end
 
 end

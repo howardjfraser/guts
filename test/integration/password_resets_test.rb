@@ -4,7 +4,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
 
   def setup
     ActionMailer::Base.deliveries.clear
-    @user = users(:brent)
+    @brent = users(:brent)
   end
 
   test "password resets" do
@@ -17,8 +17,8 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_template 'password_resets/new'
 
     # request reset - valid email
-    post password_resets_path, password_reset: { email: @user.email }
-    assert_not_equal @user.reset_digest, @user.reload.reset_digest
+    post password_resets_path, password_reset: { email: @brent.email }
+    assert_not_equal @brent.reset_digest, @brent.reload.reset_digest
     assert_equal 1, ActionMailer::Base.deliveries.size
     assert_not flash.empty?
     assert_redirected_to root_url
@@ -65,7 +65,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
 
   test "expired token" do
     get new_password_reset_path
-    post password_resets_path, password_reset: { email: @user.email }
+    post password_resets_path, password_reset: { email: @brent.email }
 
     user = assigns(:user)
     user.update_attribute(:reset_sent_at, 3.hours.ago)

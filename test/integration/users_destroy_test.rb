@@ -3,14 +3,14 @@ require 'test_helper'
 class UsersDestroyTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = users(:brent)
-    @non_admin = users(:gareth)
+    @brent = users(:brent)
+    @gareth = users(:gareth)
   end
 
   test "admin can delete other users" do
-    log_in_as(@admin)
+    log_in_as(@brent)
     assert_difference 'User.count', -1 do
-      delete user_path(@non_admin)
+      delete user_path(@gareth)
     end
     assert_not flash.empty?
     follow_redirect!

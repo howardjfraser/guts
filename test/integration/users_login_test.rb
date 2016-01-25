@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersLoginTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:brent)
+    @brent = users(:brent)
   end
 
   test "login fail" do
@@ -21,20 +21,20 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
   test "login with remembering" do
-    log_in_as(@user, remember_me: '1')
+    log_in_as(@brent, remember_me: '1')
     assert_equal cookies['remember_token'], assigns(:user).remember_token
   end
 
   test "login without remembering" do
-    log_in_as(@user, remember_me: '0')
+    log_in_as(@brent, remember_me: '0')
     assert_nil cookies['remember_token']
   end
 
   test "login with friendly forwarding" do
-    get edit_user_path(@user)
-    assert_equal edit_user_url(@user), session[:forwarding_url]
-    log_in_as(@user)
-    assert_redirected_to edit_user_path(@user)
+    get edit_user_path(@brent)
+    assert_equal edit_user_url(@brent), session[:forwarding_url]
+    log_in_as(@brent)
+    assert_redirected_to edit_user_path(@brent)
     assert_nil session[:forwarding_url]
   end
 

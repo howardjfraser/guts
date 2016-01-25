@@ -3,41 +3,41 @@ require 'test_helper'
 class UsersShowTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = users(:brent)
-    @non_admin = users(:gareth)
-    @other = users(:tim)
+    @brent = users(:brent)
+    @gareth = users(:gareth)
+    @tim = users(:tim)
   end
 
   test "show self as non-admin has no links" do
-    log_in_as(@non_admin)
-    get user_path @non_admin
+    log_in_as(@gareth)
+    get user_path @gareth
     assert_template 'users/show'
-    assert_select 'a[href=?]', edit_user_path(@non_admin), text: 'edit', count: 0
-    assert_select 'a[href=?]', user_path(@non_admin), text: 'delete', count: 0
+    assert_select 'a[href=?]', edit_user_path(@gareth), text: 'edit', count: 0
+    assert_select 'a[href=?]', user_path(@gareth), text: 'delete', count: 0
   end
 
   test "show other as non-admin has no links" do
-    log_in_as(@non_admin)
-    get user_path @other
+    log_in_as(@gareth)
+    get user_path @tim
     assert_template 'users/show'
-    assert_select 'a[href=?]', edit_user_path(@other), text: 'edit', count: 0
-    assert_select 'a[href=?]', user_path(@other), text: 'delete', count: 0
+    assert_select 'a[href=?]', edit_user_path(@tim), text: 'edit', count: 0
+    assert_select 'a[href=?]', user_path(@tim), text: 'delete', count: 0
   end
 
   test "show self as admin has edit link only" do
-    log_in_as(@admin)
-    get user_path @admin
+    log_in_as(@brent)
+    get user_path @brent
     assert_template 'users/show'
-    assert_select 'a[href=?]', edit_user_path(@admin), text: 'edit'
-    assert_select 'a[href=?]', user_path(@admin), text: 'delete', count: 0
+    assert_select 'a[href=?]', edit_user_path(@brent), text: 'edit'
+    assert_select 'a[href=?]', user_path(@brent), text: 'delete', count: 0
   end
 
   test "show other as admin has edit and delete links" do
-    log_in_as(@admin)
-    get user_path @non_admin
+    log_in_as(@brent)
+    get user_path @gareth
     assert_template 'users/show'
-    assert_select 'a[href=?]', edit_user_path(@non_admin), text: 'edit'
-    assert_select 'a[href=?]', user_path(@non_admin), text: 'delete'
+    assert_select 'a[href=?]', edit_user_path(@gareth), text: 'edit'
+    assert_select 'a[href=?]', user_path(@gareth), text: 'delete'
   end
 
 end

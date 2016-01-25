@@ -4,11 +4,11 @@ class UsersNewTest < ActionDispatch::IntegrationTest
 
   def setup
     ActionMailer::Base.deliveries.clear
-    @user = users(:brent)
+    @brent = users(:brent)
   end
 
   test "invalid new user" do
-    log_in_as(@user)
+    log_in_as(@brent)
     get new_user_path
 
     assert_no_difference 'User.count' do
@@ -19,7 +19,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
   end
 
   test "valid new user plus account activation" do
-    log_in_as(@user)
+    log_in_as(@brent)
 
     get new_user_path
 

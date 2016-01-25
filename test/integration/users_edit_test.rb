@@ -3,49 +3,49 @@ require 'test_helper'
 class UsersEditTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:brent)
-    @other = users(:gareth)
+    @brent = users(:brent)
+    @gareth = users(:gareth)
   end
 
   test "unsuccessful edit" do
-    log_in_as(@user)
-    get edit_user_path(@user)
+    log_in_as(@brent)
+    get edit_user_path(@brent)
     assert_template 'users/edit'
-    patch user_path(@user), user: { name: "", email: "foo@invalid", password: "foo" }
+    patch user_path(@brent), user: { name: "", email: "foo@invalid", password: "foo" }
     check_fail
   end
 
   test "successful edit" do
-    log_in_as(@user)
-    patch user_path(@user), user: { name: "dave",email: "dave@dave.com", password: "" }
-    check_success @user, true
+    log_in_as(@brent)
+    patch user_path(@brent), user: { name: "dave",email: "dave@dave.com", password: "" }
+    check_success @brent, true
   end
 
   test "add admin rights" do
-    log_in_as(@user)
+    log_in_as(@brent)
     make_gareth_admin
   end
 
   test "prevent removal of last admin" do
-    log_in_as(@user)
-    patch user_path(@user), user: { admin: "false" }
+    log_in_as(@brent)
+    patch user_path(@brent), user: { admin: "false" }
     check_fail
-    assert @user.reload.admin?
+    assert @brent.reload.admin?
   end
 
   test "allow removal of admin when multiple admins" do
-    log_in_as(@user)
+    log_in_as(@brent)
     make_gareth_admin # create multiple admins
-    patch user_path(@user), user: { admin: "false" }
-    check_success @user, false
+    patch user_path(@brent), user: { admin: "false" }
+    check_success @brent, false
   end
 
   private
 
   def make_gareth_admin
-    assert_not @other.admin?
-    patch user_path(@other), user: { admin: "true" }
-    check_success @other, true
+    assert_not @gareth.admin?
+    patch user_path(@gareth), user: { admin: "true" }
+    check_success @gareth, true
   end
 
   def check_success user, is_admin
