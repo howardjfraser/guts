@@ -1,7 +1,7 @@
 <p>Hi <%= @user.name %>,</p>
 
 <p>
-Welcome to Enigmatic Springs. Click on the link below to activate your account:
+Welcome to Guts. Click on the link below to activate your account:
 </p>
 
 <%= link_to "Activate", edit_activation_url(@user.activation_token, email: @user.email) %>
