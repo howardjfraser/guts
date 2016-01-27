@@ -13,5 +13,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def forbidden
+    flash[:danger] = "You’re not allowed to do that"
+    redirect_to root_url
+  end
 
 end

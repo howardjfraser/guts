@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :find_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_company, only: [:show]
+  before_action :check_same_company, only: [:show]
+  before_action :check_is_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @users = User.where(company: current_user.company)
@@ -50,21 +50,16 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :admin).merge(company: current_user.company)
   end
 
-  def check_admin
-    unless current_user.admin?
-      redirect_to root_url, notice: "You’re not allowed to do that"
-    end
-  end
-
-  def check_company
-    unless current_user.company == @user.company
-      flash[:danger] = "You’re not allowed to do that"
-      redirect_to(root_url)
-    end
-  end
-
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def check_is_admin
+    forbidden unless current_user.admin?
+  end
+
+  def check_same_company
+    forbidden unless current_user.company == @user.company
   end
 
 end
