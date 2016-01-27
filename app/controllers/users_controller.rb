@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_company, only: [:show]
 
   def index
-    @users = User.all()
+    @users = User.where(company: current_user.company)
   end
 
   def show
@@ -52,6 +53,13 @@ class UsersController < ApplicationController
   def check_admin
     unless current_user.admin?
       redirect_to root_url, notice: "You’re not allowed to do that"
+    end
+  end
+
+  def check_company
+    unless current_user.company == @user.company
+      flash[:danger] = "You’re not allowed to do that"
+      redirect_to(root_url)
     end
   end
 

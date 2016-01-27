@@ -38,3 +38,11 @@ keith:
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
+
+michael:
+  name: Michael Scott
+  email: michael@dm.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+  company: :dunder_mifflin
