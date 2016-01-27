@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all()
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -27,11 +27,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "#{@user.name} has been updated"
       redirect_to @user
@@ -41,10 +39,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
-    if user != current_user
-      user.destroy
-      flash[:success] = "#{user.name} has been deleted"
+    if @user != current_user
+      @user.destroy
+      flash[:success] = "#{@user.name} has been deleted"
       redirect_to users_url
     else
       flash[:warning] = "You can’t delete yourself"
@@ -58,11 +55,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :admin)
   end
 
-  def admin_user
+  def check_admin
     unless current_user.admin?
       flash[:danger] = "You’re not allowed to do that"
       redirect_to(root_url)
     end
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 
 end
