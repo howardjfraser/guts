@@ -1,7 +1,7 @@
 <header class="m-t-1">
 
   <% flash.each do |message_type, message| %>
-    <%= content_tag(:div, message, class: "text-xs-center text-#{message_type} m-b-h") %>
+    <%= content_tag(:div, message, class: "flash") %>
   <% end %>
 
   <% if logged_in? %>
