@@ -6,9 +6,12 @@ class UsersControllerTest < ActionController::TestCase
     @brent = users(:brent)
     @gareth = users(:gareth)
     @tim = users(:tim)
+    @michael = users(:michael)
   end
 
-  test "should redirect non-logged in users" do
+  # TODO split into is logged in, is admin and same company? add activated test?
+
+  test "should redirect users who are not logged in" do
     check_login_redirect { get :index }
     check_login_redirect { get :show, id: @brent }
     check_login_redirect { get :new }
@@ -56,6 +59,37 @@ class UsersControllerTest < ActionController::TestCase
       delete :destroy, id: @brent
     end
     assert_redirected_to users_url
+  end
+
+  test 'can’t view user from a different company' do
+    log_in_as(@brent)
+    get :show, id: @michael
+    assert_response :forbidden
+  end
+
+  test 'user list does not include other companies' do
+    log_in_as(@brent)
+    get :index
+    users = assigns[:users]
+    users.each { |u| assert @brent.company == u.company }
+  end
+
+  test 'can’t edit users from a different company' do
+    log_in_as(@brent)
+    get :edit, id: @michael
+    assert_response :forbidden
+  end
+
+  test 'can’t update users from a different company' do
+    log_in_as(@brent)
+    patch :update, id: @michael, user: { email: "new@email.com" }
+    assert_response :forbidden
+  end
+
+  test 'can’t delete users from a different company' do
+    log_in_as(@brent)
+    delete :destroy, id: @michael
+    assert_response :forbidden
   end
 
   private

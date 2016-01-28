@@ -39,6 +39,12 @@ keith:
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
+ricky:
+  name: Ricky
+  email: ricky@office.com
+  password_digest: <%= User.digest('password') %>
+  company: :wernham_hogg
+
 michael:
   name: Michael Scott
   email: michael@dm.com

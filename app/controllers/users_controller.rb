@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_same_company, only: [:show]
+  before_action :check_same_company, only: [:show, :edit, :update, :destroy]
   before_action :check_is_admin, only: [:new, :create, :edit, :update, :destroy]
 
   def index
