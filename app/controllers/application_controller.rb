@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def forbidden
-    flash[:danger] = "You’re not allowed to do that"
-    redirect_to root_url
+    render(file: File.join(Rails.root, 'public/403.html'), status: 403, layout: false)
   end
 
 end

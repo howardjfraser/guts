@@ -21,15 +21,13 @@ class UsersControllerTest < ActionController::TestCase
   test "should redirect new when logged in as non-admin" do
     log_in_as(@gareth)
     get :new
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect create when logged in as non-admin" do
     log_in_as(@gareth)
     patch :create, user: { name: "name", email: "new@company.com" }
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect edit when logged in as non-admin" do
@@ -41,8 +39,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should redirect update when logged in as non-admin" do
     log_in_as(@gareth)
     patch :update, id: @brent, user: { name: @brent.name, email: @brent.email }
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect destroy when logged in as a non-admin" do
@@ -50,7 +47,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_no_difference 'User.count' do
       delete :destroy, id: @tim
     end
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect destroy when trying to delete self as admin" do
@@ -65,8 +62,7 @@ class UsersControllerTest < ActionController::TestCase
 
   def check_edit_redirect user
     get :edit, id: user
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   def check_login_redirect

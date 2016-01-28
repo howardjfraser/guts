@@ -11,8 +11,7 @@ class UsersAuthTest < ActionController::TestCase
   test 'can’t view user from different company' do
     log_in_as(@brent)
     get :show, id: @michael
-    assert_redirected_to root_url
-    assert_not flash.empty?
+    assert_response :forbidden
   end
 
   test 'user list does not include other companies' do
