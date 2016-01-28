@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :find_user, only: [:show, :edit, :update, :destroy]
 
@@ -16,7 +15,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.company = current_user.company
     if @user.save
       @user.send_activation_email
       flash[:success] = "#{@user.name} has been invited"
@@ -52,7 +50,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :admin)
+    params.require(:user).permit(:name, :email, :password, :admin).merge(company: current_user.company)
   end
 
   def check_admin
