@@ -11,9 +11,8 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      flash[:success] = "Congratulations!"
       set_up_owner @company.users.first
-      redirect_to users_url
+      redirect_to users_url, notice: "Congratulations!"
     else
       render 'new'
     end

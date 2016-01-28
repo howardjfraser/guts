@@ -17,8 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:success] = "#{@user.name} has been invited"
-      redirect_to users_url
+      redirect_to users_url, notice: "#{@user.name} has been invited"
     else
       render 'new'
     end
@@ -29,8 +28,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "#{@user.name} has been updated"
-      redirect_to @user
+      redirect_to @user, notice: "#{@user.name} has been updated"
     else
       render 'edit'
     end
@@ -39,11 +37,9 @@ class UsersController < ApplicationController
   def destroy
     if @user != current_user
       @user.destroy
-      flash[:success] = "#{@user.name} has been deleted"
-      redirect_to users_url
+      redirect_to users_url, notice: "#{@user.name} has been deleted"
     else
-      flash[:warning] = "You can’t delete yourself"
-      redirect_to users_url
+      redirect_to users_url, notice: "You can’t delete yourself"
     end
   end
 
@@ -55,8 +51,7 @@ class UsersController < ApplicationController
 
   def check_admin
     unless current_user.admin?
-      flash[:danger] = "You’re not allowed to do that"
-      redirect_to(root_url)
+      redirect_to root_url, notice: "You’re not allowed to do that"
     end
   end
 
