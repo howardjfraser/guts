@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token
 
-  ROLES = %w[user admin]
+  ROLES = %w[user admin root]
 
   before_save :downcase_email
   before_create :create_activation_digest
@@ -20,14 +20,14 @@ class User < ActiveRecord::Base
 
   validate :at_least_one_admin, on: :update
 
-  validates_inclusion_of :role, in: ROLES
+  validates_inclusion_of :role, in: ROLES[0...-1]
 
   has_secure_password
 
   belongs_to :company, inverse_of: :users
 
   def admin?
-    self.role == "admin"
+    self.role == "admin" || self.role == "root"
   end
 
   def remember
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   # if the user being updated has had admin removed, check there is another admin
   def at_least_one_admin
     if (!self.admin? && self.role_changed?)
-      if (colleagues.select { |u| u.admin? }.count == 0)
+      if (colleagues.select { |u| u.role == "admin" }.count == 0)
         errors.add(:role, "You can’t remove the last administrator")
       end
     end

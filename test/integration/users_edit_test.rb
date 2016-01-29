@@ -40,6 +40,13 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     check_success @brent, false
   end
 
+  test "prevent root user being created" do
+    log_in_as(@brent)
+    patch user_path(@gareth), user: { role: "root" }
+    check_fail
+    assert @brent.reload.admin?
+  end
+
   private
 
   def make_gareth_admin

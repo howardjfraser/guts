@@ -1,3 +1,12 @@
+howard:
+  name: Howard Fraser
+  email: howardjfraser@gmail.com
+  password_digest: <%= User.digest('password') %>
+  role: root
+  activated: true
+  activated_at: <%= Time.zone.now %>
+  company: :wernham_hogg
+
 brent:
   name: David Brent
   email: david@office.com
