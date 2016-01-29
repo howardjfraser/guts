@@ -28,7 +28,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "prevent removal of last admin" do
     log_in_as(@brent)
-    patch user_path(@brent), user: { admin: "false" }
+    patch user_path(@brent), user: { role: "user" }
     check_fail
     assert @brent.reload.admin?
   end
@@ -36,7 +36,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   test "allow removal of admin when multiple admins" do
     log_in_as(@brent)
     make_gareth_admin # create multiple admins
-    patch user_path(@brent), user: { admin: "false" }
+    patch user_path(@brent), user: { role: "user" }
     check_success @brent, false
   end
 
@@ -44,7 +44,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   def make_gareth_admin
     assert_not @gareth.admin?
-    patch user_path(@gareth), user: { admin: "true" }
+    patch user_path(@gareth), user: { role: "admin" }
     check_success @gareth, true
   end
 

@@ -2,7 +2,7 @@ brent:
   name: David Brent
   email: david@office.com
   password_digest: <%= User.digest('password') %>
-  admin: true
+  role: admin
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
@@ -11,6 +11,7 @@ gareth:
   name: Gareth Keenan
   email: gareth@office.com
   password_digest: <%= User.digest('password') %>
+  role: user
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
@@ -19,6 +20,7 @@ tim:
   name: Tim Canterbury
   email: tim@office.com
   password_digest: <%= User.digest('password') %>
+  role: user
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
@@ -27,6 +29,7 @@ dawn:
   name: Dawn Tinsley
   email: dawn@office.com
   password_digest: <%= User.digest('password') %>
+  role: user
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
@@ -35,6 +38,7 @@ keith:
   name: Big Keith
   email: keith@office.com
   password_digest: <%= User.digest('password') %>
+  role: user
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
@@ -42,6 +46,7 @@ keith:
 ricky:
   name: Ricky
   email: ricky@office.com
+  role: user
   password_digest: <%= User.digest('password') %>
   company: :wernham_hogg
 
@@ -49,6 +54,7 @@ michael:
   name: Michael Scott
   email: michael@dm.com
   password_digest: <%= User.digest('password') %>
+  role: user
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :dunder_mifflin

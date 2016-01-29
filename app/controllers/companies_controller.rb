@@ -21,12 +21,11 @@ class CompaniesController < ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(:id, :name,
-      users_attributes: [:id, :name, :email, :password])
+    params.require(:company).permit(:id, :name, users_attributes: [:id, :name, :email, :password])
   end
 
   def set_up_owner user
-    user.update_attribute(:admin, true)
+    user.update_attribute(:role, "admin")
     user.activate
     log_in user
   end

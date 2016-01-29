@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
 
   def setup
     @company = Company.new(name: "TestCo")
-    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar", admin: true)
+    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar", role: "admin")
   end
 
   test "should be valid" do
@@ -80,6 +80,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "user should have company" do
     @user.company = nil
+    refute @user.valid?
+  end
+
+  test "user should have valid role" do
+    @user.role = "invalid"
     refute @user.valid?
   end
 

@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :admin).merge(company: current_user.company)
+    params.require(:user).permit(:name, :email, :password, :role).merge(company: current_user.company)
   end
 
   def find_user
