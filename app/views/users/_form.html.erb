@@ -32,13 +32,13 @@
   </div>
 
   <div class="row m-b-1">
-    <div class="std-checkbox-label text-sm-right">
-      <%= f.label :admin do %>
-        <span>Administrator?</span>
+    <div class="std-label text-sm-right">
+      <%= f.label :role do %>
+        <span>Role</span>
       <% end %>
     </div>
-    <div class="std-checkbox text-xs-right">
-      <%= f.check_box :admin %>
+    <div class="std-control">
+      <%= f.select :role, options_for_select([['User', "user"], ['Administrator', "admin"]]) %>
     </div>
   </div>
 

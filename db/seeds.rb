@@ -1,16 +1,50 @@
 Company.delete_all
-company = Company.new(name: "Smith Co")
-company.save(validate: false)
-
 User.delete_all
 
-User.create!(name: "Howard", email: "howardjfraser@gmail.com", company: company, password: "password", admin: true, activated: true, activated_at: Time.zone.now)
+#  smiths
+smiths = Company.new(name: "Smith Co")
+smiths.save(validate: false)
 
-User.create!(name: "Example User", email: "example@railstutorial.org", company: company, password: "foobar", activated: true, activated_at: Time.zone.now)
-
-99.times do |n|
+24.times do |n|
   name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
+  email = "user#{n+1}@smiths.com"
   password = "password"
-  User.create!(name: name, email: email, company: company, password: password, activated: true, activated_at: Time.zone.now)
+  User.create!(name: name,
+    email: email, company: smiths, password: password, activated: true, activated_at: Time.zone.now, role: "user")
 end
+
+# jones
+jones = Company.new(name: "Jones & Co")
+jones.save(validate: false)
+
+12.times do |n|
+  name  = Faker::Name.name
+  email = "user#{n+1}@jones.com"
+  password = "password"
+  User.create!(name: name,
+    email: email, company: jones, password: password, activated: true, activated_at: Time.zone.now, role: "user")
+end
+
+# starrs
+starr = Company.new(name: "Starr Partners")
+starr.save(validate: false)
+
+48.times do |n|
+  name  = Faker::Name.name
+  email = "user#{n+1}@starr.com"
+  password = "password"
+  User.create!(name: name,
+    email: email, company: starr, password: password, activated: true, activated_at: Time.zone.now, role: "user")
+end
+
+# create admins
+
+Company.all.each do |c|
+  c.users.first.update_attribute(:role, "admin")
+end
+
+# create root user
+
+root = User.new(name: "Howard", email: "howardjfraser@gmail.com", company: Company.first, password: "password", activated: true, activated_at: Time.zone.now, role: "root")
+root.save(validate: false)
+

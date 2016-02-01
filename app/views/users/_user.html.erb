@@ -9,9 +9,7 @@
       not activated
     <% end %>
 
-    <% if user.admin? %>
-      admin
-    <% end %>
+    <%= user.role unless user.role == "user" %>
   </span>
 
 </span>

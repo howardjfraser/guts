@@ -6,9 +6,12 @@ class UsersControllerTest < ActionController::TestCase
     @brent = users(:brent)
     @gareth = users(:gareth)
     @tim = users(:tim)
+    @michael = users(:michael)
   end
 
-  test "should redirect non-logged in users" do
+  # TODO split into is logged in, is admin and same company? add activated test?
+
+  test "should redirect users who are not logged in" do
     check_login_redirect { get :index }
     check_login_redirect { get :show, id: @brent }
     check_login_redirect { get :new }
@@ -21,15 +24,13 @@ class UsersControllerTest < ActionController::TestCase
   test "should redirect new when logged in as non-admin" do
     log_in_as(@gareth)
     get :new
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect create when logged in as non-admin" do
     log_in_as(@gareth)
     patch :create, user: { name: "name", email: "new@company.com" }
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect edit when logged in as non-admin" do
@@ -41,8 +42,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should redirect update when logged in as non-admin" do
     log_in_as(@gareth)
     patch :update, id: @brent, user: { name: @brent.name, email: @brent.email }
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect destroy when logged in as a non-admin" do
@@ -50,7 +50,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_no_difference 'User.count' do
       delete :destroy, id: @tim
     end
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   test "should redirect destroy when trying to delete self as admin" do
@@ -61,12 +61,42 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_url
   end
 
+  test 'can’t view user from a different company' do
+    log_in_as(@brent)
+    get :show, id: @michael
+    assert_response :forbidden
+  end
+
+  test 'user list does not include other companies' do
+    log_in_as(@brent)
+    get :index
+    users = assigns[:users]
+    users.each { |u| assert @brent.company == u.company }
+  end
+
+  test 'can’t edit users from a different company' do
+    log_in_as(@brent)
+    get :edit, id: @michael
+    assert_response :forbidden
+  end
+
+  test 'can’t update users from a different company' do
+    log_in_as(@brent)
+    patch :update, id: @michael, user: { email: "new@email.com" }
+    assert_response :forbidden
+  end
+
+  test 'can’t delete users from a different company' do
+    log_in_as(@brent)
+    delete :destroy, id: @michael
+    assert_response :forbidden
+  end
+
   private
 
   def check_edit_redirect user
     get :edit, id: user
-    assert_not flash.empty?
-    assert_redirected_to root_url
+    assert_response :forbidden
   end
 
   def check_login_redirect

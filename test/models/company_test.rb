@@ -4,7 +4,7 @@ class CompanyTest < ActiveSupport::TestCase
 
   def setup
     @company = Company.new(name: "TestCo")
-    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar", admin: true)
+    @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar", role: "admin")
   end
 
   test "valid company" do
