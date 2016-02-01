@@ -54,12 +54,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def check_is_admin
-    forbidden unless current_user.admin?
-  end
-
-  def check_same_company
-    forbidden unless current_user.company == @user.company
-  end
-
 end

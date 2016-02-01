@@ -1,6 +1,10 @@
 class CompaniesController < ApplicationController
-
   skip_before_action :require_login, only: [:new, :create]
+  before_action :check_is_root, only: [:index]
+
+  def index
+    @companies = Company.all
+  end
 
   def new
     @company = Company.new

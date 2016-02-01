@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     self.role == "admin" || self.role == "root"
   end
 
+  def root?
+    self.role == "root"
+  end
+
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
