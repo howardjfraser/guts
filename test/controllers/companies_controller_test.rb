@@ -11,8 +11,10 @@ class CompaniesControllerTest < ActionController::TestCase
   test "stranger access" do
     check_response :new, :success
 
-    post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
-      email: "dave@test.com", password: "aaaaaaaa"}}}
+    assert_difference 'Company.count', 1 do
+      post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
+        email: "dave@test.com", password: "aaaaaaaa"}}}
+    end
     assert_redirected_to users_url
   end
 

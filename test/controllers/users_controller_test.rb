@@ -9,7 +9,7 @@ class UsersControllerTest < ActionController::TestCase
     @michael = users(:michael)
   end
 
-  # TODO split into is logged in, is admin and same company? add activated test?
+  # TODO split up access tests?
 
   test "should redirect users who are not logged in" do
     check_login_redirect { get :index }
@@ -21,36 +21,48 @@ class UsersControllerTest < ActionController::TestCase
     check_login_redirect { delete :destroy, id: @tim }
   end
 
-  test "should redirect new when logged in as non-admin" do
+  test "user access" do
     log_in_as(@gareth)
     get :new
     assert_response :forbidden
-  end
 
-  test "should redirect create when logged in as non-admin" do
-    log_in_as(@gareth)
-    patch :create, user: { name: "name", email: "new@company.com" }
+    assert_no_difference 'User.count' do
+      patch :create, user: { name: "name", email: "new@company.com" }
+    end
     assert_response :forbidden
-  end
 
-  test "should redirect edit when logged in as non-admin" do
-    log_in_as(@gareth)
-    check_edit_redirect @gareth
-    check_edit_redirect @brent
-  end
+    get :edit, id: @gareth
+    assert_response :forbidden
 
-  test "should redirect update when logged in as non-admin" do
-    log_in_as(@gareth)
     patch :update, id: @brent, user: { name: @brent.name, email: @brent.email }
     assert_response :forbidden
-  end
 
-  test "should redirect destroy when logged in as a non-admin" do
-    log_in_as(@gareth)
     assert_no_difference 'User.count' do
       delete :destroy, id: @tim
     end
     assert_response :forbidden
+  end
+
+  test "admin access" do
+    log_in_as(@brent)
+    get :new
+    assert_response :success
+
+    assert_difference 'User.count', 1 do
+      patch :create, user: { name: "name", email: "new@company.com", password: "password" }
+    end
+    assert_redirected_to users_url
+
+    get :edit, id: @brent
+    assert_response :success
+
+    patch :update, id: @brent, user: { name: "new", email: @brent.email }
+    assert_redirected_to user_path @brent
+
+    assert_difference 'User.count', -1 do
+      delete :destroy, id: @tim
+    end
+    assert_redirected_to users_url
   end
 
   test "should redirect destroy when trying to delete self as admin" do
@@ -93,11 +105,6 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   private
-
-  def check_edit_redirect user
-    get :edit, id: user
-    assert_response :forbidden
-  end
 
   def check_login_redirect
     yield
