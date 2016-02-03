@@ -5,30 +5,37 @@ class CompaniesControllerTest < ActionController::TestCase
   def setup
     @howard = users(:howard)
     @brent = users(:brent)
+    @gareth = users(:gareth)
   end
 
-  test "as stranger, new is accessible" do
-    get :new
-    assert_response :success
-    assert_template :new
-  end
+  test "stranger access" do
+    check_response :new, :success
 
-  test "as stranger, create is accessible" do
     post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
       email: "dave@test.com", password: "aaaaaaaa"}}}
     assert_redirected_to users_url
   end
 
-  test "as admin, index is forbidden" do
-    log_in_as(@brent)
-    get :index
-    assert_response :forbidden
+  test "user access" do
+    log_in_as(@gareth)
+    check_response :index, :forbidden
   end
 
-  test "as root, index is accessible" do
+  test "admin access" do
+    log_in_as(@brent)
+    check_response :index, :forbidden
+  end
+
+  test "root access" do
     log_in_as(@howard)
-    get :index
-    assert_response :success
+    check_response :index, :success
+  end
+
+  private
+
+  def check_response action, response
+    get action
+    assert_response response
   end
 
 end
