@@ -9,34 +9,33 @@ class CompaniesControllerTest < ActionController::TestCase
   end
 
   test "stranger access" do
-    check_response :new, :success
+    check_response(:success) { get :new }
 
-    assert_difference 'Company.count', 1 do
-      post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
-        email: "dave@test.com", password: "aaaaaaaa"}}}
+    check_response(:redirect) do
+      assert_difference 'Company.count', 1 do
+        post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
+          email: "dave@test.com", password: "aaaaaaaa"}}}
+      end
     end
-    assert_redirected_to users_url
   end
 
   test "user access" do
-    log_in_as(@gareth)
-    check_response :index, :forbidden
+    check_response(:forbidden, @gareth) { get :index }
   end
 
   test "admin access" do
-    log_in_as(@brent)
-    check_response :index, :forbidden
+    check_response(:forbidden, @brent) { get :index }
   end
 
   test "root access" do
-    log_in_as(@howard)
-    check_response :index, :success
+    check_response(:success, @howard) { get :index}
   end
 
   private
 
-  def check_response action, response
-    get action
+  def check_response response, user=nil
+    log_in_as user if user
+    yield
     assert_response response
   end
 

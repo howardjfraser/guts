@@ -9,9 +9,7 @@ class UsersControllerTest < ActionController::TestCase
     @michael = users(:michael)
   end
 
-  # TODO split up access tests?
-
-  test "should redirect users who are not logged in" do
+  test "stranger redirects" do
     check_login_redirect { get :index }
     check_login_redirect { get :show, id: @brent }
     check_login_redirect { get :new }
@@ -22,86 +20,76 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "user access" do
-    log_in_as(@gareth)
-    get :new
-    assert_response :forbidden
+    check_access(:forbidden, @gareth) { get :new }
 
-    assert_no_difference 'User.count' do
-      patch :create, user: { name: "name", email: "new@company.com" }
+    check_access(:forbidden) do
+      assert_no_difference 'User.count' do
+        patch :create, user: { name: "name", email: "new@company.com" }
+      end
     end
-    assert_response :forbidden
 
-    get :edit, id: @gareth
-    assert_response :forbidden
+    check_access(:forbidden) { get :edit, id: @gareth }
+    check_access(:forbidden) { patch :update, id: @brent, user: { name: @brent.name, email: @brent.email } }
 
-    patch :update, id: @brent, user: { name: @brent.name, email: @brent.email }
-    assert_response :forbidden
-
-    assert_no_difference 'User.count' do
-      delete :destroy, id: @tim
+    check_access(:forbidden) do
+      assert_no_difference 'User.count' do
+        delete :destroy, id: @tim
+      end
     end
-    assert_response :forbidden
   end
 
   test "admin access" do
-    log_in_as(@brent)
-    get :new
-    assert_response :success
+    check_access(:success) { get :new}
 
-    assert_difference 'User.count', 1 do
-      patch :create, user: { name: "name", email: "new@company.com", password: "password" }
+    check_access(:redirect) {
+      assert_difference 'User.count', 1 do
+        patch :create, user: { name: "name", email: "new@company.com", password: "password" }
+      end
+    }
+
+    check_access(:success) { get :edit, id: @brent }
+    check_access(:redirect) { patch :update, id: @brent, user: { name: "new", email: @brent.email } }
+
+    check_access(:redirect) do
+      assert_difference 'User.count', -1 do
+        delete :destroy, id: @tim
+      end
     end
-    assert_redirected_to users_url
-
-    get :edit, id: @brent
-    assert_response :success
-
-    patch :update, id: @brent, user: { name: "new", email: @brent.email }
-    assert_redirected_to user_path @brent
-
-    assert_difference 'User.count', -1 do
-      delete :destroy, id: @tim
-    end
-    assert_redirected_to users_url
   end
 
-  test "should redirect destroy when trying to delete self as admin" do
-    log_in_as(@brent)
-    assert_no_difference 'User.count' do
-      delete :destroy, id: @brent
+  test "can't delete self as admin" do
+    check_access(:redirect) do
+      assert_no_difference 'User.count' do
+        delete :destroy, id: @brent
+      end
     end
-    assert_redirected_to users_url
   end
 
   test 'can’t view user from a different company' do
-    log_in_as(@brent)
-    get :show, id: @michael
-    assert_response :forbidden
+    check_access(:forbidden) { get :show, id: @michael }
   end
 
   test 'user list does not include other companies' do
-    log_in_as(@brent)
+    log_in_as @brent
     get :index
     users = assigns[:users]
     users.each { |u| assert @brent.company == u.company }
   end
 
   test 'can’t edit users from a different company' do
-    log_in_as(@brent)
-    get :edit, id: @michael
-    assert_response :forbidden
+    check_access(:forbidden) { get :edit, id: @michael }
   end
 
   test 'can’t update users from a different company' do
-    log_in_as(@brent)
-    patch :update, id: @michael, user: { email: "new@email.com" }
-    assert_response :forbidden
+    check_access(:forbidden) { patch :update, id: @michael, user: { email: "new@email.com" } }
   end
 
   test 'can’t delete users from a different company' do
-    log_in_as(@brent)
-    delete :destroy, id: @michael
-    assert_response :forbidden
+    check_access (:forbidden) do
+      assert_no_difference "User.count" do
+        delete :destroy, id: @michael
+      end
+    end
   end
 
   private
@@ -110,6 +98,12 @@ class UsersControllerTest < ActionController::TestCase
     yield
     assert_not flash.empty?
     assert_redirected_to login_url
+  end
+
+  def check_access response, user=@brent
+    log_in_as user
+    yield
+    assert_response response
   end
 
 end
