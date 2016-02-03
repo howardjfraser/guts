@@ -13,15 +13,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_is_root
-    forbidden unless current_user.root?
-  end
-
-  def check_is_admin
+  def require_admin
     forbidden unless current_user.admin?
   end
 
-  def check_same_company
+  def require_root
+    forbidden unless current_user.root?
+  end
+
+  def check_company
     forbidden unless current_user.company == @user.company
   end
 
