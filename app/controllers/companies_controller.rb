@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action :find_company, only: [:show, :edit, :update]
-  before_action :require_root, only: [:index]
+  before_action :find_company, only: [:show, :edit, :update, :destroy]
+  before_action :require_root, only: [:index, :destroy]
   before_action :require_admin, only: [:show, :edit, :update]
   before_action :check_company, only: [:show, :edit, :update]
 
@@ -37,6 +37,11 @@ class CompaniesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @company.destroy
+    redirect_to companies_url, notice: "#{@company.name} deleted"
   end
 
   private

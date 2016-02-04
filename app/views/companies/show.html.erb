@@ -3,8 +3,14 @@
 <h1>Company</h1>
 <hr>
 
-<%= @company.name %>
+<p>
+  <%= @company.name %>
+</p>
 
 <% if current_user.admin? %>
   <%= link_to "edit", edit_company_path(@company) %>
+<% end %>
+
+<% if current_user.root? %>
+  <%= link_to "delete", @company, method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
