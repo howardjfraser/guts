@@ -14,6 +14,7 @@ class CompaniesControllerTest < ActionController::TestCase
     check_response(:redirect) { get :index }
     check_response(:redirect) { get :show, id: @brent.company }
     check_response(:redirect) { get :edit, id: @brent.company }
+    check_response(:redirect) { patch :update, id: @brent.company, company: { name: "NewCo" } }
 
     check_response(:redirect) do
       assert_difference 'Company.count', 1 do
@@ -26,24 +27,29 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "user access" do
     check_response(:forbidden, @gareth) { get :index }
-    check_response(:forbidden) { get :show, id: @gareth.company }
-    check_response(:forbidden) { get :edit, id: @gareth.company }
+    check_response(:forbidden, @gareth) { get :show, id: @gareth.company }
+    check_response(:forbidden, @gareth) { get :edit, id: @gareth.company }
+    check_response(:forbidden, @gareth) { patch :update, id: @gareth.company, company: { name: "NewCo" } }
   end
 
   test "admin access" do
     check_response(:forbidden, @brent) { get :index }
-    check_response(:success) { get :show, id: @brent.company }
-    check_response(:forbidden) { get :show, id: @michael.company }
-    check_response(:success) { get :edit, id: @brent.company }
-    check_response(:forbidden) { get :edit, id: @michael.company }
+    check_response(:success, @brent) { get :show, id: @brent.company }
+    check_response(:forbidden, @brent) { get :show, id: @michael.company }
+    check_response(:success, @brent) { get :edit, id: @brent.company }
+    check_response(:forbidden, @brent) { get :edit, id: @michael.company }
+    check_response(:redirect, @brent) { patch :update, id: @brent.company, company: { name: "NewCo" } }
+    check_response(:forbidden, @brent) { patch :update, id: @michael.company, company: { name: "NewCo" } }
   end
 
   test "root access" do
     check_response(:success, @howard) { get :index}
-    check_response(:success) { get :show, id: @brent.company }
-    check_response(:success) { get :show, id: @michael.company }
-    check_response(:success) { get :edit, id: @brent.company }
-    check_response(:success) { get :edit, id: @michael.company }
+    check_response(:success, @howard) { get :show, id: @brent.company }
+    check_response(:success, @howard) { get :show, id: @michael.company }
+    check_response(:success, @howard) { get :edit, id: @brent.company }
+    check_response(:success, @howard) { get :edit, id: @michael.company }
+    check_response(:redirect, @howard) { patch :update, id: @brent.company, company: { name: "NewCo" } }
+    check_response(:redirect, @howard) { patch :update, id: @michael.company, company: { name: "NewCo" } }
   end
 
   private

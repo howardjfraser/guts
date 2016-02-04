@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action :find_company, only: [:show, :edit]
+  before_action :find_company, only: [:show, :edit, :update]
   before_action :require_root, only: [:index]
-  before_action :require_admin, only: [:show, :edit]
-  before_action :check_company, only: [:show, :edit]
+  before_action :require_admin, only: [:show, :edit, :update]
+  before_action :check_company, only: [:show, :edit, :update]
 
   def index
     @companies = Company.all
@@ -28,6 +28,15 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    # TODO user[0] params are permitted?
+    if @company.update_attributes(company_params)
+      redirect_to @company, notice: "#{@company.name} updated"
+    else
+      render :edit
+    end
   end
 
   private
