@@ -36,9 +36,8 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "root access" do
     check_response(:success, @howard) { get :index}
-    assert @howard.company == @brent.company
     check_response(:success) { get :show, id: @brent.company }
-    check_response(:forbidden) { get :show, id: @michael.company }
+    check_response(:success) { get :show, id: @michael.company }
   end
 
   private

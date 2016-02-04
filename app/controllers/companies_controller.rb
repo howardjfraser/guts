@@ -19,7 +19,6 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-
     if @company.save
       set_up_owner @company.users.first
       redirect_to users_url, notice: "Congratulations!"
@@ -39,7 +38,7 @@ class CompaniesController < ApplicationController
   end
 
   def check_company
-    forbidden unless @company == current_user.company
+    forbidden unless @company == current_user.company || current_user.root?
   end
 
   def set_up_owner user
