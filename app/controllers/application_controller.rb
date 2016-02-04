@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
     forbidden unless current_user.root?
   end
 
-  def check_company
-    forbidden unless current_user.company == @user.company
-  end
-
   def forbidden
     render(file: File.join(Rails.root, 'public/403.html'), status: 403, layout: false)
   end

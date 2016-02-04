@@ -50,6 +50,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :role).merge(company: current_user.company)
   end
 
+  def check_company
+    forbidden unless current_user.company == @user.company
+  end
+
   def find_user
     @user = User.find(params[:id])
   end
