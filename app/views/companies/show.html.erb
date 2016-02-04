@@ -3,4 +3,8 @@
 <h1>Company</h1>
 <hr>
 
-<%= render partial: @company %>
+<%= @company.name %>
+
+<% if current_user.admin? %>
+  <%= link_to "edit", edit_company_path(@company) %>
+<% end %>

@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action :find_company, only: [:show]
+  before_action :find_company, only: [:show, :edit]
   before_action :require_root, only: [:index]
-  before_action :require_admin, only: [:show]
-  before_action :check_company, only: [:show]
+  before_action :require_admin, only: [:show, :edit]
+  before_action :check_company, only: [:show, :edit]
 
   def index
     @companies = Company.all
@@ -25,6 +25,9 @@ class CompaniesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
   end
 
   private

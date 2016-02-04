@@ -13,6 +13,7 @@ class CompaniesControllerTest < ActionController::TestCase
     check_response(:success) { get :new }
     check_response(:redirect) { get :index }
     check_response(:redirect) { get :show, id: @brent.company }
+    check_response(:redirect) { get :edit, id: @brent.company }
 
     check_response(:redirect) do
       assert_difference 'Company.count', 1 do
@@ -26,18 +27,23 @@ class CompaniesControllerTest < ActionController::TestCase
   test "user access" do
     check_response(:forbidden, @gareth) { get :index }
     check_response(:forbidden) { get :show, id: @gareth.company }
+    check_response(:forbidden) { get :edit, id: @gareth.company }
   end
 
   test "admin access" do
     check_response(:forbidden, @brent) { get :index }
-    check_response(:success) { get :show, id: @gareth.company }
+    check_response(:success) { get :show, id: @brent.company }
     check_response(:forbidden) { get :show, id: @michael.company }
+    check_response(:success) { get :edit, id: @brent.company }
+    check_response(:forbidden) { get :edit, id: @michael.company }
   end
 
   test "root access" do
     check_response(:success, @howard) { get :index}
     check_response(:success) { get :show, id: @brent.company }
     check_response(:success) { get :show, id: @michael.company }
+    check_response(:success) { get :edit, id: @brent.company }
+    check_response(:success) { get :edit, id: @michael.company }
   end
 
   private

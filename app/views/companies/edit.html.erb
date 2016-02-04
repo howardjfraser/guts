@@ -1,0 +1,23 @@
+<h1>Edit <%= link_to @company.name, company_path(@company) %></h1>
+<hr>
+
+<%= render 'shared/errors', object: @company %>
+
+<%= form_for(@company) do |f| %>
+
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
+      <%= f.label :name, "Company name" %>
+    </div>
+    <div class="std-control">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="std-submit text-xs-right">
+      <%= f.submit "Update", class: "btn btn-success" %>
+    </div>
+  </div>
+
+<% end %>
