@@ -9,8 +9,7 @@ class NavTest < ActionDispatch::IntegrationTest
 
   test "pre-login nav" do
     get root_path
-    assert_template 'static_pages/welcome'
-    assert_select "a[href=?]", root_path
+    assert_template 'sessions/new'
     assert_select "a[href=?]", signup_path
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", users_path, count: 0
