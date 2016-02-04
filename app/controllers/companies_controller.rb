@@ -1,9 +1,15 @@
 class CompaniesController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
+  before_action :find_company, only: [:show]
   before_action :require_root, only: [:index]
+  before_action :require_admin, only: [:show]
+  before_action :check_company, only: [:show]
 
   def index
     @companies = Company.all
+  end
+
+  def show
   end
 
   def new
@@ -26,6 +32,14 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:id, :name, users_attributes: [:id, :name, :email, :password])
+  end
+
+  def find_company
+    @company = Company.find(params[:id])
+  end
+
+  def check_company
+    forbidden unless @company == current_user.company
   end
 
   def set_up_owner user

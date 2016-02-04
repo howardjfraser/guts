@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   get 'signup' => 'companies#new'
-  resources :companies, only: [:index, :create]
+  resources :companies, only: [:index, :show, :create]
 
   resources :users
   resources :activations, only: [:edit]
