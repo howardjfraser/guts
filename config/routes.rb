@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   get 'signup' => 'companies#new'
-  resources :companies, except: [:new]
+
+  resources :companies, except: [:new] do
+    member do
+      post "select" => "companies#select"
+    end
+  end
 
   resources :users
   resources :activations, only: [:edit]

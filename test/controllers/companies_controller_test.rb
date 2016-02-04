@@ -15,14 +15,8 @@ class CompaniesControllerTest < ActionController::TestCase
     check_response(:redirect) { get :show, id: @brent.company }
     check_response(:redirect) { get :edit, id: @brent.company }
     check_response(:redirect) { patch :update, id: @brent.company, company: { name: "NewCo" } }
-
-    check_response(:redirect) do
-      assert_difference 'Company.count', 1 do
-        post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
-          email: "dave@test.com", password: "aaaaaaaa"}}}
-        assert is_logged_in?
-      end
-    end
+    check_response(:redirect)  { post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
+      email: "dave@test.com", password: "aaaaaaaa"}}}}
   end
 
   test "user access" do
@@ -31,6 +25,7 @@ class CompaniesControllerTest < ActionController::TestCase
     check_response(:forbidden, @gareth) { get :edit, id: @gareth.company }
     check_response(:forbidden, @gareth) { patch :update, id: @gareth.company, company: { name: "NewCo" } }
     check_response(:forbidden, @gareth) { delete :destroy, id: @gareth.company }
+    check_response(:forbidden, @gareth) { post :select, id: @michael.company }
   end
 
   test "admin access" do
@@ -42,7 +37,8 @@ class CompaniesControllerTest < ActionController::TestCase
     check_response(:redirect, @brent) { patch :update, id: @brent.company, company: { name: "NewCo" } }
     check_response(:forbidden, @brent) { patch :update, id: @michael.company, company: { name: "NewCo" } }
     check_response(:forbidden, @brent) { delete :destroy, id: @brent.company }
-    check_response(:forbidden, @brent) {delete :destroy, id: @michael.company }
+    check_response(:forbidden, @brent) { delete :destroy, id: @michael.company }
+    check_response(:forbidden, @brent) { post :select, id: @michael.company}
   end
 
   test "root access" do
@@ -53,13 +49,8 @@ class CompaniesControllerTest < ActionController::TestCase
     check_response(:success, @howard) { get :edit, id: @michael.company }
     check_response(:redirect, @howard) { patch :update, id: @brent.company, company: { name: "NewCo" } }
     check_response(:redirect, @howard) { patch :update, id: @michael.company, company: { name: "NewCo" } }
-
-    check_response(:redirect, @howard) do
-      assert_difference "Company.count", -1 do
-        delete :destroy, id: @brent.company
-      end
-    end
-    User.all.select { |u| assert u.company != nil}
+    check_response(:redirect, @howard) { post :select, id: @michael.company }
+    check_response(:redirect, @howard) { delete :destroy, id: @brent.company }
   end
 
   private

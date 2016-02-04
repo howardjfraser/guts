@@ -8,5 +8,10 @@
 <% end %>
 
 <% if current_user.root? %>
+
   <%= link_to "delete", @company, method: :delete, data: { confirm: "Are you sure?" } %>
+
+  <%= link_to "select", select_company_path(@company), method: :post %>
+
 <% end %>
+
