@@ -27,7 +27,7 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "user access" do
     check_response(:forbidden, @gareth) { get :index }
-    check_response(:forbidden, @gareth) { get :show, id: @gareth.company }
+    check_response(:success, @gareth) { get :show, id: @gareth.company }
     check_response(:forbidden, @gareth) { get :edit, id: @gareth.company }
     check_response(:forbidden, @gareth) { patch :update, id: @gareth.company, company: { name: "NewCo" } }
     check_response(:forbidden, @gareth) { delete :destroy, id: @gareth.company }

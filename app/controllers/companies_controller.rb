@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   before_action :find_company, only: [:show, :edit, :update, :destroy]
   before_action :require_root, only: [:index, :destroy]
-  before_action :require_admin, only: [:show, :edit, :update]
+  before_action :require_admin, only: [:edit, :update]
   before_action :check_company, only: [:show, :edit, :update]
 
   def index
