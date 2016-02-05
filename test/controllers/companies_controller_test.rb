@@ -10,13 +10,10 @@ class CompaniesControllerTest < ActionController::TestCase
   end
 
   test "stranger access" do
-    check_response(:success) { get :new }
     check_response(:redirect) { get :index }
     check_response(:redirect) { get :show, id: @brent.company }
     check_response(:redirect) { get :edit, id: @brent.company }
     check_response(:redirect) { patch :update, id: @brent.company, company: { name: "NewCo" } }
-    check_response(:redirect)  { post :create, company: {name: "test", users_attributes: {"0" => {name: "test",
-      email: "dave@test.com", password: "aaaaaaaa"}}}}
   end
 
   test "user access" do

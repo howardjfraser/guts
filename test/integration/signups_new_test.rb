@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SignupNewTest < ActionDispatch::IntegrationTest
+class SignupsNewTest < ActionDispatch::IntegrationTest
   include SessionsHelper
 
   def setup
@@ -9,16 +9,16 @@ class SignupNewTest < ActionDispatch::IntegrationTest
 
   test "invalid sign up" do
     assert_no_difference 'User.count' do
-      post companies_path, company: {name: "test", users_attributes: {"0" => {name: "test",
+      post signup_path, company: {name: "test", users_attributes: {"0" => {name: "test",
         email: "dave@test.com", password: " "}}}
     end
-    assert_template 'companies/new'
+    assert_template 'signups/new'
     assert_select 'div.errors'
   end
 
   test "valid signup" do
     assert_difference 'User.count', 1 do
-      post companies_path, company: {name: "test", users_attributes: {"0" => {name: "test",
+      post signup_path, company: {name: "test", users_attributes: {"0" => {name: "test",
         email: "dave@test.com", password: "password"}}}
     end
 

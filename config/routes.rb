@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  get 'signup' => 'companies#new'
+  get 'signup' => 'signups#new'
+  post 'signup' => 'signups#create'
 
-  resources :companies, except: [:new] do
+  resources :companies, except: [:new, :create] do
     member do
       post "select" => "companies#select"
     end
