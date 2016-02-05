@@ -48,8 +48,9 @@ class PasswordResetsController < ApplicationController
   end
 
   def valid_user
-    # TODO no flash
-    redirect_to root_url unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+    unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+      redirect_to root_url, notice: "Invalid user"
+    end
   end
 
   def check_expiration
