@@ -63,7 +63,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   def check_fail
-    # TODO check there are validation errors
+    # TODO check there are validation errors?
     assert_template 'users/edit'
   end
 
