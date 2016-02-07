@@ -91,9 +91,9 @@ class User < ActiveRecord::Base
     self.activation_digest = User.digest(activation_token)
   end
 
-  # if the user being updated has had admin removed, check there is another admin
+  # if admin role has been removed, check there is another admin
   def at_least_one_admin
-    if (!self.admin? && self.role_changed?)
+    if (self.role_changed? && self.role != "admin")
       if (colleagues.select { |u| u.role == "admin" }.count == 0)
         errors.add(:role, "You can’t remove the last administrator")
       end
