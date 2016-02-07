@@ -6,6 +6,14 @@ class CompaniesDestroyTest < ActionDispatch::IntegrationTest
     @howard = users(:howard)
     @brent = users(:brent)
     @michael = users(:michael)
+    @gareth = users(:gareth)
+  end
+
+  test "access" do
+    check_access(:forbidden, @gareth) { delete company_path @gareth.company }
+    check_access(:forbidden, @brent) { delete company_path @brent.company }
+    check_access(:forbidden, @brent) { delete company_path @michael.company }
+    check_access(:redirect, @howard) { delete company_path @brent.company }
   end
 
   test "as root, delete links are shown" do

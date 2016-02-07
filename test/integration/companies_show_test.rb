@@ -5,7 +5,17 @@ class CompaniesShowTest < ActionDispatch::IntegrationTest
   def setup
     @howard = users(:howard)
     @brent = users(:brent)
+    @michael = users(:michael)
     @gareth = users(:gareth)
+  end
+
+  test "access" do
+    check_access(:redirect) { get company_path @brent.company }
+    check_access(:success, @gareth) { get company_path @gareth.company }
+    check_access(:success, @brent) { get company_path @brent.company }
+    check_access(:forbidden, @brent) { get company_path @michael.company }
+    check_access(:success, @howard) { get company_path @brent.company }
+    check_access(:success, @howard) { get company_path @michael.company }
   end
 
   test "as admin, edit link is shown" do

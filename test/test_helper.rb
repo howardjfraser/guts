@@ -35,4 +35,10 @@ class ActiveSupport::TestCase
       defined?(post_via_redirect)
     end
 
+    def check_access expected_response, user=nil
+      log_in_as user unless user.nil?
+      yield
+      assert_response expected_response
+    end
+
 end

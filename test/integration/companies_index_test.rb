@@ -5,6 +5,14 @@ class CompaniesIndexTest < ActionDispatch::IntegrationTest
   def setup
     @howard = users(:howard)
     @brent = users(:brent)
+    @gareth = users(:gareth)
+  end
+
+  test "access" do
+    check_access(:redirect) { get companies_path }
+    check_access(:forbidden, @gareth) { get companies_path }
+    check_access(:forbidden, @brent) { get companies_path }
+    check_access(:success, @howard) { get companies_path }
   end
 
   test "as root, nav has companies link" do

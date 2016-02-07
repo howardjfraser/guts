@@ -5,8 +5,16 @@ class CompaniesSelectTest < ActionDispatch::IntegrationTest
   def setup
     @howard = users(:howard)
     @brent = users(:brent)
+    @gareth = users(:gareth)
+
     @hogg = companies(:wernham_hogg)
     @mifflin = companies(:dunder_mifflin)
+  end
+
+  test "access" do
+    check_access(:forbidden, @gareth) { post select_company_path @hogg }
+    check_access(:forbidden, @brent) { post select_company_path @hogg }
+    check_access(:redirect, @howard) { post select_company_path @hogg }
   end
 
   test "as root, can change company" do
