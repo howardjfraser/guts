@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersIndexTest < ActionDispatch::IntegrationTest
+class IndexTest < ActionDispatch::IntegrationTest
 
   def setup
     @brent = users(:brent)

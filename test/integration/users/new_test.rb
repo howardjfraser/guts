@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersNewTest < ActionDispatch::IntegrationTest
+class NewTest < ActionDispatch::IntegrationTest
 
   def setup
     ActionMailer::Base.deliveries.clear

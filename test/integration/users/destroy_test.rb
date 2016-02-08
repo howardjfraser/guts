@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersDestroyTest < ActionDispatch::IntegrationTest
+class DestroyTest < ActionDispatch::IntegrationTest
 
   def setup
     @brent = users(:brent)
