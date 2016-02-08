@@ -31,14 +31,21 @@ class ActiveSupport::TestCase
 
   private
 
+    # TODO review this in Hartl...
     def integration_test?
       defined?(post_via_redirect)
     end
 
-    def check_access expected_response, user=nil
+    def check_access expected, user=nil
       log_in_as user unless user.nil?
       yield
-      assert_response expected_response
+      assert_response expected
+    end
+
+    def check_redirect expected, user=nil
+      log_in_as user unless user.nil?
+      yield
+      assert_redirected_to expected
     end
 
 end

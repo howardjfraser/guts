@@ -10,7 +10,7 @@ class CompaniesShowTest < ActionDispatch::IntegrationTest
   end
 
   test "access" do
-    check_access(:redirect) { get company_path @brent.company }
+    check_redirect(login_url)  { get company_path @brent.company }
     check_access(:success, @gareth) { get company_path @gareth.company }
     check_access(:success, @brent) { get company_path @brent.company }
     check_access(:forbidden, @brent) { get company_path @michael.company }
