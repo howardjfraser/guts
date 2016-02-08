@@ -7,6 +7,17 @@ class EditUpdateTest < ActionDispatch::IntegrationTest
     @gareth = users(:gareth)
   end
 
+  test "access" do
+    check_redirect(login_url) { get edit_user_path @brent }
+    check_redirect(login_url) { patch user_path, id: @brent, user: { name: "new" } }
+
+    check_access(:forbidden, @gareth) { get edit_user_path @gareth }
+    check_access(:forbidden, @gareth) { patch user_path @brent, user: { name: "new" } }
+
+    check_access(:success, @brent) { get edit_user_path @brent }
+    check_redirect(user_path(@brent)) { patch user_path @brent, user: { name: "new", email: @brent.email } }
+  end
+
   test "unsuccessful edit" do
     log_in_as(@brent)
     get edit_user_path(@brent)

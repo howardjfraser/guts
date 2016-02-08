@@ -7,6 +7,10 @@ class IndexTest < ActionDispatch::IntegrationTest
     @gareth = users(:gareth)
   end
 
+  test "access" do
+    check_redirect(login_url) { get users_path }
+  end
+
   test "index as admin has new user link" do
     log_in_as(@brent)
     get users_path

@@ -5,6 +5,21 @@ class NewCreateTest < ActionDispatch::IntegrationTest
   def setup
     ActionMailer::Base.deliveries.clear
     @brent = users(:brent)
+    @gareth = users(:gareth)
+    @tim = users(:tim)
+    @michael = users(:michael)
+  end
+
+  test "access" do
+    check_redirect(login_url) { get new_user_path }
+    check_redirect(login_url) { post users_path, user: { name: "name", email: "new@company.com" } }
+
+    check_access(:forbidden, @gareth) { get new_user_path }
+    check_access(:forbidden, @gareth) { post users_path, user: { name: "name", email: "new@company.com" } }
+
+    check_redirect(users_path, @brent) {
+      post users_path, user: { name: "name", email: "new@company.com", password: "password" }
+    }
   end
 
   test "invalid new user" do

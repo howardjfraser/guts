@@ -8,6 +8,11 @@ class ShowTest < ActionDispatch::IntegrationTest
     @tim = users(:tim)
   end
 
+  test "access" do
+    check_redirect(login_url) { get user_path @brent }
+    check_access(:success, @brent) { get user_path @brent}
+  end
+
   test "show self as non-admin has no links" do
     log_in_as(@gareth)
     get user_path @gareth
