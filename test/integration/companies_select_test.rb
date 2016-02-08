@@ -12,6 +12,7 @@ class CompaniesSelectTest < ActionDispatch::IntegrationTest
   end
 
   test "access" do
+    check_redirect(login_url) { post select_company_path @hogg }
     check_access(:forbidden, @gareth) { post select_company_path @hogg }
     check_access(:forbidden, @brent) { post select_company_path @hogg }
     check_redirect(users_path, @howard) { post select_company_path @hogg }
