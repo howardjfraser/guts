@@ -11,6 +11,15 @@ class IndexTest < ActionDispatch::IntegrationTest
     check_redirect(login_url) { get users_path }
   end
 
+  test 'user list does not include other companies' do
+    log_in_as @brent
+    get users_path
+    users = assigns[:users]
+    users.each { |u| assert @brent.company == u.company }
+  end
+
+  # TODO user list does not include root
+
   test "index as admin has new user link" do
     log_in_as(@brent)
     get users_path

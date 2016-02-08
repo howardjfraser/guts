@@ -5,6 +5,7 @@ class EditUpdateTest < ActionDispatch::IntegrationTest
   def setup
     @brent = users(:brent)
     @gareth = users(:gareth)
+    @michael = users(:michael)
   end
 
   test "access" do
@@ -16,6 +17,14 @@ class EditUpdateTest < ActionDispatch::IntegrationTest
 
     check_access(:success, @brent) { get edit_user_path @brent }
     check_redirect(user_path(@brent)) { patch user_path @brent, user: { name: "new", email: @brent.email } }
+  end
+
+  test 'can’t edit users from a different company' do
+    check_access(:forbidden, @brent) { get edit_user_path @michael }
+  end
+
+  test 'can’t update users from a different company' do
+    check_access(:forbidden, @brent) { patch user_path @michael, user: { email: "new@email.com" } }
   end
 
   test "unsuccessful edit" do
