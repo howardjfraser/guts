@@ -8,9 +8,13 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      store_location
+      store_requested_url
       redirect_to login_url, notice: "Please log in"
     end
+  end
+
+  def store_requested_url
+    session[:forwarding_url] = request.url if request.get?
   end
 
   def require_admin
