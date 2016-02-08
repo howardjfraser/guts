@@ -15,9 +15,15 @@ class NewCreateTest < ActionDispatch::IntegrationTest
     assert flash.any?
   end
 
-  test "login then logout" do
-    log_in
-    log_out
+  test "login" do
+    get "/login"
+    assert_template "sessions/new"
+    post login_path, session: { email: "david@office.com", password: "password" }
+    follow_redirect!
+    assert_template "users/index"
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", logout_path
+    assert is_logged_in?
   end
 
   test "login with remembering" do
@@ -36,32 +42,6 @@ class NewCreateTest < ActionDispatch::IntegrationTest
     log_in_as(@brent)
     assert_redirected_to edit_user_path(@brent)
     assert_nil session[:forwarding_url]
-  end
-
-  private
-
-  def log_in
-    get "/login"
-    assert_template "sessions/new"
-    post login_path, session: { email: "david@office.com", password: "password" }
-    follow_redirect!
-    assert_template "users/index"
-    assert_select "a[href=?]", login_path, count: 0
-    assert_select "a[href=?]", logout_path
-    assert is_logged_in?
-
-    # simulate a user clicking logout in a second window.
-    delete logout_path
-
-  end
-
-  def log_out
-    delete logout_path
-    assert_redirected_to root_url
-    follow_redirect!
-    assert_select "a[href=?]", login_path
-    assert_select "a[href=?]", logout_path, count: 0
-    refute is_logged_in?
   end
 
 end
