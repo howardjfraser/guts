@@ -14,7 +14,7 @@ class CompaniesSelectTest < ActionDispatch::IntegrationTest
   test "access" do
     check_access(:forbidden, @gareth) { post select_company_path @hogg }
     check_access(:forbidden, @brent) { post select_company_path @hogg }
-    check_access(:redirect, @howard) { post select_company_path @hogg }
+    check_redirect(users_path, @howard) { post select_company_path @hogg }
   end
 
   test "as root, can change company" do
