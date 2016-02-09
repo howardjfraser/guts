@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
-  resources :signups, only: [:new, :create]
-
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  resources :signups, only: [:new, :create]
 
   resources :companies, except: [:new, :create] do
     member do
