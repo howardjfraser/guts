@@ -31,21 +31,21 @@ class CompaniesDestroyTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', company_path(@brent.company), text: "delete", count: 0
   end
 
-  test "root can delete other company" do
+  test "as root, can't delete currently selected company" do
+    log_in_as @howard
+    assert_difference "Company.count", 0 do
+      delete company_path(@howard.company)
+    end
+    assert_redirected_to companies_url
+  end
+
+  test "as root, can delete other company" do
     log_in_as @howard
     assert_difference "Company.count", -1 do
       delete company_path(@michael.company)
     end
     assert_redirected_to companies_url
     User.all.select { |u| assert u.company != nil && u.company != @michael.company}
-  end
-
-  test "root can't delete currently selected company" do
-    log_in_as @howard
-    assert_difference "Company.count", 0 do
-      delete company_path(@howard.company)
-    end
-    assert_redirected_to companies_url
   end
 
 end

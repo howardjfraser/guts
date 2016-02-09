@@ -9,7 +9,7 @@ class CompaniesEditTest < ActionDispatch::IntegrationTest
     @gareth = users(:gareth)
   end
 
-  test "access" do
+  test "edit access" do
     check_redirect(login_url)  { get edit_company_path @brent.company }
     check_access(:forbidden, @gareth) { get edit_company_path @gareth.company }
     check_access(:success, @brent) { get edit_company_path @brent.company }
@@ -18,7 +18,23 @@ class CompaniesEditTest < ActionDispatch::IntegrationTest
     check_access(:success, @howard) { get edit_company_path @michael.company }
   end
 
-  test "valid edit" do
+  test "udpate access" do
+    check_redirect(login_url) { patch company_path @brent.company, company: { name: "new name" } }
+    check_access(:forbidden, @gareth) { patch company_path @gareth.company, company: { name: "new name" } }
+
+    check_redirect(company_path(@brent.company), @brent) {
+      patch company_path @brent.company, company: { name: "new name" } }
+
+    check_access(:forbidden, @brent) { patch company_path @michael.company, company: { name: "new name" } }
+
+    check_redirect(company_path(@brent.company), @howard) {
+      patch company_path @brent.company, company: { name: "new name" } }
+
+    check_redirect(company_path(@michael.company), @howard) {
+      patch company_path @michael.company, company: { name: "new name" } }
+  end
+
+  test "valid edit & update" do
     log_in_as @brent
     get edit_company_path @brent.company
     patch company_path(@brent.company), company: { name: "NewCo" }
@@ -28,7 +44,7 @@ class CompaniesEditTest < ActionDispatch::IntegrationTest
     assert @brent.reload.company.name == "NewCo"
   end
 
-  test "invalid edit" do
+  test "invalid edit & update" do
     log_in_as @brent
     get edit_company_path @brent.company
     patch company_path(@brent.company), company: { name: "" }
