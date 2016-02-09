@@ -8,14 +8,14 @@ class SignupsNewTest < ActionDispatch::IntegrationTest
   end
 
   test "access" do
-    check_access(:success) { get signup_path }
-    check_redirect(users_path) { post signup_path, company: {name: "test", users_attributes: {"0" => {name: "test",
+    check_access(:success) { get new_signup_path }
+    check_redirect(users_path) { post signups_path, company: {name: "test", users_attributes: {"0" => {name: "test",
       email: "dave@test.com", password: "password"}}}}
   end
 
   test "invalid sign up" do
     assert_no_difference 'User.count' do
-      post signup_path, company: {name: "test", users_attributes: {"0" => {name: "test",
+      post signups_path, company: {name: "test", users_attributes: {"0" => {name: "test",
         email: "dave@test.com", password: " "}}}
     end
     assert_template 'signups/new'
@@ -24,7 +24,7 @@ class SignupsNewTest < ActionDispatch::IntegrationTest
 
   test "valid signup" do
     assert_difference 'User.count', 1 do
-      post signup_path, company: {name: "test", users_attributes: {"0" => {name: "test",
+      post signups_path, company: {name: "test", users_attributes: {"0" => {name: "test",
         email: "dave@test.com", password: "password"}}}
     end
 
