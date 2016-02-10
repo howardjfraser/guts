@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   before_action :check_company, only: [:show, :edit, :update]
 
   def index
-    @companies = Company.all
+    @companies = Company.all.order(:name)
   end
 
   def show
