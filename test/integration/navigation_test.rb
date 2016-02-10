@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NavTest < ActionDispatch::IntegrationTest
+class NavigationTest < ActionDispatch::IntegrationTest
 
   def setup
     @brent = users(:brent)

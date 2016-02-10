@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActivationsEditTest < ActionDispatch::IntegrationTest
+class ActivationsTest < ActionDispatch::IntegrationTest
 
   def setup
     super
