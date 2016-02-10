@@ -67,3 +67,12 @@ michael:
   activated: true
   activated_at: <%= Time.zone.now %>
   company: :dunder_mifflin
+
+root:
+  name: root
+  email: root@example.com
+  password_digest: <%= User.digest('password') %>
+  role: root
+  activated: true
+  activated_at: <%= Time.zone.now %>
+  company: :wernham_hogg

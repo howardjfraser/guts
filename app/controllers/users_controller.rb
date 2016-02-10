@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
   before_action :check_company, only: [:show, :edit, :update, :destroy]
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :hide_root, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.where(company: current_user.company)
@@ -50,12 +51,18 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :role).merge(company: current_user.company)
   end
 
+  def find_user
+    @user = User.find(params[:id])
+  end
+
   def check_company
     forbidden unless current_user.company == @user.company
   end
 
-  def find_user
-    @user = User.find(params[:id])
+  def hide_root
+    forbidden if @user.root?
   end
+
+
 
 end

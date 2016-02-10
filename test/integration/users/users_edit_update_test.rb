@@ -17,8 +17,16 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @brent) { get edit_user_path @michael }
   end
 
+  test 'can’t edit root user' do
+    check_access(:forbidden, @howard) { get edit_user_path @howard }
+  end
+
   test 'can’t update users from a different company' do
     check_access(:forbidden, @brent) { patch user_path @michael, user: { email: "new@email.com" } }
+  end
+
+  test 'can’t update root users' do
+    check_access(:forbidden, @howard) { patch user_path @howard, user: { email: "new@email.com" } }
   end
 
   test "unsuccessful edit" do

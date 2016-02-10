@@ -11,6 +11,10 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @brent) { get user_path @michael }
   end
 
+  test "can’t view root user" do
+    check_access(:forbidden, @howard) { get user_path @howard }
+  end
+
   test "show self as non-admin has no links" do
     log_in_as(@gareth)
     get user_path @gareth
