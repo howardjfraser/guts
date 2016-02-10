@@ -2,12 +2,6 @@ require 'test_helper'
 
 class CompaniesIndexTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @howard = users(:howard)
-    @brent = users(:brent)
-    @gareth = users(:gareth)
-  end
-
   test "access" do
     check_redirect(login_url) { get companies_path }
     check_access(:forbidden, @gareth) { get companies_path }

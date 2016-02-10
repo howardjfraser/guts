@@ -2,12 +2,6 @@ require 'test_helper'
 
 class UsersEditUpdateTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @brent = users(:brent)
-    @gareth = users(:gareth)
-    @michael = users(:michael)
-  end
-
   test "access" do
     check_redirect(login_url) { get edit_user_path @brent }
     check_redirect(login_url) { patch user_path, id: @brent, user: { name: "new" } }

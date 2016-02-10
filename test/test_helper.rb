@@ -11,6 +11,17 @@ SimpleCov.start 'rails'
 class ActiveSupport::TestCase
   fixtures :all
 
+  def setup
+    @howard = users(:howard)
+    @brent = users(:brent)
+    @michael = users(:michael)
+    @gareth = users(:gareth)
+    @tim = users(:tim)
+
+    @hogg = companies(:wernham_hogg)
+    @mifflin = companies(:dunder_mifflin)
+  end
+
   def is_logged_in?
     !session[:user_id].nil?
   end

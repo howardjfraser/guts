@@ -2,12 +2,6 @@ require 'test_helper'
 
 class UsersDestroyTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @brent = users(:brent)
-    @gareth = users(:gareth)
-    @michael = users(:michael)
-  end
-
   test "access" do
     check_redirect(login_url) { delete user_path @brent }
     check_access(:forbidden, @gareth) { delete user_path @gareth }

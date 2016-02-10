@@ -2,11 +2,6 @@ require 'test_helper'
 
 class UsersIndexTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @brent = users(:brent)
-    @gareth = users(:gareth)
-  end
-
   test "access" do
     check_redirect(login_url) { get users_path }
   end

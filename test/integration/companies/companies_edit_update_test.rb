@@ -2,13 +2,6 @@ require 'test_helper'
 
 class CompaniesEditTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @howard = users(:howard)
-    @brent = users(:brent)
-    @michael = users(:michael)
-    @gareth = users(:gareth)
-  end
-
   test "edit access" do
     check_redirect(login_url)  { get edit_company_path @brent.company }
     check_access(:forbidden, @gareth) { get edit_company_path @gareth.company }

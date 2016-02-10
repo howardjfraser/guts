@@ -2,13 +2,6 @@ require 'test_helper'
 
 class CompaniesShowTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @howard = users(:howard)
-    @brent = users(:brent)
-    @michael = users(:michael)
-    @gareth = users(:gareth)
-  end
-
   test "access" do
     check_redirect(login_url)  { get company_path @brent.company }
     check_access(:success, @gareth) { get company_path @gareth.company }

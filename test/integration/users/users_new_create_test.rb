@@ -3,11 +3,8 @@ require 'test_helper'
 class UsersNewCreateTest < ActionDispatch::IntegrationTest
 
   def setup
+    super
     ActionMailer::Base.deliveries.clear
-    @brent = users(:brent)
-    @gareth = users(:gareth)
-    @tim = users(:tim)
-    @michael = users(:michael)
   end
 
   test "access" do

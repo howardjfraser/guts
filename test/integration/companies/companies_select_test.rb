@@ -2,15 +2,6 @@ require 'test_helper'
 
 class CompaniesSelectTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @howard = users(:howard)
-    @brent = users(:brent)
-    @gareth = users(:gareth)
-
-    @hogg = companies(:wernham_hogg)
-    @mifflin = companies(:dunder_mifflin)
-  end
-
   test "access" do
     check_redirect(login_url) { post select_company_path @hogg }
     check_access(:forbidden, @gareth) { post select_company_path @hogg }
