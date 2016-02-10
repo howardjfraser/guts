@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NewCreateTest < ActionDispatch::IntegrationTest
+class SessionsNewCreateTest < ActionDispatch::IntegrationTest
 
   def setup
     @brent = users(:brent)
@@ -27,19 +27,19 @@ class NewCreateTest < ActionDispatch::IntegrationTest
   end
 
   test "login with remembering" do
-    log_in_as(@brent, remember_me: '1')
+    post login_path, session: { email: "david@office.com", password: "password", remember: 1 }
     assert_equal cookies['remember_token'], assigns(:user).remember_token
   end
 
   test "login without remembering" do
-    log_in_as(@brent, remember_me: '0')
+    post login_path, session: { email: "david@office.com", password: "password", remember: 0 }
     assert_nil cookies['remember_token']
   end
 
   test "login with friendly forwarding" do
     get edit_user_path(@brent)
     assert_equal edit_user_url(@brent), session[:forwarding_url]
-    log_in_as(@brent)
+    post login_path, session: { email: "david@office.com", password: "password", remember: 0 }
     assert_redirected_to edit_user_path(@brent)
     assert_nil session[:forwarding_url]
   end

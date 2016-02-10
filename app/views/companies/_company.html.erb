@@ -1,5 +1,15 @@
 <span class="p-r-2" style="white-space: nowrap;">
 
-  <%= link_to company.name, company %>
+  <% if company == current_user.company %>
+    <span class="text-muted">
+      <%= company.name %>
+    </span>
+  <% else %>
+    <%= link_to company.name, select_company_path(company), method: :post %>
+  <% end %>
+
+  <span class="text-muted small">
+    <%= user_count company %>
+  </span>
 
 </span>

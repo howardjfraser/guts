@@ -75,4 +75,4 @@ root:
   role: root
   activated: true
   activated_at: <%= Time.zone.now %>
-  company: :wernham_hogg
+  company: :dunder_mifflin
