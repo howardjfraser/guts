@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SignupsNewTest < ActionDispatch::IntegrationTest
+class SignupsNewCreateTest < ActionDispatch::IntegrationTest
   include SessionsHelper
 
   def setup
