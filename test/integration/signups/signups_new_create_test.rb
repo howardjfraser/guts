@@ -9,6 +9,7 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
 
   test "access" do
     check_access(:success) { get new_signup_path }
+
     check_redirect(users_path) { post signups_path, company: {name: "test", users_attributes: {"0" => {name: "test",
       email: "dave@test.com", password: "password"}}}}
   end
@@ -30,16 +31,10 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
 
     company = assigns(:company)
     assert company.users.count == 1
-
-    check_owner company.users.first
-  end
-
-  private
-
-  def check_owner owner
+    owner = company.users.first
     assert owner.admin?
     assert owner.activated?
-    assert logged_in?
+    assert is_logged_in_as? owner
   end
 
 end
