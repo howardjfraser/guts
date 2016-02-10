@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
 
   belongs_to :company, inverse_of: :users
 
+  # TODO names
+  scope :by_company, ->(company) { where(company: company).order(:name) }
+  scope :excluding_root, -> { where.not(role: "root") }
+
   def admin?
     self.role == "admin" || self.role == "root"
   end

@@ -13,7 +13,14 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     users.each { |u| assert @brent.company == u.company }
   end
 
-  # TODO user list does not include root
+  test 'user list does not include root users' do
+    log_in_as @brent
+    get users_path
+    users = assigns[:users]
+    users.each { |u| assert u.role != "root" }
+  end
+
+  # TODO test sorted by name
 
   test "index as admin has new user link" do
     log_in_as(@brent)
@@ -24,7 +31,8 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 
   test "index as non-admin doesn't have new user link" do
     log_in_as(@gareth)
-    get users_path
+    follow_redirect!
+    assert_template 'users/index'
     assert_select "a[href=?]", new_user_path, test: 'Add User', count: 0
   end
 
