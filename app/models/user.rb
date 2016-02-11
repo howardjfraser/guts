@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX },
     uniqueness: {case_sensitive: false}
 
-  # TODO remove nil pw allowed once pw is removed from user form
+  # TODO remove nil pw allowed once pw is removed from user form?
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
   validates :company, presence: true
@@ -26,9 +26,7 @@ class User < ActiveRecord::Base
 
   belongs_to :company, inverse_of: :users
 
-  # TODO names
-  scope :by_company, ->(company) { where(company: company).order(:name) }
-  scope :excluding_root, -> { where.not(role: "root") }
+  scope :exclude_root, -> { where.not(role: "root") }
 
   def admin?
     self.role == "admin" || self.role == "root"

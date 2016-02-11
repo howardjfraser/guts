@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   before_action :hide_root, only: [:show, :edit, :update, :destroy]
 
   def index
-    # TODO move to company?
-    @users = User.by_company(current_user.company).excluding_root
+    @users = current_user.company.users.all.exclude_root
   end
 
   def show
