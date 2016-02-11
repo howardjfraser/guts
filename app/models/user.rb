@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX },
     uniqueness: {case_sensitive: false}
 
-  # TODO remove nil pw allowed once pw is removed from user form?
+  # TODO remove allow nil by creating separate credentials model?
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
   validates :company, presence: true
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   validates_inclusion_of :role, in: ROLES[0...-1]
 
-  has_secure_password
+  has_secure_password validations: false
 
   belongs_to :company, inverse_of: :users
 

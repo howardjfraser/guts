@@ -33,13 +33,13 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
     log_in_as(@brent)
     get edit_user_path(@brent)
     assert_template 'users/edit'
-    patch user_path(@brent), user: { name: "", email: "foo@invalid", password: "foo" }
+    patch user_path(@brent), user: { name: "", email: "foo.invalid" }
     check_fail
   end
 
   test "successful edit" do
     log_in_as(@brent)
-    patch user_path(@brent), user: { name: "dave",email: "dave@dave.com", password: "" }
+    patch user_path(@brent), user: { name: "dave",email: "dave@dave.com" }
     check_success @brent, true
   end
 

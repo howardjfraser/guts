@@ -40,7 +40,7 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
 
   def create_new_user
     log_in_as(@brent)
-    post users_path, user: { name:  "Example User", email: "user@example.com", password: "password" }
+    post users_path, user: { name:  "Example User", email: "user@example.com" }
     assigns(:user)
   end
 

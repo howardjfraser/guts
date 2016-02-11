@@ -15,7 +15,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @gareth) { post users_path, user: { name: "name", email: "new@company.com" } }
 
     check_redirect(users_path, @brent) {
-      post users_path, user: { name: "name", email: "new@company.com", password: "password" }
+      post users_path, user: { name: "name", email: "new@company.com" }
     }
   end
 
@@ -26,7 +26,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     assert_template 'users/new'
 
     assert_no_difference 'User.count' do
-      post users_path, user: { name:  "", email: "user@invalid", password: "foo" }
+      post users_path, user: { name:  "", email: "user@invalid" }
     end
 
     assert_template 'users/new'
@@ -38,7 +38,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
 
     assert_difference 'User.count', 1 do
       post users_path, user:
-        { name:  "Example User", email: "user@example.com", password: "password" }
+        { name:  "Example User", email: "user@example.com" }
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size

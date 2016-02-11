@@ -56,7 +56,6 @@ ricky:
   name: Ricky
   email: ricky@office.com
   role: user
-  password_digest: <%= User.digest('password') %>
   company: :wernham_hogg
 
 michael:
