@@ -19,7 +19,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     user = assigns(:user)
 
     check_not_activated user
-    # check_no_login_before_activation user
+    check_no_login_before_activation user
     check_invalid_token user
     check_wrong_email user
     check_valid_credentials user

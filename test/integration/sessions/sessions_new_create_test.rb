@@ -2,15 +2,26 @@ require 'test_helper'
 
 class SessionsNewCreateTest < ActionDispatch::IntegrationTest
 
-  def setup
-    @brent = users(:brent)
-  end
-
-  test "login fail" do
+  test "login fail - unknown user" do
     get "/login"
     assert_template "sessions/new"
-    post login_path, session: { email: "", password: "" }
-    follow_redirect!
+    post_via_redirect login_path, session: { email: "", password: "" }
+    assert_template "sessions/new"
+    assert flash.any?
+  end
+
+  test "login fail - pre-activation user" do
+    get "/login"
+    assert_template "sessions/new"
+    post_via_redirect login_path, session: { email: @ricky.email, password: "" }
+    assert_template "sessions/new"
+    assert flash.any?
+  end
+
+  test "login fail - wrong pw" do
+    get "/login"
+    assert_template "sessions/new"
+    post_via_redirect login_path, session: { email: @brent.email, password: "wrong" }
     assert_template "sessions/new"
     assert flash.any?
   end
@@ -18,8 +29,7 @@ class SessionsNewCreateTest < ActionDispatch::IntegrationTest
   test "login" do
     get "/login"
     assert_template "sessions/new"
-    post login_path, session: { email: "david@office.com", password: "password" }
-    follow_redirect!
+    post_via_redirect login_path, session: { email: "david@office.com", password: "password" }
     assert_template "users/index"
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
