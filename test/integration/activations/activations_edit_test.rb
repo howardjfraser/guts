@@ -50,7 +50,6 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
   def check_valid_credentials user
     get edit_activation_path(user.activation_token, email: user.email)
     assert_template 'activations/edit'
-    # TODO test hidden fields like pw reset?
   end
 
 end
