@@ -17,6 +17,7 @@ class ActiveSupport::TestCase
     @michael = users(:michael)
     @gareth = users(:gareth)
     @tim = users(:tim)
+    @ricky = users(:ricky)
 
     @keith = users(:keith)
     @keith.create_reset_digest

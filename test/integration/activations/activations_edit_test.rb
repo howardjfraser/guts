@@ -1,14 +1,10 @@
 require 'test_helper'
 
-class ActivationsTest < ActionDispatch::IntegrationTest
+class ActivationsEditTest < ActionDispatch::IntegrationTest
 
   def setup
     super
     ActionMailer::Base.deliveries.clear
-  end
-
-  test "access" do
-    # TODO how does id / email look up fit in with auth?
   end
 
   test "account activation" do
@@ -20,13 +16,13 @@ class ActivationsTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size
-
     user = assigns(:user)
+
     check_not_activated user
     check_no_login_before_activation user
     check_invalid_token user
     check_wrong_email user
-    check_successful_activation user
+    check_valid_credentials user
   end
 
   private
@@ -50,13 +46,11 @@ class ActivationsTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in_as? user
   end
 
-  def check_successful_activation user
+
+  def check_valid_credentials user
     get edit_activation_path(user.activation_token, email: user.email)
-    assert user.reload.activated?
-    follow_redirect!
-    assert_template 'users/show'
-    assert is_logged_in_as? user
-    assert_not user.admin?
+    assert_template 'activations/edit'
+    # TODO test hidden fields like pw reset?
   end
 
 end
