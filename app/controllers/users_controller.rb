@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :hide_root, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = current_user.company.users.all.exclude_root
+    @users = current_user.company.users.all.exclude_root.order('lower(name)')
   end
 
   def show
