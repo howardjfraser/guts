@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
   def create
     @user = User.find_by(email: params[:password_reset][:email])
 
-    if @user
+    if @user && !@user.root?
       @user.create_reset_digest
       @user.send_password_reset_email
       redirect_to root_path, notice: "Email sent"
@@ -20,6 +20,7 @@ class PasswordResetsController < ApplicationController
       flash.now[:notice] = 'Email not found'
       render :new
     end
+
   end
 
   def edit

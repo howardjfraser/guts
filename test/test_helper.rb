@@ -18,6 +18,9 @@ class ActiveSupport::TestCase
     @gareth = users(:gareth)
     @tim = users(:tim)
 
+    @keith = users(:keith)
+    @keith.create_reset_digest
+
     @hogg = companies(:wernham_hogg)
     @mifflin = companies(:dunder_mifflin)
   end
