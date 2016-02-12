@@ -13,13 +13,13 @@ class PasswordResetsNewCreateTest < ActionDispatch::IntegrationTest
   end
 
   test "invalid email"  do
-    post password_resets_path, password_reset: { email: "" }
+    post_via_redirect password_resets_path, password_reset: { email: "" }
     assert_not flash.empty?
     assert_template 'password_resets/new'
   end
 
   test "root user" do
-    post password_resets_path, password_reset: { email: @howard.email }
+    post_via_redirect password_resets_path, password_reset: { email: @howard.email }
     assert_not flash.empty?
     assert_template 'password_resets/new'
   end

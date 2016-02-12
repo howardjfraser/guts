@@ -1,5 +1,7 @@
 class PasswordResetsController < ApplicationController
   skip_before_action :require_login
+  before_action :find_user_by_email, only: [:create]
+  before_action :valid_user_by_email, only: [:create]
   before_action :find_user, only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
@@ -8,17 +10,9 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email])
-
-    if @user && !@user.root?
-      @user.create_reset_digest
-      @user.send_password_reset_email
-      redirect_to root_path, notice: "Email sent"
-    else
-      flash.now[:notice] = 'Email not found'
-      render :new
-    end
-
+    @user.create_reset_digest
+    @user.send_password_reset_email
+    redirect_to root_path, notice: "Email sent"
   end
 
   def edit
@@ -40,6 +34,16 @@ class PasswordResetsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password)
+  end
+
+  def find_user_by_email
+    @user = User.find_by(email: params[:password_reset][:email])
+  end
+
+  def valid_user_by_email
+    unless (@user && !@user.root?)
+      redirect_to new_password_reset_url, notice: "Email not found"
+    end
   end
 
   def find_user
