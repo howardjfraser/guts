@@ -1,0 +1,24 @@
+<% provide(:title, 'Change password') %>
+
+<h1>Change password</h1>
+<hr>
+
+<%= form_for(@user, url: password_change_path(@user)) do |f| %>
+  <%= render 'shared/errors', object: @user %>
+
+  <div class="row m-b-1">
+    <div class="std-label text-sm-right">
+      <%= f.label :password, "New password" %>
+    </div>
+    <div class="std-control">
+      <%= f.password_field :password, autofocus: true %>
+    </div>
+  </div>
+
+  <div class="row m-b-1">
+    <div class="std-submit text-xs-right">
+      <%= f.submit "Update", class: 'btn btn-primary' %>
+    </div>
+  </div>
+
+<% end %>

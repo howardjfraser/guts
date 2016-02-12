@@ -8,13 +8,9 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      store_requested_url
+      session[:forwarding_url] = request.url if request.get?
       redirect_to login_url, notice: "Please log in"
     end
-  end
-
-  def store_requested_url
-    session[:forwarding_url] = request.url if request.get?
   end
 
   def require_admin
@@ -23,6 +19,10 @@ class ApplicationController < ActionController::Base
 
   def require_root
     forbidden unless current_user.root?
+  end
+
+  def prevent_root
+    forbidden if @user.root?
   end
 
   def forbidden

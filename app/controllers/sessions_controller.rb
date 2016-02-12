@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   skip_before_action :require_login
 
   def new
@@ -31,8 +30,8 @@ class SessionsController < ApplicationController
 
   private
 
-    def remember_or_forget(user)
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-    end
+  def remember_or_forget(user)
+    params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+  end
 
 end

@@ -9,8 +9,8 @@ class SignupsController < ApplicationController
   def create
     @company = Company.new(signup_params)
     if @company.save
-      set_up_owner @company.users.first
-      redirect_to users_url, notice: "Congratulations!"
+      set_up_owner
+      redirect_to users_url, notice: "Get in!"
     else
       render 'new'
     end
@@ -22,10 +22,11 @@ class SignupsController < ApplicationController
     params.require(:company).permit(:name, users_attributes: [:name, :email, :password])
   end
 
-  def set_up_owner user
-    user.update_attribute(:role, "admin")
-    user.activate
-    log_in user
+  def set_up_owner
+    owner = @company.users.first
+    owner.update_attribute(:role, "admin")
+    owner.activate
+    log_in owner
   end
 
 end
