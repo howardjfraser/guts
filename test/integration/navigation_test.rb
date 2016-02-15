@@ -29,7 +29,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
   private
 
   def check_links user=nil, expected
-    assert_select "a[href=?]", signups_path, count: expected[0]
+    assert_select "a[href=?]", new_signup_path, count: expected[0]
     assert_select "a[href=?]", login_path, count: expected[1]
     assert_select "a[href=?]", new_password_reset_path, count: expected[2]
     assert_select "a[href=?]", users_path, count: expected[3]
