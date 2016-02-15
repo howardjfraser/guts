@@ -1,4 +1,4 @@
-<header class="m-t-1">
+<header id="nav" class="m-t-1">
 
   <% if flash[:notice] %>
     <%= content_tag(:div, flash[:notice], class: "flash") %>
@@ -13,10 +13,10 @@
     <% end %>
 
     <% if current_user.admin? %>
-      <%= link_to "Company", company_path(current_user.company), style: "padding-right: 1rem;" %>
+      <%= link_to "Company", company_path(current_user.company) %>
     <% end %>
 
-    <%= link_to "Users", users_path, style: "padding-right: 1rem;" %>
+    <%= link_to "Users", users_path %>
 
     <% unless current_user.root? %>
       <%= link_to "Me", current_user %>
@@ -24,7 +24,7 @@
 
   <% else %>
 
-    <%= link_to "Sign up", signups_path, style: "padding-right: 1rem;" %>
+    <%= link_to "Sign up", signups_path %>
     <%= link_to "Log in", login_path %>
 
   <% end %>
