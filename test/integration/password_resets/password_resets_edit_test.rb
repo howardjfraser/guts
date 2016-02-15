@@ -9,12 +9,12 @@ class PasswordResetsEditTest < ActionDispatch::IntegrationTest
 
   test "email not found" do
     get edit_password_reset_path(@keith.reset_token, email: "")
-    assert_redirected_to root_url
+    assert_redirected_to new_password_reset_url
   end
 
   test "token not found" do
     get edit_password_reset_path('wrong token', email: @keith.email)
-    assert_redirected_to root_url
+    assert_redirected_to new_password_reset_url
   end
 
   test "valid token and email" do
@@ -26,8 +26,10 @@ class PasswordResetsEditTest < ActionDispatch::IntegrationTest
   test "inactive user" do
     @keith.toggle!(:activated)
     get edit_password_reset_path(@keith.reset_token, email: @keith.email)
-    assert_redirected_to root_url
+    assert_redirected_to new_password_reset_url
     @keith.toggle!(:activated)
   end
+
+  # TODO root user
 
 end
