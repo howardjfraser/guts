@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     forbidden unless current_user.root?
   end
 
-  # prevent access *to* root - all root changes are via console
+  # prevent access *to* root - all changes to root are via console
   def hide_root
     forbidden if @user.root?
   end
