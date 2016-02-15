@@ -59,10 +59,6 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def User.new_token
-    SecureRandom.urlsafe_base64
-  end
-
   def send_activation_email
     UserMailer.activation(self).deliver_now
   end
@@ -106,6 +102,10 @@ class User < ActiveRecord::Base
 
   def colleagues
     self.company.users.select { |u| u != self }
+  end
+
+  def User.new_token
+    SecureRandom.urlsafe_base64
   end
 
 end
