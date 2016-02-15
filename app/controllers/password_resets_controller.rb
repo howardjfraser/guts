@@ -2,12 +2,13 @@ class PasswordResetsController < ApplicationController
   skip_before_action :require_login
 
   before_action :find_user_by_email, only: [:create]
-  before_action :valid_user_by_email, only: [:create]
-  before_action :find_user, only: [:edit, :update]
-  before_action :valid_user, only: [:edit, :update]
+  before_action :valid_user, only: [:create]
+
+  before_action :find_user_zz, only: [:edit, :update]
+  before_action :valid_token, only: [:edit, :update]
 
   before_action :check_expiration, only: [:edit, :update]
-  before_action :prevent_root, only: [:create, :edit, :update]
+  before_action :hide_root, only: [:create, :edit, :update]
 
   def new
   end
@@ -39,26 +40,28 @@ class PasswordResetsController < ApplicationController
     params.require(:user).permit(:password)
   end
 
-  # combine
-  def find_user
-    @user = User.find_by(email: params[:email])
-  end
-
+  # change form?
   def find_user_by_email
     @user = User.find_by(email: params[:password_reset][:email])
   end
 
-  # consolidate?
-  def valid_user_by_email
-    unless (@user && !@user.root?)
-      redirect_to new_password_reset_url, notice: "Email not found"
-    end
+  # combine?
+  def find_user_zz
+    @user = User.find_by(email: params[:email])
   end
 
   def valid_user
-    unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+    redirect_to new_password_reset_url, notice: "Email not found" unless reset_permitted?
+  end
+
+  def valid_token
+    unless reset_permitted? && @user.authenticated?(:reset, params[:id])
       redirect_to root_url, notice: "Invalid user"
     end
+  end
+
+  def reset_permitted?
+    @user && @user.activated? && !@user.root?
   end
 
   def check_expiration

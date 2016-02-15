@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
   before_action :check_company, only: [:show, :edit, :update, :destroy]
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :prevent_root, only: [:show, :edit, :update, :destroy]
+  before_action :hide_root, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = current_user.company.users.all.exclude_root.order('lower(name)')
