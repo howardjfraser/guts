@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     forbidden unless current_user.root?
   end
 
+  # prevent changes *to* root rather than *by*, confusing?
   def prevent_root
     forbidden if @user.root?
   end
