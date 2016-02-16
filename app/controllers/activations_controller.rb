@@ -1,7 +1,7 @@
 class ActivationsController < ApplicationController
   skip_before_action :require_login
   before_action :find_user
-  before_action :valid_user
+  before_action :check_user
 
   def edit
   end
@@ -29,7 +29,7 @@ class ActivationsController < ApplicationController
     @user = User.find_by(email: params[:email])
   end
 
-  def valid_user
+  def check_user
     unless (@user && !@user.activated? && @user.authenticated?(:activation, params[:id]))
       redirect_to root_url, notice: "Invalid activation"
     end

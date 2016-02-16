@@ -2,9 +2,9 @@ class PasswordResetsController < ApplicationController
   skip_before_action :require_login
   before_action :find_user_by_email, only: [:create]
   before_action :find_user_zz, only: [:edit, :update]
-  before_action :valid_user, only: [:create, :edit, :update]
-  before_action :valid_token, only: [:edit, :update]
-  before_action :valid_expiry, only: [:edit, :update]
+  before_action :check_user, only: [:create, :edit, :update]
+  before_action :check_token, only: [:edit, :update]
+  before_action :check_expiry, only: [:edit, :update]
   before_action :hide_root, only: [:create, :edit, :update]
 
   def new
@@ -47,15 +47,15 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by(email: params[:email])
   end
 
-  def valid_user
+  def check_user
     redirect_to new_password_reset_url, notice: "Email not found" unless reset_permitted?
   end
 
-  def valid_token
+  def check_token
     redirect_to new_password_reset_url, notice: "Invalid user" unless @user.authenticated?(:reset, params[:id])
   end
 
-  def valid_expiry
+  def check_expiry
     redirect_to new_password_reset_url, notice: "Password reset has expired" if @user.password_reset_expired?
   end
 
