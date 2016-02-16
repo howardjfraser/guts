@@ -3,7 +3,7 @@
 
 <%= render 'shared/errors', object: @company %>
 
-<%= form_for(@company, url: "/signups") do |f| %>
+<%= form_for(@company, url: signups_path) do |f| %>
 
   <%= f.fields_for :users do |e| %>
 
