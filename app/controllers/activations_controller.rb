@@ -33,6 +33,7 @@ class ActivationsController < ApplicationController
     unless (@user && !@user.activated? && @user.authenticated?(:activation, params[:id]))
       redirect_to root_url, notice: "Invalid activation"
     end
+
   end
 
 end

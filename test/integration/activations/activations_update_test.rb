@@ -8,30 +8,30 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
   end
 
   test "successful account activation" do
-    user = create_new_user
-    patch_via_redirect activation_path(user.activation_token), email: user.email, user: { password: "new password" }
-    assert user.reload.activated?
+    create_new_user
+    patch_via_redirect activation_path(@user.activation_token), email: @user.email, user: { password: "new password" }
+    assert @user.reload.activated?
     assert_template 'users/show'
-    assert is_logged_in_as? user
-    assert_not user.admin?
+    assert is_logged_in_as? @user
+    assert_not @user.admin?
   end
 
   test "invalid account activation - bad token" do
-    user = create_new_user
-    patch activation_path("bad token"), email: user.email, user: { password: "new password" }
+    create_new_user
+    patch activation_path("bad token"), email: @user.email, user: { password: "new password" }
     assert_redirected_to root_url
   end
 
   test "invalid account activation - invalid pw" do
-    user = create_new_user
-    patch activation_path(user.activation_token), email: user.email, user: { password: "zz" }
+    create_new_user
+    patch activation_path(@user.activation_token), email: @user.email, user: { password: "zz" }
     assert_select 'div.errors'
     assert_template "activations/edit"
   end
 
   test "invalid account activation - empty pw" do
-    user = create_new_user
-    patch activation_path(user.activation_token), email: user.email, user: { password: "" }
+    create_new_user
+    patch activation_path(@user.activation_token), email: @user.email, user: { password: "" }
     assert_select 'div.errors'
     assert_template "activations/edit"
   end
@@ -41,7 +41,7 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
   def create_new_user
     log_in_as(@brent)
     post users_path, user: { name:  "Example User", email: "user@example.com" }
-    assigns(:user)
+    @user = assigns[:user]
   end
 
 end
