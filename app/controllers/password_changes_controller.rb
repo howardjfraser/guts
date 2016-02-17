@@ -1,8 +1,8 @@
 class PasswordChangesController < ApplicationController
   before_action :find_user
   before_action :check_user
-  before_action :check_expiration, only: :update
   before_action :hide_root
+  before_action :check_expiration, only: :update
 
   def edit
     @user.create_reset_digest
