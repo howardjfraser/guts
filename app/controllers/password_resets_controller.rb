@@ -48,7 +48,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def check_token
-    redirect_to new_password_reset_url, notice: "Invalid password reset" unless @user.authenticated?(:reset, params[:id])
+    redirect_to new_password_reset_url, notice: "Invalid password reset" unless authenticated?
+  end
+
+  def authenticated?
+    @user.authenticated?(:reset, params[:id])
   end
 
   def check_expiry
