@@ -3,21 +3,20 @@
 <h1>Forgot password</h1>
 <hr>
 
-<%= form_for(:password_reset, url: password_resets_path) do |f| %>
-
+<%= form_tag(password_resets_path) do %>
 
   <div class="row m-b-1">
     <div class="std-label text-sm-right">
-      <%= f.label :email %>
+      <%= label_tag :email %>
     </div>
     <div class="std-control">
-      <%= f.email_field :email, autofocus: true %>
+      <%= email_field_tag :email, nil, autofocus: true %>
     </div>
   </div>
 
   <div class="row m-b-1">
     <div class="std-submit text-xs-right">
-      <%= f.submit "Submit", class: 'btn btn-primary' %>
+      <%= submit_tag "Submit", class: 'btn btn-primary' %>
     </div>
   </div>
 

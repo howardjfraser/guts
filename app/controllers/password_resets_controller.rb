@@ -1,7 +1,6 @@
 class PasswordResetsController < ApplicationController
   skip_before_action :require_login
-  before_action :find_user_by_email, only: [:create]
-  before_action :find_user_zz, only: [:edit, :update]
+  before_action :find_user, only: [:create, :edit, :update]
   before_action :check_user, only: [:create, :edit, :update]
   before_action :check_token, only: [:edit, :update]
   before_action :check_expiry, only: [:edit, :update]
@@ -37,13 +36,7 @@ class PasswordResetsController < ApplicationController
     params.require(:user).permit(:password)
   end
 
-  # change form?
-  def find_user_by_email
-    @user = User.find_by(email: params[:password_reset][:email])
-  end
-
-  # combine?
-  def find_user_zz
+  def find_user
     @user = User.find_by(email: params[:email])
   end
 
