@@ -41,19 +41,18 @@ class PasswordResetsController < ApplicationController
   end
 
   def check_user
-    redirect_to new_password_reset_url, notice: "Email not found" unless reset_permitted?
+    if @user.nil? || @user.root?
+      redirect_to new_password_reset_url, notice: "Email not found"  and return
+    end
+    redirect_to new_password_reset_url, notice: "User not activated" if !@user.activated?
   end
 
   def check_token
-    redirect_to new_password_reset_url, notice: "Invalid user" unless @user.authenticated?(:reset, params[:id])
+    redirect_to new_password_reset_url, notice: "Invalid password reset" unless @user.authenticated?(:reset, params[:id])
   end
 
   def check_expiry
     redirect_to new_password_reset_url, notice: "Password reset has expired" if @user.password_reset_expired?
-  end
-
-  def reset_permitted?
-    @user && @user.activated? && !@user.root?
   end
 
 end
