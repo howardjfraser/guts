@@ -7,6 +7,18 @@
 <h1>Users</h1>
 <hr>
 
-<%= render partial: @users %>
+<div class="m-b-1">
+  <%= render partial: @users %>
+</div>
 
-<p class="m-t-1 text-muted"><%= pluralize @users.count, "user" %></p>
+<% if @invited.size > 0 %>
+  <div class="m-b-1">
+    <span class="text-muted">Invited</span>
+    <%= render partial: @invited %>
+  </div>
+<% end %>
+
+<p class="text-muted">
+  <%= pluralize @users.count, "activated user" %>
+  <%= "/ #{pluralize(@invited.count, "invited user")}" if @invited.size > 0 %>
+</p>

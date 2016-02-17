@@ -3,11 +3,6 @@
   <%= link_to user.name, user %>
 
   <span class="small text-muted">
-
-    <% if !user.activated? %>
-      not activated
-    <% end %>
-
     <%= user.role unless user.role == "user" %>
   </span>
 
