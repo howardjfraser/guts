@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
 
   validates :company, presence: true
 
-  validate :at_least_one_admin, on: :update
-
   ROLES = %w(user admin root)
   validates :role, inclusion: ROLES[0...-1]
+
+  validates_with LastAdminValidator
 
   # queries
 
@@ -99,18 +99,4 @@ class User < ActiveRecord::Base
     email.downcase!
   end
 
-  def at_least_one_admin
-    if possible_admin_role_removal? && no_other_admins?
-      errors.add(:role, 'You can’t remove the last administrator')
-    end
-  end
-
-  def possible_admin_role_removal?
-    role_changed? && role != 'admin'
-  end
-
-  def no_other_admins?
-    colleagues = company.users.select { |u| u != self }
-    colleagues.count { |u| u.role == 'admin' } == 0
-  end
 end
