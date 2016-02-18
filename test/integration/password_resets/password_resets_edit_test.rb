@@ -30,6 +30,6 @@ class PasswordResetsEditTest < ActionDispatch::IntegrationTest
     @keith.toggle!(:activated)
   end
 
-  # TODO root user
+  # TODO: root user
 
 end

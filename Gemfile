@@ -17,6 +17,7 @@ gem 'sdoc', group: :doc
 group :development do
   gem 'letter_opener'
   gem 'web-console'
+  gem 'rubocop', require: false
 end
 
 group :development, :test do

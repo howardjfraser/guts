@@ -4,53 +4,46 @@ class User < ActiveRecord::Base
   before_save :downcase_email
   before_create :create_activation_digest
 
-  ROLES = %w[user admin root]
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-
   has_secure_password validations: false
   belongs_to :company, inverse_of: :users
 
-
   # validation
 
-  validates :name, presence: true, length: {maximum: 50}
+  validates :name, presence: true, length: { maximum: 50 }
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX },
-    uniqueness: {case_sensitive: false}
+                    uniqueness: { case_sensitive: false }
 
-  # TODO remove allow nil by creating separate credentials model?
-  validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+  # TODO: remove allow nil by creating separate credentials model?
+  validates :password, presence: true, length: {  minimum: 6 }, allow_nil: true
 
   validates :company, presence: true
 
   validate :at_least_one_admin, on: :update
 
-  validates_inclusion_of :role, in: ROLES[0...-1]
-
+  ROLES = %w(user admin root)
+  validates :role, inclusion: ROLES[0...-1]
 
   # queries
 
   default_scope { order('lower(name)') }
-  scope :exclude_root, -> { where.not(role: "root") }
-  scope :company, ->(company) { exclude_root.where("company_id = ?", company)}
-  scope :activated, -> (company) { company(company).where(activated: true)}
-  scope :invited, -> (company) { company(company).where(activated: false)}
 
-  def colleagues
-    self.company.users.select { |u| u != self }
-  end
+  scope :exclude_root, -> { where.not(role: 'root') }
+  scope :company, ->(company) { exclude_root.where('company_id = ?', company) }
+  scope :activated, -> (company) { company(company).where(activated: true) }
+  scope :invited, -> (company) { company(company).where(activated: false) }
 
-
-  #helpers
+  # helpers
 
   def admin?
-    self.role == "admin" || self.role == "root"
+    role == 'admin' || role == 'root'
   end
 
   def root?
-    self.role == "root"
+    role == 'root'
   end
-
 
   # auth
 
@@ -69,8 +62,7 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  def User.digest(string)
-    # TODO - hmmm...
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
@@ -93,6 +85,10 @@ class User < ActiveRecord::Base
     update_attribute(:activation_digest, activation_digest)
   end
 
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
   private
 
   def create_activation_digest
@@ -101,19 +97,21 @@ class User < ActiveRecord::Base
   end
 
   def downcase_email
-    self.email.downcase!
+    email.downcase!
   end
 
   def at_least_one_admin
-    if (self.role_changed? && self.role != "admin")
-      if (colleagues.select { |u| u.role == "admin" }.count == 0)
-        errors.add(:role, "You can’t remove the last administrator")
-      end
+    if possible_admin_role_removal? && no_other_admins?
+      errors.add(:role, 'You can’t remove the last administrator')
     end
   end
 
-  def User.new_token
-    SecureRandom.urlsafe_base64
+  def possible_admin_role_removal?
+    role_changed? && role != 'admin'
   end
 
+  def no_other_admins?
+    colleagues = company.users.select { |u| u != self }
+    colleagues.count { |u| u.role == 'admin' } == 0
+  end
 end

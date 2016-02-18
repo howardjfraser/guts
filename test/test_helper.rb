@@ -46,7 +46,7 @@ class ActiveSupport::TestCase
 
   private
 
-    # TODO review this in Hartl...
+    # TODO: review this in Hartl...
     def integration_test?
       defined?(post_via_redirect)
     end
