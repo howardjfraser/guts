@@ -82,15 +82,19 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
-  private
-
-  def downcase_email
-    self.email.downcase!
+  def renew_activation_digest
+    create_activation_digest
   end
+
+  private
 
   def create_activation_digest
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  def downcase_email
+    self.email.downcase!
   end
 
   # if admin role has been removed, check there is another admin

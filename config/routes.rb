@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
   resources :activations, only: [:edit, :update]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :password_changes, only: [:edit, :update]
+
+  post "invitations/resend/:id" => "invitations#resend", as: 'resend_invitation'
 
 end

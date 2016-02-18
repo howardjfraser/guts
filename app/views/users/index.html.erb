@@ -11,14 +11,14 @@
   <%= render partial: @users %>
 </div>
 
+<p class="text-muted">
+  <%= pluralize @users.count, "user" %>
+</p>
+
 <% if @invited.size > 0 %>
   <div class="m-b-1">
-    <span class="text-muted">Invited</span>
+    <span class="text-muted">Waiting on activation</span>
     <%= render partial: @invited %>
   </div>
 <% end %>
 
-<p class="text-muted">
-  <%= pluralize @users.count, "activated user" %>
-  <%= "/ #{pluralize(@invited.count, "invited user")}" if @invited.size > 0 %>
-</p>
