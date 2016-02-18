@@ -4,7 +4,7 @@ class UserMailerTest < ActionMailer::TestCase
 
   test "activation" do
     @brent = users(:brent)
-    @brent.activation_token = User.new_token
+    @brent.activation_token = "token"
     mail = UserMailer.activation(@brent)
     assert_equal "Account activation", mail.subject
     assert_equal [@brent.email], mail.to
@@ -16,7 +16,7 @@ class UserMailerTest < ActionMailer::TestCase
 
   test "password_reset" do
     @brent = users(:brent)
-    @brent.reset_token = User.new_token
+    @brent.reset_token = "token"
     mail = UserMailer.password_reset(@brent)
     assert_equal "Password reset", mail.subject
     assert_equal [@brent.email], mail.to
