@@ -15,7 +15,7 @@
   <%= pluralize @users.count, "user" %>
 
   <% if @invited.size > 0 %>
-    plus <%= @invited.count %> invited
+    plus <%= @invited.count %> waiting on activation
     <%= render partial: @invited %>
   <% end %>
 </p>
