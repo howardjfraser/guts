@@ -3,7 +3,6 @@ class InvitationsController < ApplicationController
 
   def resend
     @user.renew_activation_digest
-    @user.save
     UserMailer.activation(@user).deliver_now
     redirect_to users_url, notice: "Invitation for #{@user.name} has been resent "
   end

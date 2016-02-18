@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
   scope :activated, -> (company) { company(company).where(activated: true)}
   scope :invited, -> (company) { company(company).where(activated: false)}
 
+  def colleagues
+    self.company.users.select { |u| u != self }
+  end
+
 
   #helpers
 
@@ -86,6 +90,7 @@ class User < ActiveRecord::Base
 
   def renew_activation_digest
     create_activation_digest
+    update_attribute(:activation_digest, activation_digest)
   end
 
   private
@@ -105,10 +110,6 @@ class User < ActiveRecord::Base
         errors.add(:role, "You can’t remove the last administrator")
       end
     end
-  end
-
-  def colleagues
-    self.company.users.select { |u| u != self }
   end
 
   def User.new_token
