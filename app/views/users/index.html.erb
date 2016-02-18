@@ -13,12 +13,9 @@
 
 <p class="text-muted">
   <%= pluralize @users.count, "user" %>
-</p>
 
-<% if @invited.size > 0 %>
-  <div class="m-b-1">
-    <span class="text-muted">Waiting on activation</span>
+  <% if @invited.size > 0 %>
+    plus <%= @invited.count %> invited
     <%= render partial: @invited %>
-  </div>
-<% end %>
-
+  <% end %>
+</p>
