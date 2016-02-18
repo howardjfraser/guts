@@ -28,9 +28,8 @@ class User < ActiveRecord::Base
 
   # queries
 
-  default_scope { order('lower(name)') }
-
-  scope :exclude_root, -> { where.not(role: 'root') }
+  scope :sorted, -> { order('lower(name)') }
+  scope :exclude_root, -> { sorted.where.not(role: 'root') }
   scope :company, ->(company) { exclude_root.where('company_id = ?', company) }
   scope :activated, -> (company) { company(company).where(activated: true) }
   scope :invited, -> (company) { company(company).where(activated: false) }
