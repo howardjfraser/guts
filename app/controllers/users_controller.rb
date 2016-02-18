@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.send_activation_email
+      UserMailer.activation(@user).deliver_now
       redirect_to users_url, notice: "#{@user.name} has been invited"
     else
       render 'new'

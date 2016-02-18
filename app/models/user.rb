@@ -1,12 +1,17 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token
 
-  ROLES = %w[user admin root]
-
   before_save :downcase_email
   before_create :create_activation_digest
 
+  ROLES = %w[user admin root]
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
+  has_secure_password validations: false
+  belongs_to :company, inverse_of: :users
+
+
+  # validation
 
   validates :name, presence: true, length: {maximum: 50}
 
@@ -22,15 +27,17 @@ class User < ActiveRecord::Base
 
   validates_inclusion_of :role, in: ROLES[0...-1]
 
-  has_secure_password validations: false
 
-  belongs_to :company, inverse_of: :users
+  # queries
 
   default_scope { order('lower(name)') }
   scope :exclude_root, -> { where.not(role: "root") }
   scope :company, ->(company) { exclude_root.where("company_id = ?", company)}
   scope :activated, -> (company) { company(company).where(activated: true)}
   scope :invited, -> (company) { company(company).where(activated: false)}
+
+
+  #helpers
 
   def admin?
     self.role == "admin" || self.role == "root"
@@ -39,6 +46,9 @@ class User < ActiveRecord::Base
   def root?
     self.role == "root"
   end
+
+
+  # auth
 
   def remember
     self.remember_token = User.new_token
@@ -61,10 +71,6 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def send_activation_email
-    UserMailer.activation(self).deliver_now
-  end
-
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
   end
@@ -72,10 +78,6 @@ class User < ActiveRecord::Base
   def create_reset_digest
     self.reset_token = User.new_token
     update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
-  end
-
-  def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
   end
 
   def password_reset_expired?
@@ -97,7 +99,6 @@ class User < ActiveRecord::Base
     self.email.downcase!
   end
 
-  # if admin role has been removed, check there is another admin
   def at_least_one_admin
     if (self.role_changed? && self.role != "admin")
       if (colleagues.select { |u| u.role == "admin" }.count == 0)

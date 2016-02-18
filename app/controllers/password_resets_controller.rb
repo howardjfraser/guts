@@ -11,7 +11,7 @@ class PasswordResetsController < ApplicationController
 
   def create
     @user.create_reset_digest
-    @user.send_password_reset_email
+    UserMailer.password_reset(@user).deliver_now
     redirect_to root_path, notice: "Email sent"
   end
 
