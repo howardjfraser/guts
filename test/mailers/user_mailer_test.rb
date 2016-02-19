@@ -25,4 +25,5 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match @brent.reset_token, mail.body.encoded
     assert_match CGI.escape(@brent.email), mail.body.encoded
   end
+
 end

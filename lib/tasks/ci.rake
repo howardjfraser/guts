@@ -22,7 +22,7 @@ namespace :ci do
 
   desc 'Run RuboCop on the project based on git diff'
   RuboCop::RakeTask.new('rubocop_changed') do |task|
-    task.patterns = patterns_for_changed_files
+    # task.patterns = patterns_for_changed_files
     task.fail_on_error = true
   end
 end
