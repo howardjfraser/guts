@@ -22,7 +22,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
   test 'logged in as root' do
     log_in_as @howard
     assert_template 'users/index'
-    check_links [0, 0, 0, 1, 0, 1, 1, 1, 1] ,@howard
+    check_links [0, 0, 0, 1, 0, 1, 1, 1, 1], @howard
   end
 
   private

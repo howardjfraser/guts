@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'sessions#new'
 
   get 'login' => 'sessions#new'
@@ -21,5 +20,4 @@ Rails.application.routes.draw do
   resources :password_changes, only: [:edit, :update]
 
   post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
-
 end
