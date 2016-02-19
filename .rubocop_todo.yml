@@ -105,35 +105,19 @@ Style/EmptyLinesAroundBlockBody:
     - 'config/routes.rb'
     - 'db/schema.rb'
 
-# Offense count: 68
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: empty_lines, no_empty_lines
-# Style/EmptyLinesAroundClassBody:
-#   Enabled: false
-
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: empty_lines, no_empty_lines
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/companies_helper.rb'
-    - 'app/helpers/sessions_helper.rb'
 
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
-Style/ExtraSpacing:
-  Exclude:
-    - 'app/controllers/password_resets_controller.rb'
-    - 'app/validators/last_admin_validator.rb'
-    - 'bin/setup'
-    - 'db/schema.rb'
-    - 'test/integration/companies/companies_edit_update_test.rb'
-    - 'test/integration/companies/companies_show_test.rb'
-    - 'test/integration/password_resets/password_resets_new_create_test.rb'
+# Style/ExtraSpacing:
+#   Exclude:
+#     - 'app/controllers/password_resets_controller.rb'
+#     - 'app/validators/last_admin_validator.rb'
+#     - 'bin/setup'
+#     - 'db/schema.rb'
+#     - 'test/integration/companies/companies_edit_update_test.rb'
+#     - 'test/integration/companies/companies_show_test.rb'
+#     - 'test/integration/password_resets/password_resets_new_create_test.rb'
 
 # Offense count: 10
 # Cop supports --auto-correct.
