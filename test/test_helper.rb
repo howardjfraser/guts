@@ -30,7 +30,7 @@ class ActiveSupport::TestCase
     !session[:user_id].nil?
   end
 
-  def is_logged_in_as? user
+  def is_logged_in_as?(user)
     session[:user_id] == user.id
   end
 
@@ -46,19 +46,19 @@ class ActiveSupport::TestCase
 
   private
 
-    def integration_test?
-      defined?(post_via_redirect)
-    end
+  def integration_test?
+    defined?(post_via_redirect)
+  end
 
-    def check_access expected, user=nil
-      log_in_as user unless user.nil?
-      yield
-      assert_response expected
-    end
+  def check_access(expected, user=nil)
+    log_in_as user unless user.nil?
+    yield
+    assert_response expected
+  end
 
-    def check_redirect expected, user=nil
-      log_in_as user unless user.nil?
-      yield
-      assert_redirected_to expected
-    end
+  def check_redirect(expected, user=nil)
+    log_in_as user unless user.nil?
+    yield
+    assert_redirected_to expected
+  end
 end

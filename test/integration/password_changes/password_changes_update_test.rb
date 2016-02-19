@@ -33,7 +33,7 @@ class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
 
   private
 
-  def update password
+  def update(password)
     @gareth.create_reset_digest
     log_in_as @gareth
     patch password_change_path @gareth.id, user: { password: password }

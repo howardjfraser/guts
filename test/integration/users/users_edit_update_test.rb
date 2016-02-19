@@ -76,7 +76,7 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
     check_success @gareth, true
   end
 
-  def check_success user, is_admin
+  def check_success(user, is_admin)
     follow_redirect!
     assert_template 'users/show'
     assert flash.any?

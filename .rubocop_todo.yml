@@ -106,46 +106,11 @@ Style/EmptyLinesAroundBlockBody:
     - 'db/schema.rb'
 
 
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
-# Style/ExtraSpacing:
-#   Exclude:
-#     - 'app/controllers/password_resets_controller.rb'
-#     - 'app/validators/last_admin_validator.rb'
-#     - 'bin/setup'
-#     - 'db/schema.rb'
-#     - 'test/integration/companies/companies_edit_update_test.rb'
-#     - 'test/integration/companies/companies_show_test.rb'
-#     - 'test/integration/password_resets/password_resets_new_create_test.rb'
-
 # Offense count: 10
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
 # SupportedStyles: ruby19, ruby19_no_mixed_keys, hash_rockets
 Style/HashSyntax:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: normal, rails
-Style/IndentationConsistency:
-  Exclude:
-    - 'test/test_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Width.
-Style/IndentationWidth:
-  Exclude:
-    - 'app/helpers/sessions_helper.rb'
-
-# Offense count: 13
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: require_parentheses, require_no_parentheses, require_no_parentheses_except_multiline
-Style/MethodDefParentheses:
   Enabled: false
 
 # Offense count: 1
