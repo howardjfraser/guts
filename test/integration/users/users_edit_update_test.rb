@@ -38,7 +38,7 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
 
   test 'successful edit' do
     log_in_as(@brent)
-    patch user_path(@brent), user: { name: 'dave',email: 'dave@dave.com' }
+    patch user_path(@brent), user: { name: 'dave', email: 'dave@dave.com' }
     check_success @brent, true
   end
 

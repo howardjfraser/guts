@@ -38,7 +38,7 @@ class ActiveSupport::TestCase
     password = options[:password] || 'password'
     remember_me = options[:remember_me] || '1'
     if integration_test?
-      post_via_redirect login_path, session: { email: user.email,password: password, remember_me: remember_me }
+      post_via_redirect login_path, session: { email: user.email, password: password, remember_me: remember_me }
     else
       session[:user_id] = user.id
     end
@@ -50,13 +50,13 @@ class ActiveSupport::TestCase
     defined?(post_via_redirect)
   end
 
-  def check_access(expected, user=nil)
+  def check_access(expected, user = nil)
     log_in_as user unless user.nil?
     yield
     assert_response expected
   end
 
-  def check_redirect(expected, user=nil)
+  def check_redirect(expected, user = nil)
     log_in_as user unless user.nil?
     yield
     assert_redirected_to expected

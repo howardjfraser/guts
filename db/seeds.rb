@@ -7,7 +7,7 @@ smiths.save(validate: false)
 
 24.times do |n|
   name  = Faker::Name.name
-  email = "user#{n+1}@smiths.com"
+  email = "user#{n + 1}@smiths.com"
   password = 'password'
   User.create!(name: name,
     email: email, company: smiths, password: password, activated: true, activated_at: Time.zone.now, role: 'user')
@@ -19,7 +19,7 @@ jones.save(validate: false)
 
 12.times do |n|
   name  = Faker::Name.name
-  email = "user#{n+1}@jones.com"
+  email = "user#{n + 1}@jones.com"
   password = 'password'
   User.create!(name: name,
     email: email, company: jones, password: password, activated: true, activated_at: Time.zone.now, role: 'user')
@@ -31,7 +31,7 @@ starr.save(validate: false)
 
 48.times do |n|
   name  = Faker::Name.name
-  email = "user#{n+1}@starr.com"
+  email = "user#{n + 1}@starr.com"
   password = 'password'
   User.create!(name: name,
     email: email, company: starr, password: password, activated: true, activated_at: Time.zone.now, role: 'user')
