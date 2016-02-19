@@ -72,11 +72,6 @@ Style/NonNilCheck:
   Exclude:
     - 'test/integration/companies/companies_destroy_test.rb'
 
-# Offense count: 1
-Style/OptionalArguments:
-  Exclude:
-    - 'test/integration/navigation_test.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.

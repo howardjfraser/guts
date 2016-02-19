@@ -10,24 +10,24 @@ class NavigationTest < ActionDispatch::IntegrationTest
   test 'logged in' do
     log_in_as @gareth
     assert_template 'users/index'
-    check_links @gareth, [0, 0, 0, 1, 2, 0, 0, 0, 1]
+    check_links [0, 0, 0, 1, 2, 0, 0, 0, 1], @gareth
   end
 
   test 'logged in as admin' do
     log_in_as @brent
     assert_template 'users/index'
-    check_links @brent, [0, 0, 0, 1, 2, 1, 1, 0, 1]
+    check_links [0, 0, 0, 1, 2, 1, 1, 0, 1], @brent
   end
 
   test 'logged in as root' do
     log_in_as @howard
     assert_template 'users/index'
-    check_links @howard, [0, 0, 0, 1, 0, 1, 1, 1, 1]
+    check_links [0, 0, 0, 1, 0, 1, 1, 1, 1] ,@howard
   end
 
   private
 
-  def check_links(user = nil, expected)
+  def check_links(expected, user = nil)
     assert_select 'a[href=?]', new_signup_path, count: expected[0]
     assert_select 'a[href=?]', login_path, count: expected[1]
     assert_select 'a[href=?]', new_password_reset_path, count: expected[2]
