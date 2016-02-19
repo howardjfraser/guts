@@ -10,8 +10,8 @@ namespace :ci do
   end
 
   def patterns_for_changed_files
-    # always include the ci.rake file, if the pattern is empty it runs everything
-    patterns = ['lib/tasks/ci.rake']
+    # always include application.rb, if the pattern is empty it runs everything
+    patterns = ['config/application.rb']
     patterns + changed_files
   end
 
