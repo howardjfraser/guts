@@ -37,21 +37,6 @@ Style/AndOr:
   Exclude:
     - 'app/controllers/password_resets_controller.rb'
 
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Style/BlockEndNewline:
-#   Exclude:
-#     - 'test/integration/companies/companies_edit_update_test.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: braces, no_braces, context_dependent
-Style/BracesAroundHashParameters:
-  Exclude:
-    - 'test/integration/password_resets/password_resets_new_create_test.rb'
-
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: nested, compact
