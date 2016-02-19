@@ -2,9 +2,9 @@ namespace :ci do
   require 'rubocop/rake_task'
 
   def changed_files
-    cmd = %w( git diff --name-only --diff-filter=ACMRTUXB \
-              $(git merge-base HEAD master) \
-              | egrep '\.rake$|\.rb$' )
+    cmd = %q( git diff --name-only --diff-filter=ACMRTUXB \
+    $(git merge-base HEAD master) \
+    | egrep '\.rake$|\.rb$' )
     diff = `#{cmd}`
     diff.split("\n")
   end
