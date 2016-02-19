@@ -45,5 +45,4 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
     assert owner.activated?
     assert is_logged_in_as? owner
   end
-
 end

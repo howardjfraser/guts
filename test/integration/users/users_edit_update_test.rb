@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersEditUpdateTest < ActionDispatch::IntegrationTest
-
   test "access" do
     check_redirect(login_url) { get edit_user_path @brent }
     check_redirect(login_url) { patch user_path, id: @brent, user: { name: "new" } }
@@ -88,5 +87,4 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
     assert_select 'div.errors'
     assert_template 'users/edit'
   end
-
 end

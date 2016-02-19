@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-
   def setup
     @company = Company.new(name: "TestCo")
     @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar", role: "admin")
@@ -87,5 +86,4 @@ class UserTest < ActiveSupport::TestCase
     @user.role = "invalid"
     refute @user.valid?
   end
-
 end

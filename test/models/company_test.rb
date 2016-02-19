@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CompanyTest < ActiveSupport::TestCase
-
   def setup
     @company = Company.new(name: "TestCo")
     @user = @company.users.build(name: "Example User", email: "user@example.com", password: "foobar", role: "admin")
@@ -26,5 +25,4 @@ class CompanyTest < ActiveSupport::TestCase
     @company.users.delete_all
     refute @company.valid?
   end
-
 end

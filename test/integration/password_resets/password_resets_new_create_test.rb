@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PasswordResetsNewCreateTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -31,5 +30,4 @@ class PasswordResetsNewCreateTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to root_url
   end
-
 end

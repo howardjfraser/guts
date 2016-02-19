@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersShowTest < ActionDispatch::IntegrationTest
-
   test "access" do
     check_redirect(login_url) { get user_path @brent }
     check_access(:success, @brent) { get user_path @brent}
@@ -46,5 +45,4 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', edit_user_path(@gareth), text: 'edit'
     assert_select 'a[href=?]', user_path(@gareth), text: 'delete'
   end
-
 end

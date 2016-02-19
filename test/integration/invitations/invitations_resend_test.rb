@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class InvitationsResendTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     ActionMailer::Base.deliveries.clear

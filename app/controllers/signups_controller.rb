@@ -32,5 +32,4 @@ class SignupsController < ApplicationController
     owner.activate
     log_in owner
   end
-
 end

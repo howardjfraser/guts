@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CompaniesDestroyTest < ActionDispatch::IntegrationTest
-
   test "access" do
     check_redirect(login_url) { delete company_path @gareth.company }
     check_access(:forbidden, @gareth) { delete company_path @gareth.company }
@@ -40,5 +39,4 @@ class CompaniesDestroyTest < ActionDispatch::IntegrationTest
     assert_redirected_to companies_url
     User.all.select { |u| assert u.company != nil && u.company != @michael.company}
   end
-
 end

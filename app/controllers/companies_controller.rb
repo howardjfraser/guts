@@ -49,5 +49,4 @@ class CompaniesController < ApplicationController
   def check_company
     forbidden unless @company == current_user.company || current_user.root?
   end
-
 end

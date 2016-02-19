@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ActivationsUpdateTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -43,5 +42,4 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
     post users_path, user: { name:  "Example User", email: "user@example.com" }
     @user = assigns[:user]
   end
-
 end

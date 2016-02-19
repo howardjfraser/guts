@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SessionsHelperTest < ActionView::TestCase
-
   def setup
     super
     remember(@brent)
@@ -16,5 +15,4 @@ class SessionsHelperTest < ActionView::TestCase
     @brent.update_attribute(:remember_digest, User.digest("wrong token"))
     assert_nil current_user
   end
-
 end

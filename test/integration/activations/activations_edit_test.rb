@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ActivationsEditTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -50,5 +49,4 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     get edit_activation_path(user.activation_token, email: user.email)
     assert_template 'activations/edit'
   end
-
 end

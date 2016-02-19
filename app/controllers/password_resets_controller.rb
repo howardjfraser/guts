@@ -58,5 +58,4 @@ class PasswordResetsController < ApplicationController
   def check_expiry
     redirect_to new_password_reset_url, notice: "Password reset has expired" if @user.password_reset_expired?
   end
-
 end

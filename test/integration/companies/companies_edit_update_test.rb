@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CompaniesEditUpdateTest < ActionDispatch::IntegrationTest
-
   test "edit access" do
     check_redirect(login_url)  { get edit_company_path @brent.company }
     check_access(:forbidden, @gareth) { get edit_company_path @gareth.company }
@@ -44,5 +43,4 @@ class CompaniesEditUpdateTest < ActionDispatch::IntegrationTest
     assert_template "companies/edit"
     assert @brent.reload.company.name != "NewCo"
   end
-
 end

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CompaniesShowTest < ActionDispatch::IntegrationTest
-
   test "access" do
     check_redirect(login_url)  { get company_path @brent.company }
     check_access(:success, @gareth) { get company_path @gareth.company }
@@ -22,5 +21,4 @@ class CompaniesShowTest < ActionDispatch::IntegrationTest
     get company_path @gareth.company
     assert_select 'a[href=?]', edit_company_path(@gareth.company), count: 0
   end
-
 end

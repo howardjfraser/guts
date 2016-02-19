@@ -36,5 +36,4 @@ class ActivationsController < ApplicationController
     @user.errors.add(:password, "can't be empty")
     render 'edit'
   end
-
 end

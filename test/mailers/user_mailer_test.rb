@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
-
   test "activation" do
     @brent = users(:brent)
     @brent.activation_token = "token"
@@ -25,5 +24,4 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match @brent.reset_token, mail.body.encoded
     assert_match CGI::escape(@brent.email), mail.body.encoded
   end
-
 end

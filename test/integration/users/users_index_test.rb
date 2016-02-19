@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersIndexTest < ActionDispatch::IntegrationTest
-
   test "access" do
     check_redirect(login_url) { get users_path }
   end
@@ -19,5 +18,4 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     users = assigns[:users]
     users.each { |u| assert u.role != "root" }
   end
-
 end

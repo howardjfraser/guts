@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
-
   test "access" do
     check_redirect(login_url) { patch password_change_path(@brent.id) }
 
@@ -41,5 +40,4 @@ class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
     assert_select 'div.errors'
     assert_template 'password_changes/edit'
   end
-
 end

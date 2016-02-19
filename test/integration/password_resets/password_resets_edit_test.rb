@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PasswordResetsEditTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -31,5 +30,4 @@ class PasswordResetsEditTest < ActionDispatch::IntegrationTest
   end
 
   # TODO: root user
-
 end

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersNewCreateTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -49,5 +48,4 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_not user.activated?
   end
-
 end

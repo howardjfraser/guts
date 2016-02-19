@@ -61,5 +61,4 @@ class ActiveSupport::TestCase
       yield
       assert_redirected_to expected
     end
-
 end

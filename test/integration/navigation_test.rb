@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class NavigationTest < ActionDispatch::IntegrationTest
-
   test "pre-login" do
     get root_path
     assert_template 'sessions/new'
@@ -39,5 +38,4 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', companies_path, count: expected[7]
     assert_select "a[href=?]", logout_path, count: expected[8]
   end
-
 end

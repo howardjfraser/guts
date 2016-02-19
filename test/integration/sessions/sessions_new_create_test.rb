@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SessionsNewCreateTest < ActionDispatch::IntegrationTest
-
   test "login fail - unknown user" do
     get "/login"
     assert_template "sessions/new"
@@ -53,5 +52,4 @@ class SessionsNewCreateTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_user_path(@brent)
     assert_nil session[:forwarding_url]
   end
-
 end

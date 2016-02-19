@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersDestroyTest < ActionDispatch::IntegrationTest
-
   def setup
     super
     @root = users(:root)
@@ -57,5 +56,4 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
       delete user_path @brent
     end
   end
-
 end

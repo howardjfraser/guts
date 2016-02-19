@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SessionsDestroyTest < ActionDispatch::IntegrationTest
-
   def setup
     @brent = users(:brent)
   end
@@ -12,5 +11,4 @@ class SessionsDestroyTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     refute is_logged_in?
   end
-
 end
