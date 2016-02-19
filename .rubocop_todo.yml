@@ -37,24 +37,12 @@ Style/AndOr:
   Exclude:
     - 'app/controllers/password_resets_controller.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# IgnoredMethods: lambda, proc, it
-# Style/BlockDelimiters:
-#   Exclude:
-#     - 'test/integration/companies/companies_edit_update_test.rb'
-#     - 'test/integration/password_changes/password_changes_update_test.rb'
-#     - 'test/integration/users/users_new_create_test.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
-Style/BlockEndNewline:
-  Exclude:
-    - 'test/integration/companies/companies_edit_update_test.rb'
+# Style/BlockEndNewline:
+#   Exclude:
+#     - 'test/integration/companies/companies_edit_update_test.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.

@@ -15,15 +15,18 @@ class CompaniesEditUpdateTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @gareth) { patch company_path @gareth.company, company: { name: 'new name' } }
 
     check_redirect(company_path(@brent.company), @brent) do
-      patch company_path @brent.company, company: { name: 'new name' } end
+      patch company_path @brent.company, company: { name: 'new name' }
+    end
 
     check_access(:forbidden, @brent) { patch company_path @michael.company, company: { name: 'new name' } }
 
     check_redirect(company_path(@brent.company), @howard) do
-      patch company_path @brent.company, company: { name: 'new name' } end
+      patch company_path @brent.company, company: { name: 'new name' }
+    end
 
     check_redirect(company_path(@michael.company), @howard) do
-      patch company_path @michael.company, company: { name: 'new name' } end
+      patch company_path @michael.company, company: { name: 'new name' }
+    end
   end
 
   test 'valid edit & update' do
