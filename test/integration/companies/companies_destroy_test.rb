@@ -37,6 +37,6 @@ class CompaniesDestroyTest < ActionDispatch::IntegrationTest
       delete company_path(@michael.company)
     end
     assert_redirected_to companies_url
-    User.all.select { |u| assert u.company != nil && u.company != @michael.company }
+    User.all.select { |u| assert !u.company.nil? && u.company != @michael.company }
   end
 end
