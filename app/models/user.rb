@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def other_admins?
+  def has_admin_colleague?
     colleagues = company.users.select { |u| u != self }
     colleagues.count { |u| u.role == 'admin' } > 0
   end
