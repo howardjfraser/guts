@@ -88,6 +88,11 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
+  def other_admins?
+    colleagues = company.users.select { |u| u != self }
+    colleagues.count { |u| u.role == 'admin' } > 0
+  end
+
   private
 
   def create_activation_digest
