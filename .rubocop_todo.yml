@@ -115,12 +115,6 @@ Style/HashSyntax:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/MultilineBlockLayout:
-  Exclude:
-    - 'test/integration/signups/signups_new_create_test.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 Style/MutableConstant:
   Exclude:
     - 'app/models/user.rb'

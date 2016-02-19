@@ -10,8 +10,10 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
   test "access" do
     check_access(:success) { get new_signup_path }
 
-    check_redirect(users_path) { post signups_path, company: {name: "test", users_attributes: {"0" => {name: "test",
-      email: "dave@test.com", password: "password"}}}}
+    check_redirect(users_path) do
+      post signups_path, company: {name: "test", users_attributes: {"0" => {name: "test",
+                         email: "dave@test.com", password: "password"}}}
+    end
   end
 
   test "invalid sign up" do
