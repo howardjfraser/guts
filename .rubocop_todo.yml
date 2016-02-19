@@ -6,11 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# # Offense count: 1
-# Lint/AmbiguousRegexpLiteral:
-#   Exclude:
-#     - 'test/integration/password_resets/password_resets_update_test.rb'
-
 # Offense count: 3
 Metrics/AbcSize:
   Max: 29
@@ -28,14 +23,6 @@ Style/AlignHash:
   Exclude:
     - 'db/seeds.rb'
     - 'test/integration/signups/signups_new_create_test.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: always, conditionals
-Style/AndOr:
-  Exclude:
-    - 'app/controllers/password_resets_controller.rb'
 
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
