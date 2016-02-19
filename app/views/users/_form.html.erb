@@ -27,7 +27,7 @@
       <% end %>
     </div>
     <div class="std-control">
-      <%= f.select :role, options_for_select([['User', "user"], ['Administrator', "admin"]]) %>
+      <%= f.select :role, options_for_select([['User', "user"], ['Administrator', "admin"]], @user.role) %>
     </div>
   </div>
 
