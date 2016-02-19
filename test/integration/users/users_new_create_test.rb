@@ -13,9 +13,9 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @gareth) { get new_user_path }
     check_access(:forbidden, @gareth) { post users_path, user: { name: 'name', email: 'new@company.com' } }
 
-    check_redirect(users_path, @brent) {
+    check_redirect(users_path, @brent) do
       post users_path, user: { name: 'name', email: 'new@company.com' }
-    }
+    end
   end
 
   test 'invalid new user' do

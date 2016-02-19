@@ -5,16 +5,16 @@ class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
     check_redirect(login_url) { patch password_change_path(@brent.id) }
 
     @gareth.create_reset_digest
-    check_redirect(user_path(@gareth), @gareth) {
+    check_redirect(user_path(@gareth), @gareth) do
       patch password_change_path @gareth.id, user: { password: 'new password' }
-    }
+    end
 
     check_access(:forbidden, @gareth) { patch password_change_path @tim.id }
 
     @brent.create_reset_digest
-    check_redirect(user_path(@brent), @brent) {
+    check_redirect(user_path(@brent), @brent) do
       patch password_change_path @brent, user: { password: 'new password' }
-    }
+    end
 
     check_access(:forbidden, @brent) { patch password_change_path @tim.id }
     check_access(:forbidden, @brent) { patch password_change_path @michael.id }
