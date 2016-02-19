@@ -6,6 +6,9 @@ AllCops:
     - db/migrate/*
     - bin/*
 
+Rails:
+  Enabled: true
+
 Style/Documentation:
   Enabled: false
 
