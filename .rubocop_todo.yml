@@ -15,12 +15,6 @@ Lint/AmbiguousRegexpLiteral:
 Metrics/AbcSize:
   Max: 29
 
-# Offense count: 78
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 171
-
 # Offense count: 2
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
@@ -82,10 +76,6 @@ Style/ClassAndModuleChildren:
 Style/ColonMethodCall:
   Exclude:
     - 'test/mailers/user_mailer_test.rb'
-
-# Offense count: 18
-Style/Documentation:
-  Enabled: false
 
 # Offense count: 3
 # Cop supports --auto-correct.

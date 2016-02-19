@@ -45,5 +45,7 @@ end
 
 # create root user
 
-root = User.new(name: 'Howard', email: 'howardjfraser@gmail.com', company: Company.first, password: 'password', activated: true, activated_at: Time.zone.now, role: 'root')
+root = User.new(name: 'Howard', email: 'howardjfraser@gmail.com', company: Company.first, password: 'password',
+                activated: true, activated_at: Time.zone.now, role: 'root')
+
 root.save(validate: false)
