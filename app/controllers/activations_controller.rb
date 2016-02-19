@@ -28,16 +28,13 @@ class ActivationsController < ApplicationController
   end
 
   def check_user
-    unless (@user && !@user.activated? && @user.authenticated?(:activation, params[:id]))
-      redirect_to root_url, notice: "Invalid activation"
-    end
+    redirect_to root_url, notice: "Invalid activation" unless (@user && !@user.activated? && @user.authenticated?(:activation, params[:id]))
   end
 
   def check_password
-    if params[:user][:password].empty?
-      @user.errors.add(:password, "can't be empty")
-      render 'edit'
-    end
+    return unless params[:user][:password].empty?
+    @user.errors.add(:password, "can't be empty")
+    render 'edit'
   end
 
 end

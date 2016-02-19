@@ -46,7 +46,6 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in_as? user
   end
 
-
   def check_valid_credentials user
     get edit_activation_path(user.activation_token, email: user.email)
     assert_template 'activations/edit'

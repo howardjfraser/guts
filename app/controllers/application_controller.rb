@@ -7,10 +7,9 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-    unless logged_in?
-      session[:forwarding_url] = request.url if request.get?
-      redirect_to login_url, notice: "Please log in"
-    end
+    return if logged_in?
+    session[:forwarding_url] = request.url if request.get?
+    redirect_to login_url, notice: "Please log in"
   end
 
   def require_admin
