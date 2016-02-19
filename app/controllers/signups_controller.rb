@@ -8,13 +8,13 @@ class SignupsController < ApplicationController
 
   def create
     @company = Company.new(signup_params)
-    if params[:company][:users_attributes]["0"][:password].empty?
+    if params[:company][:users_attributes]['0'][:password].empty?
       @company.valid? # run other validations
       @company.errors.add(:password, "can't be empty")
       render 'new'
     elsif @company.save
       set_up_owner
-      redirect_to users_url, notice: "Get in!"
+      redirect_to users_url, notice: 'Get in!'
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class SignupsController < ApplicationController
 
   def set_up_owner
     owner = @company.users.first
-    owner.update_attribute(:role, "admin")
+    owner.update_attribute(:role, 'admin')
     owner.activate
     log_in owner
   end

@@ -6,12 +6,12 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     ActionMailer::Base.deliveries.clear
   end
 
-  test "account activation" do
+  test 'account activation' do
     log_in_as(@brent)
 
     assert_difference 'User.count', 1 do
       post users_path, user:
-        { name:  "Example User", email: "user@example.com" }
+        { name:  'Example User', email: 'user@example.com' }
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size
@@ -36,7 +36,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
   end
 
   def check_invalid_token(user)
-    get edit_activation_path("invalid token", email: user.email)
+    get edit_activation_path('invalid token', email: user.email)
     assert_not is_logged_in_as? user
   end
 

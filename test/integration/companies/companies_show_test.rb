@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CompaniesShowTest < ActionDispatch::IntegrationTest
-  test "access" do
+  test 'access' do
     check_redirect(login_url) { get company_path @brent.company }
     check_access(:success, @gareth) { get company_path @gareth.company }
     check_access(:success, @brent) { get company_path @brent.company }
@@ -10,13 +10,13 @@ class CompaniesShowTest < ActionDispatch::IntegrationTest
     check_access(:success, @howard) { get company_path @michael.company }
   end
 
-  test "as admin, edit link is shown" do
+  test 'as admin, edit link is shown' do
     log_in_as @brent
     get company_path @brent.company
     assert_select 'a[href=?]', edit_company_path(@brent.company), count: 1
   end
 
-  test "as user, edit link is not shown" do
+  test 'as user, edit link is not shown' do
     log_in_as @gareth
     get company_path @gareth.company
     assert_select 'a[href=?]', edit_company_path(@gareth.company), count: 0

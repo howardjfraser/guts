@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
   def create
     @user.create_reset_digest
     UserMailer.password_reset(@user).deliver_now
-    redirect_to root_path, notice: "Email sent"
+    redirect_to root_path, notice: 'Email sent'
   end
 
   def edit
@@ -24,7 +24,7 @@ class PasswordResetsController < ApplicationController
       render 'edit'
     elsif @user.update_attributes(user_params)
       log_in @user
-      redirect_to @user, notice: "Password has been reset"
+      redirect_to @user, notice: 'Password has been reset'
     else
       render 'edit'
     end
@@ -42,13 +42,13 @@ class PasswordResetsController < ApplicationController
 
   def check_user
     if @user.nil? || @user.root?
-      redirect_to new_password_reset_url, notice: "Email not found" and return
+      redirect_to new_password_reset_url, notice: 'Email not found' and return
     end
-    redirect_to new_password_reset_url, notice: "User not activated" unless @user.activated?
+    redirect_to new_password_reset_url, notice: 'User not activated' unless @user.activated?
   end
 
   def check_token
-    redirect_to new_password_reset_url, notice: "Invalid password reset" unless authenticated?
+    redirect_to new_password_reset_url, notice: 'Invalid password reset' unless authenticated?
   end
 
   def authenticated?
@@ -56,6 +56,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def check_expiry
-    redirect_to new_password_reset_url, notice: "Password reset has expired" if @user.password_reset_expired?
+    redirect_to new_password_reset_url, notice: 'Password reset has expired' if @user.password_reset_expired?
   end
 end

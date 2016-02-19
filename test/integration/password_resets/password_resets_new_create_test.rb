@@ -6,24 +6,24 @@ class PasswordResetsNewCreateTest < ActionDispatch::IntegrationTest
     ActionMailer::Base.deliveries.clear
   end
 
-  test "new" do
+  test 'new' do
     get new_password_reset_path
     assert_template 'password_resets/new'
   end
 
-  test "invalid email" do
-    post_via_redirect password_resets_path, { email: "" }
+  test 'invalid email' do
+    post_via_redirect password_resets_path, { email: '' }
     assert_not flash.empty?
     assert_template 'password_resets/new'
   end
 
-  test "root user" do
+  test 'root user' do
     post_via_redirect password_resets_path, { email: @howard.email }
     assert_not flash.empty?
     assert_template 'password_resets/new'
   end
 
-  test "valid reset request" do
+  test 'valid reset request' do
     post password_resets_path, { email: @brent.email }
     assert_not_equal @brent.reset_digest, @brent.reload.reset_digest
     assert_equal 1, ActionMailer::Base.deliveries.size

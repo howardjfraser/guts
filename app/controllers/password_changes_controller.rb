@@ -13,7 +13,7 @@ class PasswordChangesController < ApplicationController
       @user.errors.add(:password, "can't be empty")
       render 'edit'
     elsif @user.update_attributes(user_params)
-      redirect_to @user, notice: "Password has been changed"
+      redirect_to @user, notice: 'Password has been changed'
     else
       render 'edit'
     end
@@ -30,7 +30,7 @@ class PasswordChangesController < ApplicationController
   end
 
   def check_expiration
-    redirect_to @user, notice: "Password change has expired" if @user.password_reset_expired?
+    redirect_to @user, notice: 'Password change has expired' if @user.password_reset_expired?
   end
 
   def check_user

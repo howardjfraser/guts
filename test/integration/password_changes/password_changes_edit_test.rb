@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PasswordChangesEditTest < ActionDispatch::IntegrationTest
-  test "access" do
+  test 'access' do
     check_redirect(login_url) { get edit_password_change_path @brent }
     check_access(:success, @gareth) { get edit_password_change_path @gareth }
     check_access(:forbidden, @gareth) { get edit_password_change_path @tim }

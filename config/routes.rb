@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :companies, except: [:new, :create] do
     member do
-      post "select" => "companies#select"
+      post 'select' => 'companies#select'
     end
   end
 
@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :password_changes, only: [:edit, :update]
 
-  post "invitations/resend/:id" => "invitations#resend", as: 'resend_invitation'
+  post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
 
 end

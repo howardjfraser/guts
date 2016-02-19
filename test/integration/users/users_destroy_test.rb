@@ -6,13 +6,13 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
     @root = users(:root)
   end
 
-  test "access" do
+  test 'access' do
     check_redirect(login_url) { delete user_path @brent }
     check_access(:forbidden, @gareth) { delete user_path @gareth }
     check_redirect(users_path, @brent) { delete user_path @gareth }
   end
 
-  test "admin can delete other users" do
+  test 'admin can delete other users' do
     log_in_as(@brent)
 
     assert_difference 'User.count', -1 do
@@ -21,7 +21,7 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
 
     assert_not flash.empty?
     follow_redirect!
-    assert_template "users/index"
+    assert_template 'users/index'
   end
 
   test "can't delete self as admin" do
@@ -43,7 +43,7 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
 
   test 'can’t delete users from a different company' do
     check_access(:forbidden, @brent) do
-      assert_no_difference "User.count" do
+      assert_no_difference 'User.count' do
         delete user_path @michael
       end
     end

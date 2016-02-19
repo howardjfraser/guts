@@ -11,7 +11,7 @@ class ActivationsController < ApplicationController
     if @user.update_attributes(user_params)
       @user.activate
       log_in @user
-      redirect_to @user, notice: "Account activated"
+      redirect_to @user, notice: 'Account activated'
     else
       render 'edit'
     end
@@ -28,7 +28,7 @@ class ActivationsController < ApplicationController
   end
 
   def check_user
-    redirect_to root_url, notice: "Invalid activation" unless (@user && !@user.activated? && @user.authenticated?(:activation, params[:id]))
+    redirect_to root_url, notice: 'Invalid activation' unless (@user && !@user.activated? && @user.authenticated?(:activation, params[:id]))
   end
 
   def check_password

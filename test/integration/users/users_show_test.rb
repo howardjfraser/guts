@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersShowTest < ActionDispatch::IntegrationTest
-  test "access" do
+  test 'access' do
     check_redirect(login_url) { get user_path @brent }
     check_access(:success, @brent) { get user_path @brent}
   end
@@ -14,7 +14,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @howard) { get user_path @howard }
   end
 
-  test "show self as non-admin has no links" do
+  test 'show self as non-admin has no links' do
     log_in_as(@gareth)
     get user_path @gareth
     assert_template 'users/show'
@@ -22,7 +22,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', user_path(@gareth), text: 'delete', count: 0
   end
 
-  test "show other as non-admin has no links" do
+  test 'show other as non-admin has no links' do
     log_in_as(@gareth)
     get user_path @tim
     assert_template 'users/show'
@@ -30,7 +30,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', user_path(@tim), text: 'delete', count: 0
   end
 
-  test "show self as admin has edit link only" do
+  test 'show self as admin has edit link only' do
     log_in_as(@brent)
     get user_path @brent
     assert_template 'users/show'
@@ -38,7 +38,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', user_path(@brent), text: 'delete', count: 0
   end
 
-  test "show other as admin has edit and delete links" do
+  test 'show other as admin has edit and delete links' do
     log_in_as(@brent)
     get user_path @gareth
     assert_template 'users/show'

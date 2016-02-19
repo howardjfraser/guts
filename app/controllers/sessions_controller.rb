@@ -13,19 +13,19 @@ class SessionsController < ApplicationController
           remember_or_forget @user
           redirect_back_or users_url
         else
-          redirect_to login_url, notice: "Invalid email / password"
+          redirect_to login_url, notice: 'Invalid email / password'
         end
       else
-        redirect_to root_url, notice: "Account not activated. Check email for activation link."
+        redirect_to root_url, notice: 'Account not activated. Check email for activation link.'
       end
     else
-      redirect_to login_url, notice: "Invalid email / password"
+      redirect_to login_url, notice: 'Invalid email / password'
     end
   end
 
   def destroy
     log_out if logged_in?
-    redirect_to root_url, notice: "Bye"
+    redirect_to root_url, notice: 'Bye'
   end
 
   private
