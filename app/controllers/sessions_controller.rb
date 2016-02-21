@@ -6,21 +6,10 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
-    if @user
-      if @user.activated?
-        if @user.authenticate(params[:session][:password])
-          log_in @user
-          remember_or_forget @user
-          redirect_back_or users_url
-        else
-          redirect_to login_url, notice: 'Invalid email / password'
-        end
-      else
-        redirect_to root_url, notice: 'Account not activated. Check email for activation link.'
-      end
-    else
-      redirect_to login_url, notice: 'Invalid email / password'
-    end
+    return redirect_to login_url, notice: 'Invalid email / password' unless @user
+    return redirect_to root_url, notice: 'Account not activated.' unless @user.activated?
+    return redirect_to login_url, notice: 'Invalid email / password' unless authenticate?
+    log_user_in
   end
 
   def destroy
@@ -29,6 +18,16 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def authenticate?
+    @user.authenticate(params[:session][:password])
+  end
+
+  def log_user_in
+    log_in @user
+    remember_or_forget @user
+    redirect_back_or users_url
+  end
 
   def remember_or_forget(user)
     params[:session][:remember_me] == '1' ? remember(user) : forget(user)
