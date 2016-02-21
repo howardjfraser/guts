@@ -9,8 +9,8 @@ smiths.save(validate: false)
   name  = Faker::Name.name
   email = "user#{n + 1}@smiths.com"
   password = 'password'
-  User.create!(name: name,
-    email: email, company: smiths, password: password, activated: true, activated_at: Time.zone.now, role: 'user')
+  User.create!(name: name, email: email, company: smiths, password: password, activated: true,
+               activated_at: Time.zone.now, role: 'user')
 end
 
 # jones
@@ -21,8 +21,8 @@ jones.save(validate: false)
   name  = Faker::Name.name
   email = "user#{n + 1}@jones.com"
   password = 'password'
-  User.create!(name: name,
-    email: email, company: jones, password: password, activated: true, activated_at: Time.zone.now, role: 'user')
+  User.create!(name: name, email: email, company: jones, password: password, activated: true,
+               activated_at: Time.zone.now, role: 'user')
 end
 
 # starrs
@@ -33,8 +33,8 @@ starr.save(validate: false)
   name  = Faker::Name.name
   email = "user#{n + 1}@starr.com"
   password = 'password'
-  User.create!(name: name,
-    email: email, company: starr, password: password, activated: true, activated_at: Time.zone.now, role: 'user')
+  User.create!(name: name, email: email, company: starr, password: password, activated: true,
+               activated_at: Time.zone.now, role: 'user')
 end
 
 # create admins
