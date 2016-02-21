@@ -8,9 +8,8 @@ class SignupsController < ApplicationController
 
   def create
     @company = Company.new(signup_params)
-    if params[:company][:users_attributes]['0'][:password].empty?
-      @company.valid? # run other validations
-      @company.errors.add(:password, "can't be empty")
+    if password_empty?
+      validate
       render 'new'
     elsif @company.save
       set_up_owner
@@ -24,6 +23,15 @@ class SignupsController < ApplicationController
 
   def signup_params
     params.require(:company).permit(:name, users_attributes: [:name, :email, :password])
+  end
+
+  def password_empty?
+    params[:company][:users_attributes]['0'][:password].empty?
+  end
+
+  def validate
+    @company.valid? # runs other validations
+    @company.errors.add(:password, "can't be empty")
   end
 
   def set_up_owner
