@@ -15,3 +15,6 @@ Style/Documentation:
 
 Metrics/LineLength:
   Max: 120
+
+Style/AlignHash:
+  Enabled: false
