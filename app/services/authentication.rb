@@ -37,4 +37,8 @@ class Authentication
     @cookies.delete(:user_id)
     @cookies.delete(:remember_token)
   end
+
+  def self.cost
+    ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+  end
 end

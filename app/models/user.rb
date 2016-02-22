@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
 
   validates_with LastAdminValidator
 
+  def last_admin?
+    colleagues = company.users.select { |u| u != self }
+    colleagues.count { |u| u.role == 'admin' } == 0
+  end
+
   # queries
 
   scope :sorted, -> { order('lower(name)') }
@@ -54,17 +59,6 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
-  end
-
-  def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
   end
@@ -74,22 +68,29 @@ class User < ActiveRecord::Base
     update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
-  def password_reset_expired?
-    reset_sent_at < 2.hours.ago
-  end
-
   def renew_activation_digest
     create_activation_digest
     update_attribute(:activation_digest, activation_digest)
   end
 
+  # ----
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end
 
-  def last_admin?
-    colleagues = company.users.select { |u| u != self }
-    colleagues.count { |u| u.role == 'admin' } == 0
+  def self.digest(string)
+    BCrypt::Password.create(string, cost: Authentication.cost)
+  end
+
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
 
   private
