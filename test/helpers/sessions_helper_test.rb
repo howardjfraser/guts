@@ -8,7 +8,7 @@ class SessionsHelperTest < ActionView::TestCase
 
   test 'current_user returns right user when session is nil' do
     assert_equal @brent, current_user
-    assert is_logged_in?
+    assert user_logged_in?
   end
 
   test 'current_user returns nil when remember digest is wrong' do

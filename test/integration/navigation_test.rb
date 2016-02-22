@@ -27,6 +27,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
 
   private
 
+  # rubocop:disable AbcSize
   def check_links(expected, user = nil)
     assert_select 'a[href=?]', new_signup_path, count: expected[0]
     assert_select 'a[href=?]', login_path, count: expected[1]
@@ -38,4 +39,5 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', companies_path, count: expected[7]
     assert_select 'a[href=?]', logout_path, count: expected[8]
   end
+  # rubocop:enable AbcSize
 end

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   validates :company, presence: true
 
-  ROLES = %w(user admin root)
+  ROLES = %w(user admin root).freeze
   validates :role, inclusion: ROLES[0...-1]
 
   validates_with LastAdminValidator
@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def has_admin_colleague?
+  def admin_colleague?
     colleagues = company.users.select { |u| u != self }
     colleagues.count { |u| u.role == 'admin' } > 0
   end

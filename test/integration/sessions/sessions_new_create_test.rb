@@ -32,7 +32,7 @@ class SessionsNewCreateTest < ActionDispatch::IntegrationTest
     assert_template 'users/index'
     assert_select 'a[href=?]', login_path, count: 0
     assert_select 'a[href=?]', logout_path
-    assert is_logged_in?
+    assert user_logged_in?
   end
 
   test 'login with remembering' do

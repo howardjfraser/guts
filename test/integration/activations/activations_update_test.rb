@@ -11,7 +11,7 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
     patch_via_redirect activation_path(@user.activation_token), email: @user.email, user: { password: 'new password' }
     assert @user.reload.activated?
     assert_template 'users/show'
-    assert is_logged_in_as? @user
+    assert logged_in_as? @user
     assert_not @user.admin?
   end
 

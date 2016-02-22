@@ -32,17 +32,17 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
 
   def check_no_login_before_activation(user)
     log_in_as(user)
-    assert_not is_logged_in_as? user
+    assert_not logged_in_as? user
   end
 
   def check_invalid_token(user)
     get edit_activation_path('invalid token', email: user.email)
-    assert_not is_logged_in_as? user
+    assert_not logged_in_as? user
   end
 
   def check_wrong_email(user)
     get edit_activation_path(user.activation_token, email: 'wrong')
-    assert_not is_logged_in_as? user
+    assert_not logged_in_as? user
   end
 
   def check_valid_credentials(user)

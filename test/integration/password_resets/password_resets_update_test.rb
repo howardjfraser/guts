@@ -27,7 +27,7 @@ class PasswordResetsUpdateTest < ActionDispatch::IntegrationTest
 
   test 'valid pw reset' do
     patch password_reset_path(@keith.reset_token), email: @keith.email, user: { password: 'foobaz' }
-    assert is_logged_in?
+    assert user_logged_in?
     assert_not flash.empty?
     assert_redirected_to @keith
   end

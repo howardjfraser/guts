@@ -45,6 +45,6 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
     owner = company.users.first
     assert owner.admin?
     assert owner.activated?
-    assert is_logged_in_as? owner
+    assert logged_in_as? owner
   end
 end

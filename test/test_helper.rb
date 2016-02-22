@@ -27,11 +27,11 @@ module ActiveSupport
       @mifflin = companies(:dunder_mifflin)
     end
 
-    def is_logged_in?
+    def user_logged_in?
       !session[:user_id].nil?
     end
 
-    def is_logged_in_as?(user)
+    def logged_in_as?(user)
       session[:user_id] == user.id
     end
 
