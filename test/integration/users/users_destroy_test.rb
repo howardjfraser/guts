@@ -50,7 +50,7 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
   end
 
   test "root can't delete last admin" do
-    assert !@brent.admin_colleague?
+    assert @brent.last_admin?
     log_in_as @howard
     assert_no_difference 'User.count' do
       delete user_path @brent

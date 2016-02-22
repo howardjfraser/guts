@@ -1,7 +1,8 @@
 class LastAdminValidator < ActiveModel::Validator
   def validate(user)
-    user.errors.add(:role, 'You can’t remove the last administrator') if
-        possible_admin_role_removal?(user) && !user.admin_colleague?
+    if possible_admin_role_removal?(user) && user.last_admin?
+      user.errors.add(:role, 'You can’t remove the last administrator')
+    end
   end
 
   def possible_admin_role_removal?(user)

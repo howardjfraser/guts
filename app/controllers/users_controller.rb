@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user != current_user && @user.admin_colleague?
+    if @user != current_user && !@user.last_admin?
       @user.destroy
       redirect_to users_url, notice: "#{@user.name} has been deleted"
     else
