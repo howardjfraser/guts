@@ -31,6 +31,15 @@ class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
     update 'aaa'
   end
 
+  test 'expired token' do
+    @gareth.create_reset_digest
+    @gareth.update_attribute(:reset_sent_at, 3.hours.ago)
+    log_in_as @gareth
+    patch_via_redirect password_change_path(@gareth.id), user: { password: 'foobar' }
+    assert_not flash.empty?
+    assert_match(/expired/i, response.body)
+  end
+
   private
 
   def update(password)
