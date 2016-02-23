@@ -19,7 +19,7 @@ class Authentication
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = @cookies.signed[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, @cookies[:remember_token])
+      if user && Authentication.authenticated?(user, :remember, @cookies[:remember_token])
         Authentication.new(@session).log_in user
         @current_user = user
       end
@@ -36,6 +36,12 @@ class Authentication
     user.forget
     @cookies.delete(:user_id)
     @cookies.delete(:remember_token)
+  end
+
+  def self.authenticated?(user, attribute, token)
+    digest = user.send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def self.new_token

@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
   belongs_to :company, inverse_of: :users
 
-  # validation
-
   validates :name, presence: true, length: { maximum: 50 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -30,15 +28,11 @@ class User < ActiveRecord::Base
     colleagues.count { |u| u.role == 'admin' } == 0
   end
 
-  # queries
-
   scope :sorted, -> { order('lower(name)') }
   scope :exclude_root, -> { sorted.where.not(role: 'root') }
   scope :company, ->(company) { exclude_root.where('company_id = ?', company) }
   scope :activated, -> (company) { company(company).where(activated: true) }
   scope :invited, -> (company) { company(company).where(activated: false) }
-
-  # helpers
 
   def admin?
     role == 'admin' || role == 'root'
@@ -47,8 +41,6 @@ class User < ActiveRecord::Base
   def root?
     role == 'root'
   end
-
-  # auth
 
   def remember
     self.remember_token = Authentication.new_token
@@ -71,14 +63,6 @@ class User < ActiveRecord::Base
   def renew_activation_digest
     create_activation_digest
     update_attribute(:activation_digest, activation_digest)
-  end
-
-  # ----
-
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def password_reset_expired?
