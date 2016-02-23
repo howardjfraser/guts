@@ -5,6 +5,7 @@ class LastAdminValidator < ActiveModel::Validator
     end
   end
 
+  # lose the possible...
   def possible_admin_role_removal?(user)
     user.role_changed? && user.role != 'admin'
   end
