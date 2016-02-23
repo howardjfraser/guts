@@ -38,6 +38,14 @@ class Authentication
     @cookies.delete(:remember_token)
   end
 
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def self.digest(string)
+    BCrypt::Password.create(string, cost: Authentication.cost)
+  end
+
   def self.cost
     ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
   end

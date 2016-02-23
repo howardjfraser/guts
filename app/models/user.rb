@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
   # auth
 
   def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+    self.remember_token = Authentication.new_token
+    update_attribute(:remember_digest, Authentication.digest(remember_token))
   end
 
   def forget
@@ -64,8 +64,8 @@ class User < ActiveRecord::Base
   end
 
   def create_reset_digest
-    self.reset_token = User.new_token
-    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+    self.reset_token = Authentication.new_token
+    update_columns(reset_digest: Authentication.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
   def renew_activation_digest
@@ -74,14 +74,6 @@ class User < ActiveRecord::Base
   end
 
   # ----
-
-  def self.new_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def self.digest(string)
-    BCrypt::Password.create(string, cost: Authentication.cost)
-  end
 
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
@@ -96,8 +88,8 @@ class User < ActiveRecord::Base
   private
 
   def create_activation_digest
-    self.activation_token  = User.new_token
-    self.activation_digest = User.digest(activation_token)
+    self.activation_token  = Authentication.new_token
+    self.activation_digest = Authentication.digest(activation_token)
   end
 
   def downcase_email
