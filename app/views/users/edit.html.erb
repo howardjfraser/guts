@@ -1,6 +1,4 @@
-<% provide(:title, 'Edit User') %>
-
-<h1>Edit <%= link_to @user.name, user_path(@user) %></h1>
+<% provide(:title, "Edit #{@user.name}") %>
 
 <%= render 'shared/errors', object: @user %>
 <%= render 'form' %>

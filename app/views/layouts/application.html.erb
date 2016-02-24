@@ -13,8 +13,11 @@
   </head>
 
   <body class="container">
+
     <%= render partial: 'layouts/header' %>
 
+    <h1><%= yield :title %></h1>
+    <hr>
     <div class="main">
       <%= yield %>
     </div>

@@ -1,5 +1,4 @@
-<h1>Edit <%= link_to @company.name, company_path(@company) %></h1>
-<hr>
+<%= provide :title, "Edit #{@company.name}" %>
 
 <%= render 'shared/errors', object: @company %>
 

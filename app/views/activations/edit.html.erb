@@ -1,5 +1,4 @@
-<h1>Activate account</h1>
-<hr>
+<%= provide :title, "Activate account" %>
 
 <%= form_for(@user, url: activation_path(params[:id])) do |f| %>
   <%= render 'shared/errors', object: @user %>

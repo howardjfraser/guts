@@ -1,7 +1,4 @@
-<% provide(:title, "Company") %>
-
-<h1><%= @company.name %></h1>
-<hr>
+<% provide(:title, "#{@company.name}") %>
 
 <% if current_user.admin? %>
   <%= link_to "edit", edit_company_path(@company) %>
