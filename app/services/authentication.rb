@@ -20,7 +20,7 @@ class Authentication
     elsif (user_id = @cookies.signed[:user_id])
       user = User.find_by(id: user_id)
       if user && Authentication.authenticated?(user, :remember, @cookies[:remember_token])
-        Authentication.new(@session).log_in user
+        log_in user
         @current_user = user
       end
     end
