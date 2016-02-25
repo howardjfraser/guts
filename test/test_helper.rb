@@ -7,6 +7,7 @@ Minitest::Reporters.use!
 
 require 'simplecov'
 SimpleCov.start 'rails'
+SimpleCov.minimum_coverage 100.0
 
 module ActiveSupport
   class TestCase
