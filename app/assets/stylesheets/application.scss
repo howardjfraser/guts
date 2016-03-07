@@ -114,8 +114,12 @@ select {
   padding: 8px;
   text-align: center;
   max-width: 560px;
-  // TODO: brittle / height
-  margin: -141px auto 92px;
+  cursor: pointer;
+
+  // TODO: multi-line flash?
+  position: relative;
+  top: 2.2em;
+  margin: 0 auto -2.875em;
 }
 
 header#nav {

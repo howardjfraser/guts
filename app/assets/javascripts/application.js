@@ -18,6 +18,6 @@
 $(document).on('page:change', function () {
   $('.flash').click(function (e) {
     e.preventDefault();
-    $(this).toggle();
+    $(this).fadeToggle('fast');
   });
 });

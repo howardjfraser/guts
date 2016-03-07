@@ -14,21 +14,20 @@
 
   <body class="container">
 
+    <% if flash[:notice] %>
+      <%= content_tag(:div, flash[:notice], class: "flash") %>
+    <% end %>
+
     <%= render partial: 'layouts/header' %>
 
     <h1><%= yield :title %></h1>
     <hr class="m-b-2">
-
-    <% if flash[:notice] %>
-      <%= content_tag(:div, flash[:notice], class: "flash") %>
-    <% end %>
 
     <div class="main">
       <%= yield %>
     </div>
 
     <%= render partial: 'layouts/footer' %>
-
 
   </body>
 
