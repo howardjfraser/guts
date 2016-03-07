@@ -1,9 +1,5 @@
 <header id="nav" class="m-t-1">
 
-  <% if flash[:notice] %>
-    <%= content_tag(:div, flash[:notice], class: "flash") %>
-  <% end %>
-
   <% if logged_in? %>
 
     <% if current_user.root? %>
