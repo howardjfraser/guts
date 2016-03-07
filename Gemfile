@@ -12,10 +12,10 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
-gem 'rubocop', require: false
 gem 'sdoc', group: :doc
 
 group :development do
+  gem 'rubocop', require: false
   gem 'letter_opener'
   gem 'web-console'
 end
