@@ -5,25 +5,24 @@ ruby '2.3.0'
 gem 'rails', '4.2.6.rc1'
 
 gem 'bcrypt'
-gem 'faker'
-gem 'sass-rails'
-gem 'uglifier'
 gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
+gem 'faker'
 gem 'jbuilder'
-gem 'sdoc', group: :doc
+gem 'jquery-rails'
+gem 'sass-rails'
+gem 'turbolinks'
+gem 'uglifier'
 
 group :development do
-  gem 'rubocop', require: false
   gem 'letter_opener'
+  gem 'rubocop', require: false
   gem 'web-console'
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug'
   gem 'spring'
+  gem 'sqlite3'
 end
 
 group :test do
@@ -34,6 +33,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'rails_12factor'
   gem 'puma'
+  gem 'rails_12factor'
 end
