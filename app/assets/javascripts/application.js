@@ -18,6 +18,7 @@
 $(document).on('page:change', function () {
   $('.flash').click(function (e) {
     e.preventDefault();
+    // TODO: use CSS animation
     $(this).fadeToggle('fast');
   });
 });
