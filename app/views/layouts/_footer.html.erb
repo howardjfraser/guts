@@ -1,24 +1,28 @@
-<footer class="">
+<footer>
 
-  <hr>
+  <div class="container m-b-1">
 
-  <div class="pull-xs-left text-muted">
-    <% if Rails.env.production? %>
-      <%= ENV['HEROKU_SLUG_COMMIT'][0..7] %> /
+    <hr>
+
+    <div class="pull-xs-left text-muted">
+      <% if Rails.env.production? %>
+        <%= ENV['HEROKU_SLUG_COMMIT'][0..7] %> /
+      <% end %>
+
+      <!-- screen size debug -->
+      <span class="hidden-sm-up">xs</span>
+      <span class="hidden-xs-down hidden-md-up">sm</span>
+      <span class="hidden-sm-down hidden-lg-up">md</span>
+      <span class="hidden-md-down hidden-xl-up">lg</span>
+      <span class="hidden-lg-down">xl</span>
+    </div>
+
+    <% if logged_in? %>
+      <div class="pull-xs-right">
+        <%= link_to "Log out", logout_path, method: "delete" %>
+      </div>
     <% end %>
 
-    <!-- screen size debug -->
-    <span class="hidden-sm-up">xs</span>
-    <span class="hidden-xs-down hidden-md-up">sm</span>
-    <span class="hidden-sm-down hidden-lg-up">md</span>
-    <span class="hidden-md-down hidden-xl-up">lg</span>
-    <span class="hidden-lg-down">xl</span>
   </div>
-
-  <% if logged_in? %>
-    <div class="pull-xs-right m-b-1">
-      <%= link_to "Log out", logout_path, method: "delete" %>
-    </div>
-  <% end %>
 
 </footer>

@@ -12,19 +12,20 @@
 
   </head>
 
-  <body class="container">
-
-    <% if flash[:notice] %>
-      <%= content_tag(:div, flash[:notice], class: "flash") %>
-    <% end %>
+  <body>
 
     <%= render partial: 'layouts/header' %>
 
-    <h1><%= yield :title %></h1>
-    <hr class="m-b-2">
+    <div id="main">
+      <div class="container">
 
-    <div class="main">
-      <%= yield %>
+        <h1><%= yield :title %></h1>
+        <hr class="m-b-2">
+
+        <%= yield %>
+
+      </div>
+
     </div>
 
     <%= render partial: 'layouts/footer' %>

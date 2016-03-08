@@ -21,10 +21,6 @@ select {
   @extend .form-control;
 }
 
-.main {
-  min-height: 380px;
-}
-
 .std-label {
   @include make-col();
 
@@ -104,22 +100,16 @@ select {
   }
 }
 
-.m-b-h {
-  margin-bottom: 0.5rem;
-}
-
 .flash {
   @extend .alert;
   @include alert-variant(#ffc, #eee, $text-muted);
-  padding: 8px;
   text-align: center;
-  max-width: 560px;
+  padding: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
   cursor: pointer;
-
-  // TODO: multi-line flash?
-  position: relative;
-  top: 2.2em;
-  margin: 0 auto -2.875em;
+  transform: rotate(-0.67deg);
 }
 
 header#nav {
@@ -128,16 +118,22 @@ header#nav {
   }
 }
 
-.circle {
-  font-size: 1em;
-  text-align: center;
+/* Sticky footer
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
 
-  width: 1.5rem;
-  height: 1.5rem;
-  line-height: 1.5rem;
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 75px;
+}
 
-  background: #ddd;
-  color: white;
-
-  border-radius: 50%;
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 75px;
 }
