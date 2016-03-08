@@ -26,8 +26,13 @@
 
     <% else %>
 
-      <%= link_to "Sign up", new_signup_path %>
-      <%= link_to "Log in", login_path %>
+      <div class="pull-xs-right">
+        <%= link_to "Sign up", new_signup_path %>
+      </div>
+
+      <div>
+        <%= link_to "Log in", login_path %>
+      </div>
 
     <% end %>
 
