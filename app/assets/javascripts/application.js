@@ -16,9 +16,20 @@
 //= require_tree .
 
 $(document).on('page:change', function () {
-  $('.flash').click(function (e) {
+
+  $('form').on('submit', function(e) {
+    var $form = $(this);
+    if ($form.data('submitted') == true) {
+      e.preventDefault();
+    } else {
+      $form.data('submitted', true);
+    }
+  });
+
+  $('.flash').click(function(e) {
     e.preventDefault();
-    // TODO: use CSS animation
+    // TODO: use CSS animation?
     $(this).fadeToggle('fast');
   });
+
 });
