@@ -1,20 +1,22 @@
 <%= form_for(@user) do |f| %>
 
-  <div class="row m-b-1">
+  <div class="row m-b-1 <%= error_class @user, :name %>">
     <div class="std-label text-sm-right">
       <%= f.label :name %>
     </div>
     <div class="std-control">
       <%= f.text_field :name, autofocus: true  %>
+      <%= error_message @user, :name %>
     </div>
   </div>
 
-  <div class="row m-b-1">
+  <div class="row m-b-1 <%= error_class @user, :email %>">
     <div class="std-label text-sm-right">
       <%= f.label :email %>
     </div>
     <div class="std-control">
       <%= f.email_field :email %>
+      <%= error_message @user, :email  %>
     </div>
   </div>
 

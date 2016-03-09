@@ -46,6 +46,10 @@ module ActiveSupport
       end
     end
 
+    def errors_present
+      assert_select 'div.field_with_errors'
+    end
+
     private
 
     def integration_test?

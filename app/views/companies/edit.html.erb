@@ -1,15 +1,14 @@
 <%= provide :title, "Edit #{@company.name}" %>
 
-<%= render 'shared/errors', object: @company %>
-
 <%= form_for(@company) do |f| %>
 
-  <div class="row m-b-1">
+  <div class="row m-b-1 <%= error_class @company, :name %>">
     <div class="std-label text-sm-right">
       <%= f.label :name, "Company name" %>
     </div>
     <div class="std-control">
       <%= f.text_field :name %>
+      <%= custom_error_message @company, :name, 'Company name' %>
     </div>
   </div>
 

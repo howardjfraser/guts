@@ -84,7 +84,7 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
   end
 
   def check_fail
-    assert_select 'div.errors'
+    errors_present
     assert_template 'users/edit'
   end
 end

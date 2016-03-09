@@ -1,14 +1,14 @@
 <% provide(:title, 'Change password') %>
 
 <%= form_for(@user, url: password_change_path(@user)) do |f| %>
-  <%= render 'shared/errors', object: @user %>
 
-  <div class="row m-b-1">
+  <div class="row m-b-1 <%= error_class @user, :password %>">
     <div class="std-label text-sm-right">
       <%= f.label :password, "New password" %>
     </div>
     <div class="std-control">
       <%= f.password_field :password, autofocus: true %>
+      <%= custom_error_message @user, :password, "New password" %>
     </div>
   </div>
 

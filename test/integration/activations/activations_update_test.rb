@@ -24,14 +24,14 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
   test 'invalid account activation - invalid pw' do
     create_new_user
     patch activation_path(@user.activation_token), email: @user.email, user: { password: 'zz' }
-    assert_select 'div.errors'
+    errors_present
     assert_template 'activations/edit'
   end
 
   test 'invalid account activation - empty pw' do
     create_new_user
     patch activation_path(@user.activation_token), email: @user.email, user: { password: '' }
-    assert_select 'div.errors'
+    errors_present
     assert_template 'activations/edit'
   end
 

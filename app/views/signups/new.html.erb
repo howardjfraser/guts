@@ -1,44 +1,46 @@
 <%= provide :title, "Sign up" %>
 
-<%= render 'shared/errors', object: @company %>
-
 <%= form_for(@company, url: signups_path) do |f| %>
 
   <%= f.fields_for :users do |e| %>
 
-    <div class="row m-b-1">
+    <div class="row m-b-1 <%= error_class @company.users[0], :name %>">
       <div class="std-label text-sm-right">
         <%= e.label :name, "Your name" %>
       </div>
       <div class="std-control">
         <%= e.text_field :name, autofocus: true %>
+        <%= custom_error_message @company.users[0], :name, "Your name" %>
       </div>
     </div>
 
-    <div class="row m-b-1">
+    <div class="row m-b-1 <%= error_class @company.users[0], :email %>">
       <div class="std-label text-sm-right">
         <%= e.label :email %>
       </div>
       <div class="std-control">
         <%= e.email_field :email %>
+        <%= error_message @company.users[0], :email %>
       </div>
     </div>
 
-    <div class="row m-b-1">
+    <div class="row m-b-1 <%= error_class @company, :name %>">
       <div class="std-label text-sm-right">
         <%= f.label :name, "Company name" %>
       </div>
       <div class="std-control">
         <%= f.text_field :name %>
+        <%= custom_error_message @company, :name, "Company name" %>
       </div>
     </div>
 
-    <div class="row m-b-1">
+    <div class="row m-b-1 <%= error_class @company.users[0], :password %>">
       <div class="std-label text-sm-right">
         <%= e.label :password %>
       </div>
       <div class="std-control">
         <%= e.password_field :password %>
+        <%= error_message @company.users[0], :password %>
       </div>
     </div>
 

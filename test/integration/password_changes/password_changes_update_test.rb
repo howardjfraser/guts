@@ -46,7 +46,7 @@ class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
     @gareth.create_reset_digest
     log_in_as @gareth
     patch password_change_path @gareth.id, user: { password: password }
-    assert_select 'div.errors'
+    errors_present
     assert_template 'password_changes/edit'
   end
 end
