@@ -1,0 +1,13 @@
+<% if @user.valid? %>
+  $('#invited').append("<%= j render partial: @user %>");
+  $('#invited').removeClass('invisible')
+
+  $('#invited_count').text(<%= User.invited(@user.company).count %>);
+
+  $('#user_name').val('').focus();
+  $('#user_email').val('').focus();
+<% else %>
+  // TOOD better validation errors...
+  alert('This user is invalid.')
+<% end %>
+
