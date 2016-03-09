@@ -8,12 +8,12 @@ class PasswordResetsUpdateTest < ActionDispatch::IntegrationTest
 
   test 'empty pw' do
     patch password_reset_path(@keith.reset_token), email: @keith.email, user: { password: '' }
-    errors_present
+    assert_errors_present
   end
 
   test 'pw too short' do
     patch password_reset_path(@keith.reset_token), email: @keith.email, user: { password: 'aaa' }
-    errors_present
+    assert_errors_present
   end
 
   test 'expired token' do

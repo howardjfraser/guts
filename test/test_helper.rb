@@ -46,7 +46,7 @@ module ActiveSupport
       end
     end
 
-    def errors_present
+    def assert_errors_present
       assert_select 'div.field_with_errors'
     end
 

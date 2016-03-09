@@ -22,7 +22,7 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
         email: 'dave.test.com', password: 'aaa' } } }
     end
     assert_template 'signups/new'
-    errors_present
+    assert_errors_present
   end
 
   test 'invalid sign up - empty password' do
@@ -31,7 +31,7 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
         email: 'dave@test.com', password: '' } } }
     end
     assert_template 'signups/new'
-    errors_present
+    assert_errors_present
   end
 
   test 'valid signup' do

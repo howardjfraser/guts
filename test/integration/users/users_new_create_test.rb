@@ -29,7 +29,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     end
 
     assert_template 'users/new'
-    errors_present
+    assert_errors_present
   end
 
   test 'create new user' do
