@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :signups, only: [:new, :create]
+  resources :signups, only: [:index, :new, :create]
 
   resources :companies, except: [:new, :create] do
     member do
