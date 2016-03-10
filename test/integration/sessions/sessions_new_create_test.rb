@@ -52,4 +52,10 @@ class SessionsNewCreateTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_user_path(@brent)
     assert_nil session[:forwarding_url]
   end
+
+  test 'login redirect if already logged in' do
+    post_via_redirect login_path, session: { email: 'david@office.com', password: 'password' }
+    get login_path
+    assert_redirected_to users_url
+  end
 end
