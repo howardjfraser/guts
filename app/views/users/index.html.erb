@@ -1,9 +1,11 @@
 <% provide(:title, "Users") %>
 
 <% provide :toolbar do %>
-  <div class="hidden-md-up">
-    <%= link_to "Invite User", new_user_path, class: 'btn btn-primary' %>
-  </div>
+  <% if current_user.admin? %>
+    <div class="hidden-md-up">
+      <%= link_to "Invite User", new_user_path, class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 <% end %>
 
 
