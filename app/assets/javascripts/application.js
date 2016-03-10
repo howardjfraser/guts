@@ -26,10 +26,13 @@ $(document).on('page:change', function () {
     }
   });
 
-  $('.flash').click(function(e) {
+  $('body').on('click', '.flash', function(e) {
     e.preventDefault();
     // TODO: use CSS animation?
     $(this).fadeToggle('fast');
   });
 
+  $('.ajax-submit').click(function() {
+    $('.flash').remove();
+  })
 });

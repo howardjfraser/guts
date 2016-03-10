@@ -1,16 +1,17 @@
-$('.flash').remove();
-
 <% if @user.valid? %>
+
   $('#invited').append("<%= j render partial: @user %>");
   $('#invited').removeClass('invisible')
-
-  $('#invited_count').text(<%= User.invited(@user.company).count %>);
 
   $('#user_name').val('').focus();
   $('#user_email').val('').focus();
 
-  $('header#nav').prepend("<%= j render partial: 'layouts/flash', locals: {msg: 'User added...'} %>");
-<% else %>
-  $('header#nav').prepend("<%= j render partial: 'layouts/flash', locals: {msg: 'User invalid...'} %>");
-<% end %>
+  $('div#nav-container').prepend
+    ("<%= j render partial: 'layouts/flash', locals: {msg: "#{@user.name} has been invited"} %>");
 
+<% else %>
+
+  $('div#nav-container').prepend
+    ("<%= j render partial: 'layouts/flash', locals: {msg: "#{@user.errors.to_a[0]}"} %>");
+
+<% end %>
