@@ -100,13 +100,28 @@ select {
   }
 }
 
-.flash {
+.alt-flash {
   border-bottom: 3px solid rgba(0,0,0,.1);
   background-color: #ffc;
   position: absolute;
   width: 100%;
   cursor: pointer;
+  padding: 1em;
   z-index: 1;
+}
+
+.flash {
+  @extend .alert;
+  @include alert-variant(#ffc, #eee, $text-muted);
+  text-align: center;
+  padding: 0.25em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 540px;
+  position: relative;
+  top: 66px;
+  margin-top: -54px;
+  transform: rotate(-0.67deg);
 }
 
 header#nav {

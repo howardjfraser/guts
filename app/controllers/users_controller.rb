@@ -19,10 +19,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      UserMailer.activation(@user).deliver_now
-      redirect_to users_url, notice: "#{@user.name} has been invited"
+      create_success
     else
-      render 'new'
+      create_fail
     end
   end
 
@@ -58,5 +57,20 @@ class UsersController < ApplicationController
 
   def check_company
     forbidden unless current_user.company == @user.company
+  end
+
+  def create_success
+    UserMailer.activation(@user).deliver_now
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: "#{@user.name} has been invited" }
+      format.js
+    end
+  end
+
+  def create_fail
+    respond_to do |format|
+      format.html { render 'new' }
+      format.js
+    end
   end
 end
