@@ -1,35 +1,46 @@
 <% provide(:title, "Users") %>
 
-<% if current_user.admin? %>
-  <div class="row m-b-1">
-    <%= form_for User.new, remote: true do |f| %>
-
-      <div class="col-xs-12 col-md-5 col-lg-5 col-xl-4 col-xl-offset-1">
-        <%= f.text_field :name, autofocus: true, placeholder: 'Name'  %>
-      </div>
-
-      <div class="col-xs-12 col-md-5 col-lg-5 col-xl-4">
-        <%= f.text_field :email, placeholder: 'Email' %>
-      </div>
-
-      <div class="col-xs-12 col-md-2 col-lg-2">
-        <%= f.submit 'Add', class: 'btn btn-primary btn-block' %>
-      </div>
-
-    <% end %>
+<% provide :toolbar do %>
+  <div class="hidden-md-up">
+    <%= link_to "Invite User", new_user_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<div class="m-b-1">
-  <%= render partial: @users %>
-</div>
-<div class="m-b-1">
-  <%= pluralize @users.count, "person" %>
-</div>
 
-<div id="invited" class="m-b-1 <%= @invited.empty? ? 'invisible' : '' %>">
-  <span class="p-r-1">
-    <span id="invited_count"><%= @invited.count %></span> invited
-  </span>
-  <%= render partial: @invited %>
+<div class="row">
+
+  <div class="col-xs-12 col-md-7 col-lg-8">
+    <div class="m-b-1">
+      <%= render partial: @users %>
+    </div>
+    <div class="m-b-1">
+      <%= pluralize @users.count, "person" %>
+    </div>
+
+    <hr class="m-y-2 hidden-md-up">
+  </div>
+
+
+  <div class="col-xs-12 col-md-5 col-md-offset-0 col-lg-4">
+
+    <div class="hidden-sm-down">
+      <% if current_user.admin? %>
+        <%= form_for User.new, remote: true do |f| %>
+          <h4 class="m-b-1">Invite new user</h4>
+          <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-group' %>
+          <%= f.text_field :email, placeholder: 'Email', class: 'form-group' %>
+          <%= f.submit 'Send Invitation', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      <% end %>
+
+    </div>
+
+    <div id="invited" class="m-b-1 <%= @invited.empty? ? 'invisible' : '' %>">
+      <hr class="m-y-2 hidden-sm-down">
+      <h6 class="">Invited, waiting for reply</h6>
+      <%= render partial: @invited %>
+    </div>
+
+  </div>
+
 </div>

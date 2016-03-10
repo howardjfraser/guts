@@ -1,3 +1,5 @@
+$('.flash').remove();
+
 <% if @user.valid? %>
   $('#invited').append("<%= j render partial: @user %>");
   $('#invited').removeClass('invisible')
@@ -6,8 +8,9 @@
 
   $('#user_name').val('').focus();
   $('#user_email').val('').focus();
+
+  $('header#nav').prepend("<%= j render partial: 'layouts/flash', locals: {msg: 'User added...'} %>");
 <% else %>
-  // TOOD better validation errors...
-  alert('This user is invalid.')
+  $('header#nav').prepend("<%= j render partial: 'layouts/flash', locals: {msg: 'User invalid...'} %>");
 <% end %>
 

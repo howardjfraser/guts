@@ -1,9 +1,7 @@
 <header id="nav">
 
   <% if flash[:notice] %>
-    <div class="text-xs-center text-muted flash">
-      <%= flash[:notice] %>
-    </div>
+    <%= render partial: 'layouts/flash', locals: { msg: flash[:notice] } %>
   <% end %>
 
   <div class="container p-t-1">

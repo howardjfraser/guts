@@ -9,7 +9,7 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
     check_access(:forbidden, @gareth) { patch user_path @brent, user: { name: 'new' } }
 
     check_access(:success, @brent) { get edit_user_path @brent }
-    check_redirect(user_path(@brent)) { patch user_path @brent, user: { name: 'new', email: @brent.email } }
+    check_redirect(users_url) { patch user_path @brent, user: { name: 'new', email: @brent.email } }
   end
 
   test 'can’t edit users from a different company' do
@@ -78,7 +78,7 @@ class UsersEditUpdateTest < ActionDispatch::IntegrationTest
 
   def check_success(user, is_admin)
     follow_redirect!
-    assert_template 'users/show'
+    assert_template 'users/index'
     assert flash.any?
     assert user.reload.admin? == is_admin
   end

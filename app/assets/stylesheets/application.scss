@@ -117,7 +117,7 @@ select {
   padding: 0.25em;
   margin-left: auto;
   margin-right: auto;
-  max-width: 540px;
+  max-width: 546px;
   position: relative;
   top: 66px;
   margin-top: -54px;
@@ -139,7 +139,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 75px;
+  margin-bottom: 4.6875em;
 }
 
 footer {
@@ -147,5 +147,5 @@ footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 75px;
+  height: 4.6875em;
 }
