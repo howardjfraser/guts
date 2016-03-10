@@ -1,10 +1,11 @@
 <header id="nav">
 
-  <% if flash[:notice] %>
-    <%= render partial: 'layouts/flash', locals: { msg: flash[:notice] } %>
-  <% end %>
 
   <div class="container p-t-1">
+
+    <% if flash[:notice] %>
+      <%= render partial: 'layouts/flash', locals: { msg: flash[:notice] } %>
+    <% end %>
 
     <% if logged_in? %>
 
