@@ -15,19 +15,19 @@ $border-width: 3px;
 
 $grid-breakpoints: (
   xs: 0,
-  sm: 580px,
+  sm: 560px,
   md: 760px,
-  lg: 940px,
-  xl: 1120px
+  lg: 960px,
+  xl: 1160px
 );
 
 // .container width is fixed between container-max-width and next grid-breakpoint
 // e.g. width is 442 until 544, then fluid until 576
 // having 720 < 768 means no fluid widths between 544 and 768
 
-//$container-max-widths: (
-//  sm: 442px,
-//  md: 576px,
-//  lg: 720px,
-//  xl: 720px
-//);
+$container-max-widths: (
+  sm: 660px,
+  md: 760px,
+  lg: 960px,
+  xl: 1160px
+);
