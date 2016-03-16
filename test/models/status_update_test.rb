@@ -31,4 +31,5 @@ class StatusUpdateTest < ActiveSupport::TestCase
     @update.user = nil
     refute @update.valid?
   end
+
 end
