@@ -22,11 +22,10 @@ $grid-breakpoints: (
 );
 
 // .container width is fixed between container-max-width and next grid-breakpoint
-// e.g. width is 442 until 544, then fluid until 576
-// having 720 < 768 means no fluid widths between 544 and 768
+// i.e. below is fluid to 760 then fixed
 
 $container-max-widths: (
-  sm: 660px,
+  sm: 759px,
   md: 760px,
   lg: 960px,
   xl: 1160px
