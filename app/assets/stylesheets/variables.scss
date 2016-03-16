@@ -18,7 +18,7 @@ $grid-breakpoints: (
   sm: 560px,
   md: 760px,
   lg: 960px,
-  xl: 1160px
+  xl: 960px
 );
 
 // .container width is fixed between container-max-width and next grid-breakpoint
@@ -28,5 +28,5 @@ $container-max-widths: (
   sm: 759px,
   md: 760px,
   lg: 960px,
-  xl: 1160px
+  xl: 960px
 );
