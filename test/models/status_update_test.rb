@@ -31,4 +31,8 @@ class StatusUpdateTest < ActiveSupport::TestCase
     @update.user = nil
     refute @update.valid?
   end
+
+  test 'default order' do
+    assert StatusUpdate.first == status_updates(:newer)
+  end
 end

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  message: MyText
+newer:
+  message: Going well today.
   user: :gareth
+  created_at: <%= 2.days.ago %>
 
-two:
-  message: MyText
+older:
+  message: Not going so well today...
   user: :gareth
+  created_at: <%= 3.days.ago %>
