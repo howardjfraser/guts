@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class StatusUpdateTest < ActiveSupport::TestCase
+class UpdateTest < ActiveSupport::TestCase
   def setup
     @company = Company.new(name: 'TestCo')
     @user = @company.users.build(name: 'Example', email: 'user@example.com', password: 'foobar', role: 'admin')
-    @update = @user.status_updates.build(message: 'message')
+    @update = @user.updates.build(message: 'message')
   end
 
   test 'should be valid' do
@@ -33,6 +33,6 @@ class StatusUpdateTest < ActiveSupport::TestCase
   end
 
   test 'default order' do
-    assert StatusUpdate.first == status_updates(:newer)
+    assert Update.first == updates(:newer)
   end
 end

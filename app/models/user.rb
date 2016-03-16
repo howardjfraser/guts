@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_secure_password validations: false
   belongs_to :company, inverse_of: :users
-  has_many :status_updates, dependent: :destroy
+  has_many :updates, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
 

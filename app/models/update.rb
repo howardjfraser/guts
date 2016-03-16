@@ -1,4 +1,4 @@
-class StatusUpdate < ActiveRecord::Base
+class Update < ActiveRecord::Base
   belongs_to :user
 
   validates :message, presence: true, length: { maximum: 256 }

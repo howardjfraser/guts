@@ -59,9 +59,9 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
 
   test 'dependent status updates are destroyed' do
     log_in_as(@brent)
-    update_count = @gareth.status_updates.count
+    update_count = @gareth.updates.count
     assert update_count > 0
-    assert_difference 'StatusUpdate.all.count', -update_count do
+    assert_difference 'Update.all.count', -update_count do
       delete user_path @gareth
     end
   end
