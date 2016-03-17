@@ -53,7 +53,7 @@ root.save(validate: false)
 
 User.all.each do |user|
   next unless rand < 0.9
-  user.updates.build message: Faker::Lorem.sentence(10, true, 20)
+  puts user.updates.build message: Faker::Lorem.sentence(10, true, 20)
   user.save
 
   update = Update.last
