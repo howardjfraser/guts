@@ -57,7 +57,7 @@ module ActiveSupport
     end
 
     def check_access(expected, *users)
-      if users.nil?
+      if users.empty?
         yield
         assert_response expected
       else
