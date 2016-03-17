@@ -53,11 +53,12 @@ root.save(validate: false)
 # updates
 
 messages = [
-  "All good.",
-  "Pretty terrible...",
+  nil,
+  'All good.',
+  'Pretty terrible...',
   "Had a nice cup of tea but that's about it",
-  "V. successful meeting with the MD and PA, (WTF?)",
-  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  'V. successful meeting with the MD and PA, (WTF?)',
+  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...'
 ]
 
 User.all.each do |u|

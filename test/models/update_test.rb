@@ -33,6 +33,6 @@ class UpdateTest < ActiveSupport::TestCase
   end
 
   test 'default order' do
-    assert Update.first == updates(:newer)
+    assert Update.first == updates(:older)
   end
 end

@@ -1,0 +1,17 @@
+<% update = user.updates.last %>
+
+<div class="p-b-1">
+  <% if update.nil? %>
+    nil...
+  <% else %>
+    <%= update.message %>
+    <span class="text-muted">
+      <%= time_ago_in_words(update.created_at) %> ago <%= update.id %>
+    </span>
+  <% end %>
+
+  <div class="text-muted nowrap">
+    &mdash; <%= user.name %> <%= user.id %>
+  </div>
+
+</div>

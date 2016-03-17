@@ -4,25 +4,25 @@ class NavigationTest < ActionDispatch::IntegrationTest
   test 'pre-login' do
     get root_path
     assert_template 'sessions/new'
-    check_links [1, 1, 1, 0, 0, 0, 0, 0]
+    check_links [1, 1, 1, 0, 0, 0, 0, 0, 0]
   end
 
   test 'logged in' do
     log_in_as @gareth
     assert_template 'users/index'
-    check_links [0, 0, 0, 1, 2, 0, 0, 1], @gareth
+    check_links [0, 0, 0, 1, 2, 0, 0, 1, 1], @gareth
   end
 
   test 'logged in as admin' do
     log_in_as @brent
     assert_template 'users/index'
-    check_links [0, 0, 0, 1, 2, 1, 0, 1], @brent
+    check_links [0, 0, 0, 1, 2, 1, 0, 1, 1], @brent
   end
 
   test 'logged in as root' do
     log_in_as @howard
     assert_template 'users/index'
-    check_links [0, 0, 0, 1, 0, 1, 1, 1], @howard
+    check_links [0, 0, 0, 1, 0, 1, 1, 1, 1], @howard
   end
 
   private
@@ -37,6 +37,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', company_path(user.company), count: expected[5] if user
     assert_select 'a[href=?]', companies_path, count: expected[6]
     assert_select 'a[href=?]', logout_path, count: expected[7]
+    assert_select 'a[href=?]', updates_path, count: expected[8]
   end
   # rubocop:enable AbcSize
 end

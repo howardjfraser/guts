@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   resources :password_changes, only: [:edit, :update]
 
   post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
+
+  resources :updates, only: [:index]
 end

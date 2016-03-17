@@ -1,0 +1,5 @@
+<% provide :title, 'Updates' %>
+
+<% @users.each do |u| %>
+  <%= render 'update', user: u %>
+<% end %>

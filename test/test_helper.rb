@@ -62,6 +62,14 @@ module ActiveSupport
       assert_response expected
     end
 
+    def check_access_zz(expected, users)
+      users.each do |u|
+        log_in_as u
+        yield
+        assert_response expected
+      end
+    end
+
     def check_redirect(expected, user = nil)
       log_in_as user unless user.nil?
       yield
