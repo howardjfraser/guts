@@ -10,6 +10,8 @@ company_sizes.each do |size|
   company = Company.new(name: "#{Faker::Company.name} #{Faker::Company.suffix}")
   company.save(validate: false)
 
+  puts company
+
   size.times do
     name  = Faker::Name.name
     email = Faker::Internet.safe_email(name)
