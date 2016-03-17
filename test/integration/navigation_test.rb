@@ -3,6 +3,7 @@ require 'test_helper'
 class NavigationTest < ActionDispatch::IntegrationTest
   test 'pre-login' do
     get root_path
+    follow_redirect!
     assert_template 'sessions/new'
     check_links [1, 1, 1, 0, 0, 0, 0, 0, 0]
   end
