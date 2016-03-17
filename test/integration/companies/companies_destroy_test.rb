@@ -39,4 +39,14 @@ class CompaniesDestroyTest < ActionDispatch::IntegrationTest
     assert_redirected_to companies_url
     User.all.select { |u| assert !u.company.nil? && u.company != @michael.company }
   end
+
+  test 'deleting company deletes users' do
+    log_in_as @howard
+    user_count = @michael.company.users.count
+    assert user_count > 0
+
+    assert_difference 'User.count', -user_count do
+      delete company_path @michael.company
+    end
+  end
 end
