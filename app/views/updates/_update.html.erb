@@ -3,10 +3,16 @@
 <div class="p-b-1">
   <% if update.nil? %>
     nil...
-  <% else %>
+  <% elsif update.created_at.today? %>
     <%= update.message %>
     <span class="text-muted small nowrap">
-      <%= update.created_at %>
+      <%= update.created_at.strftime '%A %e %B %Y %R' %>
+    </span>
+  <% else %>
+    missing today...
+    <span class="text-muted small nowrap">
+      last update
+      <%= update.created_at.strftime '%A %e %B %Y %R' %>
     </span>
   <% end %>
 
