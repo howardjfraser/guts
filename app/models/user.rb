@@ -80,4 +80,8 @@ class User < ActiveRecord::Base
   def downcase_email
     email.downcase!
   end
+
+  def to_s
+    "User: #{name} / #{email}"
+  end
 end
