@@ -1,48 +1,31 @@
+# reset
+
 Company.destroy_all
 
-#  smiths
-smiths = Company.new(name: 'Smith Co')
-smiths.save(validate: false)
+# companies and users
 
-24.times do |n|
-  name  = Faker::Name.name
-  email = "user#{n + 1}@smiths.com"
-  password = 'password'
-  puts User.create!(name: name, email: email, company: smiths, password: password, activated: true,
-               activated_at: Time.zone.now, role: 'user')
+company_sizes = [24, 12, 48, 6, 18, 96]
+
+company_sizes.each do |size|
+  company = Company.new(name: "#{Faker::Company.name} #{Faker::Company.suffix}")
+  company.save(validate: false)
+
+  size.times do
+    name  = Faker::Name.name
+    email = Faker::Internet.safe_email(name)
+    password = 'password'
+    puts User.create!(name: name, email: email, company: company, password: password, activated: true,
+                      activated_at: Time.zone.now, role: 'user')
+  end
 end
 
-# jones
-jones = Company.new(name: 'Jones & Co')
-jones.save(validate: false)
-
-12.times do |n|
-  name  = Faker::Name.name
-  email = "user#{n + 1}@jones.com"
-  password = 'password'
-  puts User.create!(name: name, email: email, company: jones, password: password, activated: true,
-               activated_at: Time.zone.now, role: 'user')
-end
-
-# starrs
-starr = Company.new(name: 'Starr Partners')
-starr.save(validate: false)
-
-48.times do |n|
-  name  = Faker::Name.name
-  email = "user#{n + 1}@starr.com"
-  password = 'password'
-  puts User.create!(name: name, email: email, company: starr, password: password, activated: true,
-               activated_at: Time.zone.now, role: 'user')
-end
-
-# create admins
+# admins
 
 Company.all.each do |c|
   c.users.first.update_attribute(:role, 'admin')
 end
 
-# create root user
+# root user
 
 root = User.new(name: 'Howard', email: 'howardjfraser@gmail.com', company: Company.first, password: 'password',
                 activated: true, activated_at: Time.zone.now, role: 'root')
