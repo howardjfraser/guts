@@ -7,7 +7,7 @@ Company.destroy_all
 company_sizes = [24, 12, 48, 6, 18]
 
 company_sizes.each do |size|
-  company = Company.new(name: "#{Faker::Company.name}")
+  company = Company.new(name: Faker::Company.name)
   company.save(validate: false)
   puts company
 
@@ -24,7 +24,7 @@ end
 
 Company.all.each do |c|
   c.users.first.update_attribute(:role, 'admin')
-  (c.users.count / 12).times  { c.users.sample.update_attribute(:role, 'admin') }
+  (c.users.count / 12).times { c.users.sample.update_attribute(:role, 'admin') }
 end
 
 # root user
