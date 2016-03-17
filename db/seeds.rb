@@ -52,9 +52,12 @@ root.save(validate: false)
 
 # updates
 
-User.all.each do |u|
+User.all.each do |user|
   if rand < 0.9
-    u.updates.build message: Faker::Lorem.sentence(10, true, 20)
-    u.save
+    user.updates.build message: Faker::Lorem.sentence(10, true, 20)
+    user.save
+
+    update = Update.last
+    update.update_attribute :created_at, (rand*3).days.ago
   end
 end

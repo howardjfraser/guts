@@ -5,8 +5,8 @@
     nil...
   <% else %>
     <%= update.message %>
-    <span class="text-muted small">
-      <%= time_ago_in_words(update.created_at) %> ago
+    <span class="text-muted small nowrap">
+      <%= update.created_at %>
     </span>
   <% end %>
 
