@@ -5,13 +5,13 @@
     nil...
   <% else %>
     <%= update.message %>
-    <span class="text-muted">
-      <%= time_ago_in_words(update.created_at) %> ago <%= update.id %>
+    <span class="text-muted small">
+      <%= time_ago_in_words(update.created_at) %> ago
     </span>
   <% end %>
 
   <div class="text-muted nowrap">
-    &mdash; <%= user.name %> <%= user.id %>
+    &mdash; <%= user.name %>
   </div>
 
 </div>
