@@ -4,12 +4,11 @@ Company.destroy_all
 
 # companies and users
 
-company_sizes = [24, 12, 48, 6, 18, 96]
+company_sizes = [24, 12, 48, 6, 18]
 
 company_sizes.each do |size|
-  company = Company.new(name: "#{Faker::Company.name} #{Faker::Company.suffix}")
+  company = Company.new(name: "#{Faker::Company.name}")
   company.save(validate: false)
-
   puts company
 
   size.times do
@@ -25,6 +24,7 @@ end
 
 Company.all.each do |c|
   c.users.first.update_attribute(:role, 'admin')
+  (c.users.count / 12).times  { c.users.sample.update_attribute(:role, 'admin') }
 end
 
 # root user
@@ -42,5 +42,5 @@ User.all.each do |user|
   user.save
 
   update = Update.last
-  update.update_attribute :created_at, (rand * 3).days.ago
+  update.update_attribute :created_at, (rand * 2).days.ago
 end
