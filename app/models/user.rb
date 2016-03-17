@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
+  def to_s
+    "User: #{name} / #{email}"
+  end
+
   private
 
   def create_activation_digest
@@ -79,9 +83,5 @@ class User < ActiveRecord::Base
 
   def downcase_email
     email.downcase!
-  end
-
-  def to_s
-    "User: #{name} / #{email}"
   end
 end
