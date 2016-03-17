@@ -1,5 +1,4 @@
-Company.delete_all
-User.delete_all
+Company.destroy_all
 
 #  smiths
 smiths = Company.new(name: 'Smith Co')
