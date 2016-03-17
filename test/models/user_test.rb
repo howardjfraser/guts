@@ -86,4 +86,8 @@ class UserTest < ActiveSupport::TestCase
     @user.role = 'invalid'
     refute @user.valid?
   end
+
+  test 'to_s' do
+    assert @user.to_s == 'User: Example / user@example.com'
+  end
 end

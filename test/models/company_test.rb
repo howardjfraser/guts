@@ -25,4 +25,8 @@ class CompanyTest < ActiveSupport::TestCase
     @company.users.delete_all
     refute @company.valid?
   end
+
+  test 'to_s' do
+    assert @company.to_s == 'Company: TestCo'
+  end
 end

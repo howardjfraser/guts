@@ -35,4 +35,8 @@ class UpdateTest < ActiveSupport::TestCase
   test 'default order' do
     assert Update.first == updates(:older)
   end
+
+  test 'to_s' do
+    assert @update.to_s == 'Update: message'
+  end
 end
