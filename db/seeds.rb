@@ -52,16 +52,9 @@ root.save(validate: false)
 
 # updates
 
-messages = [
-  nil,
-  'All good.',
-  'Pretty terrible...',
-  "Had a nice cup of tea but that's about it",
-  'V. successful meeting with the MD and PA, (WTF?)',
-  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore...'
-]
-
 User.all.each do |u|
-  u.updates.build message: messages.sample
-  u.save
+  if rand < 0.9
+    u.updates.build message: Faker::Lorem.sentence(10, true, 20)
+    u.save
+  end
 end
