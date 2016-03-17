@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersShowTest < ActionDispatch::IntegrationTest
   test 'access' do
     check_redirect(login_url) { get user_path @brent }
-    check_access(:success, @brent) { get user_path @brent }
+    check_access(:success, @gareth, @brent, @howard) { get user_path @brent }
   end
 
   test "can’t view user from a different company" do

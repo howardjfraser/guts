@@ -56,17 +56,16 @@ module ActiveSupport
       defined?(post_via_redirect)
     end
 
-    def check_access(expected, user = nil)
-      log_in_as user unless user.nil?
-      yield
-      assert_response expected
-    end
-
-    def check_access_zz(expected, users)
-      users.each do |u|
-        log_in_as u
+    def check_access(expected, *users)
+      if users.nil?
         yield
         assert_response expected
+      else
+        users.each do |u|
+          log_in_as u
+          yield
+          assert_response expected
+        end
       end
     end
 
