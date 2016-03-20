@@ -16,7 +16,7 @@ company_sizes.each do |size|
     email = Faker::Internet.safe_email(name)
     password = 'password'
     puts User.create!(name: name, email: email, company: company, password: password, activated: true,
-      activated_at: Time.zone.now, role: 'user')
+                      activated_at: Time.zone.now, role: 'user')
   end
 end
 
@@ -30,7 +30,7 @@ end
 # root user
 
 root = User.new(name: 'Howard', email: 'howardjfraser@gmail.com', company: Company.first, password: 'password',
-  activated: true, activated_at: Time.zone.now, role: 'root')
+                activated: true, activated_at: Time.zone.now, role: 'root')
 
 root.save(validate: false)
 
