@@ -20,10 +20,8 @@ module ActiveSupport
       @gareth = users(:gareth)
       @tim = users(:tim)
       @ricky = users(:ricky)
-
       @keith = users(:keith)
       @keith.create_reset_digest
-
       @hogg = companies(:wernham_hogg)
       @mifflin = companies(:dunder_mifflin)
     end
