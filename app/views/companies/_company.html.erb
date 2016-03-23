@@ -6,6 +6,9 @@
     </span>
   <% else %>
     <%= link_to company.name, select_company_path(company), method: :post %>
+    <small>
+      <%= link_to 'delete', company, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </small>
   <% end %>
 
   <span class="text-muted small">
