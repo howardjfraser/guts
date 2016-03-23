@@ -27,12 +27,16 @@ Company.all.each do |c|
   (c.users.count / 12).times { c.users.sample.update_attribute(:role, 'admin') }
 end
 
-# root user
+# standard users
 
-root = User.new(name: 'Howard', email: 'howardjfraser@gmail.com', company: Company.first, password: 'password',
-                activated: true, activated_at: Time.zone.now, role: 'root')
+users = { name: 'Howard', email: 'howardjfraser@gmail.com', role: 'root' },
+        { name: 'David Brent', email: 'brent@office.com', role: 'admin' },
+        { name: 'Tim Canterbury', email: 'tim@office.com', role: 'user' }
 
-root.save(validate: false)
+users.each do |u|
+  user = User.new(u.merge(company: Company.first, password: 'password', activated: true, activated_at: Time.zone.now))
+  user.save(validate: false)
+end
 
 # updates
 

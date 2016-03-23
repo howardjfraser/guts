@@ -18,11 +18,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      create_success
-    else
-      create_fail
-    end
+    @user.save ? create_success : create_fail
   end
 
   def edit
