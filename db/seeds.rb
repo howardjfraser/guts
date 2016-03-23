@@ -27,6 +27,17 @@ Company.all.each do |c|
   (c.users.count / 12).times { c.users.sample.update_attribute(:role, 'admin') }
 end
 
+# updates
+
+User.all.each do |user|
+  next unless rand < 0.9
+  puts user.updates.build message: Faker::Lorem.sentence(10, true, 20)
+  user.save
+
+  update = Update.last
+  update.update_attribute :created_at, (rand * 2).days.ago
+end
+
 # standard users
 
 users = { name: 'Howard', email: 'howardjfraser@gmail.com', role: 'root' },
@@ -38,13 +49,3 @@ users.each do |u|
   user.save(validate: false)
 end
 
-# updates
-
-User.all.each do |user|
-  next unless rand < 0.9
-  puts user.updates.build message: Faker::Lorem.sentence(10, true, 20)
-  user.save
-
-  update = Update.last
-  update.update_attribute :created_at, (rand * 2).days.ago
-end
