@@ -69,6 +69,7 @@ class UsersController < ApplicationController
       format.html { render 'new' }
       format.js do
         flash[:notice] = 'Invite user failed'
+        # TODO: move to a template file / create.js.erb?
         render js: "window.location = '#{users_url}'"
       end
     end

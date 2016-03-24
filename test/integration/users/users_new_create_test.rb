@@ -32,12 +32,11 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     assert_errors_present
   end
 
-  test 'create new user' do
+  test 'valid new user' do
     log_in_as(@brent)
 
     assert_difference 'User.count', 1 do
-      post users_path, user:
-        { name:  'Example User', email: 'user@example.com' }
+      post users_path, user: { name:  'Example User', email: 'user@example.com' }
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size
@@ -47,5 +46,20 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     assert_template 'users/index'
     assert_not flash.empty?
     assert_not user.activated?
+  end
+
+  test 'ajax invalid user' do
+    log_in_as @brent
+    assert_no_difference 'User.count' do
+      xhr :post, users_path, user: { name: '', email: '' }
+    end
+  end
+
+  test 'ajax valid new user' do
+    log_in_as @brent
+    assert_difference 'User.count', 1 do
+      xhr :post, users_path, user: { name: 'example', email: 'user@example.com' }
+    end
+    assert_template 'users/create'
   end
 end
