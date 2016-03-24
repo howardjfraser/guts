@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { render 'new' }
       format.js do
-        flash[:notice] = "Invite user failed"
+        flash[:notice] = 'Invite user failed'
         render js: "window.location = '#{users_url}'"
       end
     end

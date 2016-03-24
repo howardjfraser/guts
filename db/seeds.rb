@@ -48,4 +48,3 @@ users.each do |u|
   user = User.new(u.merge(company: Company.first, password: 'password', activated: true, activated_at: Time.zone.now))
   user.save(validate: false)
 end
-
