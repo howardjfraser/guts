@@ -27,7 +27,7 @@
 
     <div class="hidden-sm-down">
       <% if current_user.admin? %>
-        <%= form_for User.new, remote: true do |f| %>
+        <%= form_for User.new, remote: true, authenticity_token: true do |f| %>
           <h4 class="m-b-1">Invite new user</h4>
           <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-group' %>
           <%= f.text_field :email, placeholder: 'Email', class: 'form-group' %>

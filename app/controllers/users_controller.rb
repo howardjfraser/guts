@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.activated(current_user.company)
+    # TODO: sort by order added?
     @invited = User.invited(current_user.company)
   end
 
@@ -66,7 +67,10 @@ class UsersController < ApplicationController
   def create_fail
     respond_to do |format|
       format.html { render 'new' }
-      format.js
+      format.js do
+        flash[:notice] = "Invite user failed"
+        render js: "window.location = '#{users_url}'"
+      end
     end
   end
 end
