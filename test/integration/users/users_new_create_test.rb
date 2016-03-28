@@ -53,6 +53,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     assert_no_difference 'User.count' do
       xhr :post, users_path, user: { name: '', email: '' }
     end
+    assert_not flash.empty?
   end
 
   test 'ajax valid new user' do
