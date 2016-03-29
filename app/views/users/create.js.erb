@@ -5,4 +5,4 @@ $('#user_name').val('').focus();
 $('#user_email').val('').focus();
 
 $('div#nav-container').prepend
-  ("<%= j render partial: 'layouts/flash', locals: {msg: "#{@user.name} has been invited"} %>");
+  ("<%= j render partial: 'shared/flash', locals: {msg: "#{@user.name} has been invited"} %>");
