@@ -1,0 +1,14 @@
+<% provide :title, 'Update' %>
+
+<%= form_for @update, html: { class: 'row' } do |f| %>
+
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+    <div class="form-group <%= error_class @update, :message %>">
+      <%= f.text_field :message, autofocus: true %>
+      <%= error_message @update, :message %>
+    </div>
+
+    <%= f.submit 'Update', class: 'btn btn-primary pull-xs-right' %>
+  </div>
+
+<% end %>

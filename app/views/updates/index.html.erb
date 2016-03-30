@@ -1,5 +1,16 @@
 <% provide :title, 'Updates' %>
 
+<% unless current_user.root? %>
+  <div>
+    <%= form_for Update.new, remote: true, authenticity_token: true do |f| %>
+      <%= f.text_field :message, class: 'form-group' %>
+      <%= f.submit 'Update', class: 'btn btn-primary ajax-submit' %>
+    <% end %>
+  </div>
+
+  <hr>
+<% end %>
+
 <% @users.each do |u| %>
   <%= render 'update', user: u %>
 <% end %>

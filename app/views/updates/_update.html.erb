@@ -1,6 +1,6 @@
 <% update = user.updates.last %>
 
-<div class="p-b-1">
+<div class="p-b-1" id="<%= user.id %>">
   <% if update.nil? %>
     nil...
   <% elsif update.created_at.today? %>

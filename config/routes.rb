@@ -21,5 +21,5 @@ Rails.application.routes.draw do
 
   post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
 
-  resources :updates, only: [:index]
+  resources :updates, only: [:index, :create]
 end

@@ -1,8 +1,8 @@
 $('#invited').append("<%= j render partial: @user %>");
-$('#invited').removeClass('invisible')
+$('#invited').removeClass('invisible');
 
 $('#user_name').val('').focus();
-$('#user_email').val('').focus();
+$('#user_email').val('');
 
 $('div#nav-container').prepend
   ("<%= j render partial: 'shared/flash', locals: {msg: "#{@user.name} has been invited"} %>");

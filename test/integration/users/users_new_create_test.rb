@@ -19,7 +19,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
   end
 
   test 'invalid new user' do
-    log_in_as(@brent)
+    log_in_as @brent
 
     get new_user_path
     assert_template 'users/new'
@@ -33,7 +33,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
   end
 
   test 'valid new user' do
-    log_in_as(@brent)
+    log_in_as @brent
 
     assert_difference 'User.count', 1 do
       post users_path, user: { name:  'Example User', email: 'user@example.com' }
@@ -51,15 +51,16 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
   test 'ajax invalid user' do
     log_in_as @brent
     assert_no_difference 'User.count' do
-      xhr :post, users_path, user: { name: '', email: '' }
+      xhr :post, users_path(user: { name: '', email: '' })
     end
-    assert_not flash.empty?
+    assert_template 'users/fail'
+    assert_not flash.empty? # js redirects
   end
 
   test 'ajax valid new user' do
     log_in_as @brent
     assert_difference 'User.count', 1 do
-      xhr :post, users_path, user: { name: 'example', email: 'user@example.com' }
+      xhr :post, users_path(user: { name: 'example', email: 'user@example.com' })
     end
     assert_template 'users/create'
   end
