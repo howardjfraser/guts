@@ -17,14 +17,8 @@
 
 $(document).on('page:change', function () {
 
-  $('form').on('submit', function(e) {
-    var $form = $(this);
-    if ($form.data('submitted') == true) {
-      e.preventDefault();
-    } else {
-      $form.data('submitted', true);
-    }
-  });
+  // prevent_double_submits();
+  prevent_empty_updates()
 
   $('body').on('click', '.flash', function(e) {
     e.preventDefault();
@@ -36,3 +30,29 @@ $(document).on('page:change', function () {
     $('.flash').remove();
   })
 });
+
+function prevent_double_submits() {
+  $('form').on('submit', function(e) {
+    var $form = $(this);
+    if ($form.data('submitted') == true) {
+      e.preventDefault();
+    } else {
+      $form.data('submitted', true);
+    }
+  });
+}
+
+function prevent_empty_updates() {
+  var submit = $('#new_update :submit');
+  submit.prop('disabled', true);
+
+  $('#update_message').keyup(function() {
+    var length = $('#update_message').val().length;
+    if(length > 0 && submit.prop('disabled') == true) {
+      submit.prop('disabled', false);
+    }
+    if(length == 0 && submit.prop('disabled') == false) {
+      submit.prop('disabled', true);
+    }
+  })
+}
