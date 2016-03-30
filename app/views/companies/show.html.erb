@@ -8,7 +8,7 @@
 
   <%= link_to "delete", @company, method: :delete, data: { confirm: "Are you sure?" } %>
 
-  <% unless @company == current_user.company %>
+  <% unless @company == current_company %>
     <%= link_to "select", select_company_path(@company), method: :post %>
   <% end %>
 

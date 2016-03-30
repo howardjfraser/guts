@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   before_action :hide_root, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.activated(current_user.company)
+    @users = User.activated(current_company)
     # TODO: sort by order added?
-    @invited = User.invited(current_user.company)
+    @invited = User.invited(current_company)
   end
 
   def show
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = current_company.users.build(user_params)
     @user.save ? create_success : create_fail
   end
 
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :role).merge(company: current_user.company)
+    params.require(:user).permit(:name, :email, :role)
   end
 
   def find_user
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def check_company
-    forbidden unless current_user.company == @user.company
+    forbidden unless current_company == @user.company
   end
 
   def create_success

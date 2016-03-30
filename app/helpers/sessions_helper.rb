@@ -15,6 +15,10 @@ module SessionsHelper
     Authentication.new(session, cookies).current_user
   end
 
+  def current_company
+    current_user.company
+  end
+
   def current_user?(user)
     user == current_user
   end

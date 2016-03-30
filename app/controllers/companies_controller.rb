@@ -23,7 +23,7 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
-    if @company == current_user.company
+    if @company == current_company
       redirect_to companies_url, notice: "Can’t delete currently selected company"
     else
       @company.destroy
@@ -47,6 +47,6 @@ class CompaniesController < ApplicationController
   end
 
   def check_company
-    forbidden unless @company == current_user.company || current_user.root?
+    forbidden unless @company == current_company || current_user.root?
   end
 end

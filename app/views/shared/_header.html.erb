@@ -10,12 +10,12 @@
 
       <% if current_user.root? %>
         <div class="text-muted pull-xs-right">
-          <%= link_to current_user.company.name, companies_path %>
+          <%= link_to current_company.name, companies_path %>
         </div>
       <% end %>
 
       <% if current_user.admin? %>
-        <%= link_to "Company", company_path(current_user.company) %>
+        <%= link_to "Company", company_path(current_company) %>
       <% end %>
 
       <%= link_to "Users", users_path %>
