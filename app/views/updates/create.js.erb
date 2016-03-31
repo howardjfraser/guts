@@ -1,3 +1,7 @@
 $('#<%= @update.user.id %>').replaceWith("<%= j render @update, user: @update.user %>");
 
 $('#update_message').val('').focus();
+
+var submit = $('#new_update :submit');
+submit.prop('disabled', true);
+
