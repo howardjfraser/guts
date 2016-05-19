@@ -19,7 +19,7 @@
 
     <% if logged_in? %>
       <div class="pull-xs-right">
-        <%= link_to "Log out", logout_path, method: "delete" %>
+        <%= link_to "Log out", session_path, method: "delete" %>
       </div>
     <% end %>
 

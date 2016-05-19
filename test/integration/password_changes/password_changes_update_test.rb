@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PasswordChangesUpdateTest < ActionDispatch::IntegrationTest
   test 'access' do
-    check_redirect(login_url) { patch password_change_path(@brent.id) }
+    check_redirect(new_session_url) { patch password_change_path(@brent.id) }
 
     @gareth.create_reset_digest
     check_redirect(user_path(@gareth), @gareth) do

@@ -2,8 +2,8 @@ require 'test_helper'
 
 class UsersEditUpdateTest < ActionDispatch::IntegrationTest
   test 'access' do
-    check_redirect(login_url) { get edit_user_path @brent }
-    check_redirect(login_url) { patch user_path, id: @brent, user: { name: 'new' } }
+    check_redirect(new_session_url) { get edit_user_path @brent }
+    check_redirect(new_session_url) { patch user_path, id: @brent, user: { name: 'new' } }
 
     check_access(:forbidden, @gareth) { get edit_user_path @gareth }
     check_access(:forbidden, @gareth) { patch user_path @brent, user: { name: 'new' } }

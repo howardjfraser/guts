@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersShowTest < ActionDispatch::IntegrationTest
   test 'access' do
-    check_redirect(login_url) { get user_path @brent }
+    check_redirect(new_session_url) { get user_path @brent }
     check_access(:success, @gareth, @brent, @howard) { get user_path @brent }
   end
 

@@ -7,8 +7,8 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
   end
 
   test 'access' do
-    check_redirect(login_url) { get new_user_path }
-    check_redirect(login_url) { post users_path, user: { name: 'name', email: 'new@company.com' } }
+    check_redirect(new_session_url) { get new_user_path }
+    check_redirect(new_session_url) { post users_path, user: { name: 'name', email: 'new@company.com' } }
 
     check_access(:forbidden, @gareth) { get new_user_path }
     check_access(:forbidden, @gareth) { post users_path, user: { name: 'name', email: 'new@company.com' } }

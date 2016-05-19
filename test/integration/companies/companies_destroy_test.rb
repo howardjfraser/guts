@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CompaniesDestroyTest < ActionDispatch::IntegrationTest
   test 'access' do
-    check_redirect(login_url) { delete company_path @gareth.company }
+    check_redirect(new_session_url) { delete company_path @gareth.company }
     check_access(:forbidden, @gareth) { delete company_path @gareth.company }
     check_access(:forbidden, @brent) { delete company_path @brent.company }
     check_access(:forbidden, @brent) { delete company_path @michael.company }

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UpdatesIndexTest < ActionDispatch::IntegrationTest
   test 'access' do
-    check_redirect(login_url) { get updates_path }
+    check_redirect(new_session_url) { get updates_path }
     check_access(:success, @gareth, @brent, @howard) { get updates_path }
   end
 

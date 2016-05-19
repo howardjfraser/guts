@@ -6,8 +6,8 @@ class SessionsDestroyTest < ActionDispatch::IntegrationTest
   end
 
   test 'logout' do
-    post login_path, session: { email: 'david@office.com', password: 'password' }
-    delete logout_path
+    post session_path, session: { email: 'david@office.com', password: 'password' }
+    delete session_path
     assert_redirected_to root_url
     refute user_logged_in?
   end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CompaniesEditUpdateTest < ActionDispatch::IntegrationTest
   test 'edit access' do
-    check_redirect(login_url) { get edit_company_path @brent.company }
+    check_redirect(new_session_url) { get edit_company_path @brent.company }
     check_access(:forbidden, @gareth) { get edit_company_path @gareth.company }
     check_access(:success, @brent) { get edit_company_path @brent.company }
     check_access(:forbidden, @brent) { get edit_company_path @michael.company }
@@ -11,7 +11,7 @@ class CompaniesEditUpdateTest < ActionDispatch::IntegrationTest
   end
 
   test 'update access' do
-    check_redirect(login_url) { patch company_path @brent.company, company: { name: 'new name' } }
+    check_redirect(new_session_url) { patch company_path @brent.company, company: { name: 'new name' } }
     check_access(:forbidden, @gareth) { patch company_path @gareth.company, company: { name: 'new name' } }
 
     check_redirect(company_path(@brent.company), @brent) do

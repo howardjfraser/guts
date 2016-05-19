@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
-    return redirect_to login_url, notice: 'Invalid email / password' unless @user
+    return redirect_to new_session_url, notice: 'Invalid email / password' unless @user
     return redirect_to root_url, notice: 'Account not activated.' unless @user.activated?
-    return redirect_to login_url, notice: 'Invalid email / password' unless authenticate?
+    return redirect_to new_session_url, notice: 'Invalid email / password' unless authenticate?
     log_user_in
   end
 

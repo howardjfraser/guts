@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
   root 'updates#index'
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
-
   resources :signups, only: [:index, :new, :create]
+  resource :session, only: [:new, :create, :destroy]
 
   resources :companies, except: [:new, :create] do
     member do
+      # TODO: use resources?
       post 'select' => 'companies#select'
     end
   end
@@ -19,6 +17,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :password_changes, only: [:edit, :update]
 
+  # TODO: use resources?
   post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
 
   resources :updates, only: [:index, :create]

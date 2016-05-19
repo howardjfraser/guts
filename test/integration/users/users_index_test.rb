@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersIndexTest < ActionDispatch::IntegrationTest
   test 'access' do
-    check_redirect(login_url) { get users_path }
+    check_redirect(new_session_url) { get users_path }
   end
 
   test 'user list does not include other companies' do

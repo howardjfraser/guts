@@ -7,7 +7,7 @@ class UsersDestroyTest < ActionDispatch::IntegrationTest
   end
 
   test 'access' do
-    check_redirect(login_url) { delete user_path @brent }
+    check_redirect(new_session_url) { delete user_path @brent }
     check_access(:forbidden, @gareth) { delete user_path @gareth }
     check_redirect(users_path, @brent) { delete user_path @gareth }
   end
