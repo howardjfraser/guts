@@ -2,16 +2,12 @@ Rails.application.routes.draw do
   root 'updates#index'
 
   resources :signups, only: [:index, :new, :create]
-  resource :session, only: [:new, :create, :destroy]
+  resource  :session, only: [:new, :create, :destroy]
 
-  resources :companies, except: [:new, :create] do
-    member do
-      # TODO: use resources?
-      post 'select' => 'companies#select'
-    end
-  end
+  resources :companies, except: [:new, :create]
 
   resources :users
+  resources :root_users, only: [:update]
 
   resources :activations, only: [:edit, :update]
   resources :password_resets, only: [:new, :create, :edit, :update]

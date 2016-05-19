@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
-  before_action :find_company, only: [:show, :edit, :update, :destroy, :select]
-  before_action :require_root, only: [:index, :destroy, :select]
+  before_action :find_company, only: [:show, :edit, :update, :destroy]
+  before_action :require_root, only: [:index, :destroy]
   before_action :require_admin, only: [:edit, :update]
   before_action :check_company, only: [:show, :edit, :update]
 
@@ -29,11 +29,6 @@ class CompaniesController < ApplicationController
       @company.destroy
       redirect_to companies_url, notice: "#{@company.name} deleted"
     end
-  end
-
-  def select
-    current_user.update_attribute(:company, @company)
-    redirect_to users_url, notice: "Company changed to #{@company.name}"
   end
 
   private

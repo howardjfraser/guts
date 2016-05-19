@@ -9,8 +9,7 @@
   <%= link_to "delete", @company, method: :delete, data: { confirm: "Are you sure?" } %>
 
   <% unless @company == current_company %>
-    <%= link_to "select", select_company_path(@company), method: :post %>
+    <%= link_to "select", root_user_path(@company), method: :patch %>
   <% end %>
 
 <% end %>
-

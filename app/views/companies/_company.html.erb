@@ -5,7 +5,7 @@
       <%= company.name %>
     </span>
   <% else %>
-    <%= link_to company.name, select_company_path(company), method: :post %>
+    <%= link_to company.name, root_user_path(company), method: :patch %>
     <small>
       <%= link_to 'delete', company, method: :delete, data: { confirm: 'Are you sure?' } %>
     </small>
