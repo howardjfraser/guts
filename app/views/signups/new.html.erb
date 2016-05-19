@@ -1,6 +1,6 @@
 <%= provide :title, "Sign up" %>
 
-<%= form_for(@company, url: signups_path) do |f| %>
+<%= form_for(@company, url: signup_path) do |f| %>
 
   <%= f.fields_for :users do |e| %>
 

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'updates#index'
 
-  resources :signups, only: [:new, :create]
-  resource  :session, only: [:new, :create, :destroy]
+  resource :signup, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
 
   resources :companies, except: [:new, :create]
 
@@ -18,5 +18,5 @@ Rails.application.routes.draw do
 
   resources :updates, only: [:index, :create]
 
-  get 'signups', to: redirect('/signups/new')
+  get 'signup', to: redirect('/signup/new')
 end
