@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'updates#index'
 
-  resources :signups, only: [:index, :new, :create]
+  resources :signups, only: [:new, :create]
   resource  :session, only: [:new, :create, :destroy]
 
   resources :companies, except: [:new, :create]
@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
 
   resources :updates, only: [:index, :create]
+
+  get 'signups', to: redirect('/signups/new')
 end
