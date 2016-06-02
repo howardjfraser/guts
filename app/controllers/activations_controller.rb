@@ -28,7 +28,7 @@ class ActivationsController < ApplicationController
   end
 
   def check_user
-    redirect_to root_url, notice: 'Invalid activation' unless
+    redirect_to root_url, notice: 'Invalid activation code' unless
       @user && !@user.active? && @user.authenticated?(:activation, params[:id])
   end
 

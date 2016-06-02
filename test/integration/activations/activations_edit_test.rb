@@ -16,7 +16,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)
 
-    check_not_activated user
+    check_not_active user
     check_no_login_before_activation user
     check_invalid_token user
     check_wrong_email user
@@ -25,7 +25,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
 
   private
 
-  def check_not_activated(user)
+  def check_not_active(user)
     assert_not user.active?
   end
 

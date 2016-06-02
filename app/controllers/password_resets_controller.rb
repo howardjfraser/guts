@@ -44,7 +44,7 @@ class PasswordResetsController < ApplicationController
     if @user.nil? || @user.root?
       redirect_to(new_password_reset_url, notice: 'Email not found') && return
     end
-    redirect_to new_password_reset_url, notice: 'User not activated' unless @user.active?
+    redirect_to new_password_reset_url, notice: 'Account not active' unless @user.active?
   end
 
   def check_token
