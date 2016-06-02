@@ -58,17 +58,10 @@ class UsersController < ApplicationController
   end
 
   def create_success
-    invite
+    @user.invite
     respond_to do |format|
       format.html { redirect_to users_url, notice: "#{@user.name} has been invited" }
       format.js
-    end
-  end
-
-  def invite
-    if @user.send_invitation == '1'
-      UserMailer.activation(@user).deliver_now
-      @user.update_attribute(:status, 'invited')
     end
   end
 

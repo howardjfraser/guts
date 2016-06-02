@@ -108,6 +108,12 @@ class User < ActiveRecord::Base
     ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
   end
 
+  def invite
+    return if send_invitation == '0'
+    UserMailer.invite(self).deliver_now
+    update_attribute(:status, 'invited')
+  end
+
   private
 
   def create_activation_digest

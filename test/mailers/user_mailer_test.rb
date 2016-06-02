@@ -4,7 +4,7 @@ class UserMailerTest < ActionMailer::TestCase
   test 'activation' do
     @brent = users(:brent)
     @brent.activation_token = 'token'
-    mail = UserMailer.activation(@brent)
+    mail = UserMailer.invite(@brent)
     assert_equal 'Account activation', mail.subject
     assert_equal [@brent.email], mail.to
     assert_equal ['noreply@example.com'], mail.from
