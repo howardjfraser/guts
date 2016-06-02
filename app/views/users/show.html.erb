@@ -25,7 +25,7 @@
 <% end %>
 
 <% if current_user.admin? && !@user.active? %>
-  <%= link_to "send invitation #{' again' if @user.invited?}", resend_invitation_path(@user), method: :post %>
+  <%= link_to "send invitation #{' again' if @user.invited?}", user_invitation_path(@user), method: :post %>
 <% end %>
 
 <% if current_user? @user %>

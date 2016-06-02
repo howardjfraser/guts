@@ -35,13 +35,13 @@
           <div class="text-xs-right">
             <%= f.submit 'Send Invitation', class: 'btn btn-primary ajax-submit' %>
           </div>
+          <hr class="m-y-2 hidden-sm-down">
         <% end %>
       <% end %>
 
     </div>
 
     <div id="invited" class="m-b-1 <%= @invited.empty? ? 'invisible' : '' %>">
-      <hr class="m-y-2 hidden-sm-down">
       <h6 class="">Invited, waiting for reply</h6>
       <%= render partial: @invited %>
     </div>

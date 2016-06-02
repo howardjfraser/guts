@@ -7,14 +7,14 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :show, :edit, :update, :destroy]
   resources :updates, only: [:index, :create]
-  resources :users
+
+  resources :users do
+    resource :invitation, only: [:create]
+  end
 
   # group under users?
   resources :activations, only: [:edit, :update]
   resources :password_changes, only: [:edit, :update]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :root_users, only: [:update]
-
-  # TODO: use resources?
-  post 'invitations/resend/:id' => 'invitations#resend', as: 'resend_invitation'
 end

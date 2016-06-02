@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
   before_action :find_user, :require_admin
 
-  def resend
+  def create
     @user.invite
     redirect_to users_url, notice: "#{@user.name} has been invited"
   end
@@ -9,6 +9,6 @@ class InvitationsController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 end
