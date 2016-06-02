@@ -15,8 +15,7 @@ company_sizes.each do |size|
     name  = Faker::Name.name
     email = Faker::Internet.safe_email(name)
     password = 'password'
-    puts User.create!(name: name, email: email, company: company, password: password, activated: true,
-                      activated_at: Time.zone.now, role: 'user')
+    puts User.create!(name: name, email: email, company: company, password: password, activated: true, role: 'user')
   end
 end
 
@@ -45,6 +44,6 @@ users = { name: 'Howard', email: 'howardjfraser@gmail.com', role: 'root' },
         { name: 'Tim Canterbury', email: 'tim@office.com', role: 'user' }
 
 users.each do |u|
-  user = User.new(u.merge(company: Company.first, password: 'password', activated: true, activated_at: Time.zone.now))
+  user = User.new(u.merge(company: Company.first, password: 'password', activated: true))
   user.save(validate: false)
 end

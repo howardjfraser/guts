@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def activate
-    update_columns(activated: true, activated_at: Time.zone.now)
+    update_attribute(:activated, true)
   end
 
   def create_reset_digest

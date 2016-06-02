@@ -4,7 +4,6 @@ howard:
   password_digest: <%= User.digest('password') %>
   role: root
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
 brent:
@@ -13,7 +12,6 @@ brent:
   password_digest: <%= User.digest('password') %>
   role: admin
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
 gareth:
@@ -22,7 +20,6 @@ gareth:
   password_digest: <%= User.digest('password') %>
   role: user
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
 tim:
@@ -31,7 +28,6 @@ tim:
   password_digest: <%= User.digest('password') %>
   role: user
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
 dawn:
@@ -40,7 +36,6 @@ dawn:
   password_digest: <%= User.digest('password') %>
   role: user
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
 keith:
@@ -49,7 +44,6 @@ keith:
   password_digest: <%= User.digest('password') %>
   role: user
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :wernham_hogg
 
 ricky:
@@ -64,7 +58,6 @@ michael:
   password_digest: <%= User.digest('password') %>
   role: user
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :dunder_mifflin
 
 root:
@@ -73,5 +66,4 @@ root:
   password_digest: <%= User.digest('password') %>
   role: root
   activated: true
-  activated_at: <%= Time.zone.now %>
   company: :dunder_mifflin
