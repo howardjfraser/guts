@@ -31,9 +31,20 @@
     </div>
   </div>
 
+  <div class="row m-b-1">
+    <div class="std-checkbox-label text-sm-right">
+      <%= f.label :send_invitation do %>
+        <span>Send email invitation straight away</span>
+      <% end %>
+    </div>
+    <div class="std-checkbox text-xs-right">
+      <%= f.check_box :send_invitation, checked: true %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="std-submit text-xs-right">
-      <%= f.submit "#{@user.new_record? ? 'Invite User' : 'Update'}", class: "btn btn-primary m-y-2" %>
+      <%= f.submit "#{@user.new_record? ? 'Add User' : 'Update'}", class: "btn btn-primary m-y-2" %>
     </div>
   </div>
 

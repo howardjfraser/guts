@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  Activated - <%= @user.activated? %>
+  Status - <%= @user.status %>
 </p>
 
 <p>
@@ -24,8 +24,8 @@
   <%= link_to "delete", @user, method: :delete, data: { confirm: "Are you sure you want to delete #{@user.name}?" } %>
 <% end %>
 
-<% if current_user.admin? %>
-  <%= link_to "resend", resend_invitation_path(@user), method: :post if !@user.activated? %>
+<% if current_user.admin? && !@user.active? %>
+  <%= link_to "send invitation #{' again' if @user.invited?}", resend_invitation_path(@user), method: :post %>
 <% end %>
 
 <% if current_user? @user %>

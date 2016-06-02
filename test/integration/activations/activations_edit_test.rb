@@ -10,8 +10,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     log_in_as(@brent)
 
     assert_difference 'User.count', 1 do
-      post users_path, user:
-        { name:  'Example User', email: 'user@example.com' }
+      post users_path, user: { name:  'Example User', email: 'user@example.com', send_invitation: '1' }
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size
@@ -27,7 +26,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
   private
 
   def check_not_activated(user)
-    assert_not user.activated?
+    assert_not user.active?
   end
 
   def check_no_login_before_activation(user)

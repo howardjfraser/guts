@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :send_invitation
 
   before_save :downcase_email
   before_create :create_activation_digest
@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   ROLES = %w(user admin root).freeze
   validates :role, inclusion: ROLES[0...-1]
 
+  STATUSES = %w(new invited active).freeze
+  validates :status, inclusion: STATUSES
+
   validates_with LastAdminValidator
 
   def last_admin?
@@ -32,8 +35,9 @@ class User < ActiveRecord::Base
   scope :sorted, -> { order('lower(name)') }
   scope :exclude_root, -> { sorted.where.not(role: 'root') }
   scope :company, ->(company) { exclude_root.where('company_id = ?', company) }
-  scope :activated, -> (company) { company(company).where(activated: true) }
-  scope :invited, -> (company) { company(company).where(activated: false) }
+  scope :new_users, -> (company) { company(company).where(status: 'new') }
+  scope :invited, -> (company) { company(company).where(status: 'invited') }
+  scope :active, -> (company) { company(company).where(status: 'active') }
 
   def admin?
     role == 'admin' || role == 'root'
@@ -53,7 +57,19 @@ class User < ActiveRecord::Base
   end
 
   def activate
-    update_attribute(:activated, true)
+    update_attribute(:status, 'active')
+  end
+
+  def new?
+    status == 'new'
+  end
+
+  def invited?
+    status == 'invited'
+  end
+
+  def active?
+    status == 'active'
   end
 
   def create_reset_digest

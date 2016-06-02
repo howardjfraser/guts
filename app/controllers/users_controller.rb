@@ -5,9 +5,10 @@ class UsersController < ApplicationController
   before_action :hide_root, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.activated(current_company)
+    @users = User.active(current_company)
     # TODO: sort by order added?
     @invited = User.invited(current_company)
+    @new = User.new_users(current_company)
   end
 
   def show
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :role)
+    params.require(:user).permit(:name, :email, :role, :send_invitation)
   end
 
   def find_user
@@ -57,10 +58,17 @@ class UsersController < ApplicationController
   end
 
   def create_success
-    UserMailer.activation(@user).deliver_now
+    invite
     respond_to do |format|
       format.html { redirect_to users_url, notice: "#{@user.name} has been invited" }
       format.js
+    end
+  end
+
+  def invite
+    if @user.send_invitation == '1'
+      UserMailer.activation(@user).deliver_now
+      @user.update_attribute(:status, 'invited')
     end
   end
 

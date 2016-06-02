@@ -9,7 +9,7 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
   test 'successful account activation' do
     create_new_user
     patch_via_redirect activation_path(@user.activation_token), email: @user.email, user: { password: 'new password' }
-    assert @user.reload.activated?
+    assert @user.reload.active?
     assert_template 'users/show'
     assert logged_in_as? @user
     assert_not @user.admin?

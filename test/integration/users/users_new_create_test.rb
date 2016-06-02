@@ -36,7 +36,7 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
     log_in_as @brent
 
     assert_difference 'User.count', 1 do
-      post users_path, user: { name:  'Example User', email: 'user@example.com' }
+      post users_path, user: { name:  'Example User', email: 'user@example.com', send_invitation: '1' }
     end
 
     assert_equal 1, ActionMailer::Base.deliveries.size
@@ -44,8 +44,22 @@ class UsersNewCreateTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_template 'users/index'
-    assert_not flash.empty?
-    assert_not user.activated?
+    assert user.invited?
+  end
+
+  test 'valid new user no invite' do
+    log_in_as @brent
+
+    assert_difference 'User.count', 1 do
+      post users_path, user: { name:  'Example User', email: 'user@example.com', send_invitation: '0' }
+    end
+
+    assert_equal 0, ActionMailer::Base.deliveries.size
+    user = assigns(:user)
+
+    follow_redirect!
+    assert_template 'users/index'
+    assert user.new?
   end
 
   test 'ajax invalid user' do

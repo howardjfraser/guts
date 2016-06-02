@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602014437) do
+ActiveRecord::Schema.define(version: 20160602033601) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -36,11 +36,11 @@ ActiveRecord::Schema.define(version: 20160602014437) do
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "activation_digest"
-    t.boolean  "activated",         default: false
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.integer  "company_id"
     t.string   "role",              default: "user"
+    t.string   "status",            default: "new"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"

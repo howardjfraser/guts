@@ -18,7 +18,7 @@ class InvitationsResendTest < ActionDispatch::IntegrationTest
     post resend_invitation_path(@ricky)
     @ricky = assigns[:user] # in order to get the token
     patch activation_path(@ricky.activation_token), email: @ricky.email, user: { password: 'password' }
-    assert @ricky.reload.activated?
+    assert @ricky.reload.active?
   end
 
   test 'activation digest changes' do

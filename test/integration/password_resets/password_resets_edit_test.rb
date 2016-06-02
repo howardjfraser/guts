@@ -23,10 +23,9 @@ class PasswordResetsEditTest < ActionDispatch::IntegrationTest
   end
 
   test 'inactive user' do
-    @keith.toggle!(:activated)
+    @keith.update_attribute(:status, 'new')
     get edit_password_reset_path(@keith.reset_token, email: @keith.email)
     assert_redirected_to new_password_reset_url
-    @keith.toggle!(:activated)
   end
 
   # TODO: root user

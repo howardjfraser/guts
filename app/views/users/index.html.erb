@@ -28,9 +28,10 @@
     <div class="hidden-sm-down">
       <% if current_user.admin? %>
         <%= form_for User.new, remote: true, authenticity_token: true do |f| %>
-          <h4 class="m-b-1">Invite new user</h4>
+          <h4 class="m-b-1">Quick invite</h4>
           <%= f.text_field :name, autofocus: true, placeholder: 'Name', class: 'form-group' %>
           <%= f.text_field :email, placeholder: 'Email', class: 'form-group' %>
+          <%= f.hidden_field :send_invitation, value: "1" %>
           <div class="text-xs-right">
             <%= f.submit 'Send Invitation', class: 'btn btn-primary ajax-submit' %>
           </div>
@@ -43,6 +44,12 @@
       <hr class="m-y-2 hidden-sm-down">
       <h6 class="">Invited, waiting for reply</h6>
       <%= render partial: @invited %>
+    </div>
+
+    <div id="added" class="m-b-1 <%= @new.empty? ? 'invisible' : '' %>">
+      <hr class="m-y-2 hidden-sm-down">
+      <h6 class="">Set up, waiting for invite</h6>
+      <%= render partial: @new %>
     </div>
 
   </div>

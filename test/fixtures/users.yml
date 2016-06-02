@@ -3,7 +3,7 @@ howard:
   email: howardjfraser@gmail.com
   password_digest: <%= User.digest('password') %>
   role: root
-  activated: true
+  status: 'active'
   company: :wernham_hogg
 
 brent:
@@ -11,7 +11,7 @@ brent:
   email: david@office.com
   password_digest: <%= User.digest('password') %>
   role: admin
-  activated: true
+  status: 'active'
   company: :wernham_hogg
 
 gareth:
@@ -19,7 +19,7 @@ gareth:
   email: gareth@office.com
   password_digest: <%= User.digest('password') %>
   role: user
-  activated: true
+  status: 'active'
   company: :wernham_hogg
 
 tim:
@@ -27,7 +27,7 @@ tim:
   email: tim@office.com
   password_digest: <%= User.digest('password') %>
   role: user
-  activated: true
+  status: 'active'
   company: :wernham_hogg
 
 dawn:
@@ -35,7 +35,7 @@ dawn:
   email: dawn@office.com
   password_digest: <%= User.digest('password') %>
   role: user
-  activated: true
+  status: 'active'
   company: :wernham_hogg
 
 keith:
@@ -43,13 +43,14 @@ keith:
   email: keith@office.com
   password_digest: <%= User.digest('password') %>
   role: user
-  activated: true
+  status: 'active'
   company: :wernham_hogg
 
 ricky:
   name: Ricky
   email: ricky@office.com
   role: user
+  status: 'new'
   company: :wernham_hogg
 
 michael:
@@ -57,7 +58,7 @@ michael:
   email: michael@dm.com
   password_digest: <%= User.digest('password') %>
   role: user
-  activated: true
+  status: 'active'
   company: :dunder_mifflin
 
 root:
@@ -65,5 +66,5 @@ root:
   email: root@example.com
   password_digest: <%= User.digest('password') %>
   role: root
-  activated: true
+  status: 'active'
   company: :dunder_mifflin

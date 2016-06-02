@@ -44,7 +44,7 @@ class SignupsNewCreateTest < ActionDispatch::IntegrationTest
     assert company.users.count == 1
     owner = company.users.first
     assert owner.admin?
-    assert owner.activated?
+    assert owner.active?
     assert logged_in_as? owner
   end
 
