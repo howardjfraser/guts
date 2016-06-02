@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token, :send_invitation
 
   before_save :downcase_email
-  before_create :create_activation_digest
 
   has_secure_password validations: false
   belongs_to :company, inverse_of: :users
@@ -77,11 +76,6 @@ class User < ActiveRecord::Base
     update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
-  def renew_activation_digest
-    create_activation_digest
-    update_attribute(:activation_digest, activation_digest)
-  end
-
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
@@ -110,8 +104,8 @@ class User < ActiveRecord::Base
 
   def invite
     return if send_invitation == '0'
+    update_attributes(activation_digest: create_activation_digest, status: 'invited')
     UserMailer.invite(self).deliver_now
-    update_attribute(:status, 'invited')
   end
 
   private

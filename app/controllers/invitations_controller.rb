@@ -2,9 +2,8 @@ class InvitationsController < ApplicationController
   before_action :find_user, :require_admin
 
   def resend
-    @user.renew_activation_digest
-    UserMailer.invite(@user).deliver_now
-    redirect_to users_url, notice: "Invitation for #{@user.name} has been resent "
+    @user.invite
+    redirect_to users_url, notice: "#{@user.name} has been invited"
   end
 
   private
