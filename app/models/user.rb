@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
   end
 
   def remember
-    self.remember_token = Authentication.new_token
-    update_attribute(:remember_digest, Authentication.digest(remember_token))
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
 
   def forget
@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
   end
 
   def create_reset_digest
-    self.reset_token = Authentication.new_token
-    update_columns(reset_digest: Authentication.digest(reset_token), reset_sent_at: Time.zone.now)
+    self.reset_token = User.new_token
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
   def renew_activation_digest
@@ -74,11 +74,29 @@ class User < ActiveRecord::Base
     "User: #{name} / #{email}"
   end
 
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def self.digest(string)
+    BCrypt::Password.create(string, cost: User.cost)
+  end
+
+  def self.cost
+    ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+  end
+
   private
 
   def create_activation_digest
-    self.activation_token  = Authentication.new_token
-    self.activation_digest = Authentication.digest(activation_token)
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 
   def downcase_email

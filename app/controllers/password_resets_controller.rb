@@ -52,7 +52,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def authenticated?
-    Authentication.authenticated?(@user, :reset, params[:id])
+    @user.authenticated?(:reset, params[:id])
   end
 
   def check_expiry

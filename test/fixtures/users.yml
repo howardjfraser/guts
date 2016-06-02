@@ -1,7 +1,7 @@
 howard:
   name: Howard Fraser
   email: howardjfraser@gmail.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: root
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -10,7 +10,7 @@ howard:
 brent:
   name: David Brent
   email: david@office.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: admin
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -19,7 +19,7 @@ brent:
 gareth:
   name: Gareth Keenan
   email: gareth@office.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -28,7 +28,7 @@ gareth:
 tim:
   name: Tim Canterbury
   email: tim@office.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -37,7 +37,7 @@ tim:
 dawn:
   name: Dawn Tinsley
   email: dawn@office.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -46,7 +46,7 @@ dawn:
 keith:
   name: Big Keith
   email: keith@office.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -61,7 +61,7 @@ ricky:
 michael:
   name: Michael Scott
   email: michael@dm.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: user
   activated: true
   activated_at: <%= Time.zone.now %>
@@ -70,7 +70,7 @@ michael:
 root:
   name: root
   email: root@example.com
-  password_digest: <%= Authentication.digest('password') %>
+  password_digest: <%= User.digest('password') %>
   role: root
   activated: true
   activated_at: <%= Time.zone.now %>

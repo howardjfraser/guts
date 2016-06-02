@@ -12,7 +12,7 @@ class SessionsHelperTest < ActionView::TestCase
   end
 
   test 'current_user returns nil when remember digest is wrong' do
-    @brent.update_attribute(:remember_digest, Authentication.digest('wrong token'))
+    @brent.update_attribute(:remember_digest, User.digest('wrong token'))
     assert_nil current_user
   end
 end
