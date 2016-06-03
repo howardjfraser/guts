@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   resources :users do
     resource :invitation, only: [:create]
     resource :activation, only: [:new, :create]
+    resource :password_change, only: [:new, :create]
   end
 
   # group under users?
-  resources :password_changes, only: [:edit, :update]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :root_users, only: [:update]

@@ -29,5 +29,5 @@
 <% end %>
 
 <% if current_user? @user %>
-  <%= link_to "change password", edit_password_change_path(@user) %>
+  <%= link_to "change password", new_user_password_change_path(@user) %>
 <% end %>

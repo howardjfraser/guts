@@ -1,6 +1,6 @@
 <% provide(:title, 'Change password') %>
 
-<%= form_for(@user, url: password_change_path(@user)) do |f| %>
+<%= form_for(@user, url: user_password_change_path(@user)) do |f| %>
 
   <div class="row m-b-1 <%= error_class @user, :password %>">
     <div class="std-label text-sm-right">

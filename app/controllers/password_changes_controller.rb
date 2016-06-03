@@ -2,20 +2,20 @@ class PasswordChangesController < ApplicationController
   before_action :find_user
   before_action :check_user
   before_action :hide_root
-  before_action :check_expiration, only: :update
+  before_action :check_expiration, only: :create
 
-  def edit
+  def new
     @user.create_reset_digest
   end
 
-  def update
+  def create
     if params[:user][:password].empty?
       @user.errors.add(:password, "can't be empty")
-      render 'edit'
+      render 'new'
     elsif @user.update_attributes(user_params)
       redirect_to @user, notice: 'Password has been changed'
     else
-      render 'edit'
+      render 'new'
     end
   end
 
@@ -26,7 +26,7 @@ class PasswordChangesController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def check_expiration
