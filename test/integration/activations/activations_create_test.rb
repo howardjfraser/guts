@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActivationsUpdateTest < ActionDispatch::IntegrationTest
+class ActivationsCreateTest < ActionDispatch::IntegrationTest
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -8,7 +8,7 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
 
   test 'successful account activation' do
     create_new_user
-    patch_via_redirect activation_path(@user.activation_token), email: @user.email, user: { password: 'new password' }
+    post_via_redirect user_activation_path(@user, token: @user.activation_token, user: { password: 'new password' })
     assert @user.reload.active?
     assert_template 'users/show'
     assert logged_in_as? @user
@@ -17,22 +17,22 @@ class ActivationsUpdateTest < ActionDispatch::IntegrationTest
 
   test 'invalid account activation - bad token' do
     create_new_user
-    patch activation_path('bad token'), email: @user.email, user: { password: 'new password' }
+    post user_activation_path(@user, token: 'bad token', user: { password: 'new password' })
     assert_redirected_to root_url
   end
 
   test 'invalid account activation - invalid pw' do
     create_new_user
-    patch activation_path(@user.activation_token), email: @user.email, user: { password: 'zz' }
+    post user_activation_path(@user, token: @user.activation_token, user: { password: 'zz' })
     assert_errors_present
-    assert_template 'activations/edit'
+    assert_template 'activations/new'
   end
 
   test 'invalid account activation - empty pw' do
     create_new_user
-    patch activation_path(@user.activation_token), email: @user.email, user: { password: '' }
+    post user_activation_path(@user, token: @user.activation_token, user: { password: '' })
     assert_errors_present
-    assert_template 'activations/edit'
+    assert_template 'activations/new'
   end
 
   private

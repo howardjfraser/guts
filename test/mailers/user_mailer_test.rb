@@ -10,7 +10,6 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@example.com'], mail.from
     assert_match @brent.name, mail.body.encoded
     assert_match @brent.activation_token, mail.body.encoded
-    assert_match CGI.escape(@brent.email), mail.body.encoded
   end
 
   test 'password_reset' do
@@ -22,6 +21,5 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@example.com'], mail.from
     assert_match @brent.name, mail.body.encoded
     assert_match @brent.reset_token, mail.body.encoded
-    assert_match CGI.escape(@brent.email), mail.body.encoded
   end
 end

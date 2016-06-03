@@ -14,9 +14,9 @@ class InvitationsCreateTest < ActionDispatch::IntegrationTest
   end
 
   test 'activation digest is set' do
-    assert @ricky.activation_digest == nil
+    assert @ricky.activation_digest.nil?
     log_in_as @brent
     post_via_redirect user_invitation_path(@ricky)
-    assert @ricky.reload.activation_digest != nil
+    assert !@ricky.reload.activation_digest.nil?
   end
 end

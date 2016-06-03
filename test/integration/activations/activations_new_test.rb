@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActivationsEditTest < ActionDispatch::IntegrationTest
+class ActivationsNewTest < ActionDispatch::IntegrationTest
   def setup
     super
     ActionMailer::Base.deliveries.clear
@@ -19,7 +19,7 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
     check_not_active user
     check_no_login_before_activation user
     check_invalid_token user
-    check_wrong_email user
+    # check_wrong_email user
     check_valid_credentials user
   end
 
@@ -35,17 +35,17 @@ class ActivationsEditTest < ActionDispatch::IntegrationTest
   end
 
   def check_invalid_token(user)
-    get edit_activation_path('invalid token', email: user.email)
+    get new_user_activation_path(user, token: 'invalid token')
     assert_not logged_in_as? user
   end
 
-  def check_wrong_email(user)
-    get edit_activation_path(user.activation_token, email: 'wrong')
-    assert_not logged_in_as? user
-  end
+  # def check_wrong_email(user)
+  #   get new_user_activation_path(user, token.activation_token, email: 'wrong')
+  #   assert_not logged_in_as? user
+  # end
 
   def check_valid_credentials(user)
-    get edit_activation_path(user.activation_token, email: user.email)
-    assert_template 'activations/edit'
+    get new_user_activation_path(user, token: user.activation_token)
+    assert_template 'activations/new'
   end
 end

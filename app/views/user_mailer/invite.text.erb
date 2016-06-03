@@ -4,4 +4,4 @@ Welcome to Guts.
 
 Click on the link below to activate your account:
 
-<%= edit_activation_url(@user.activation_token, email: @user.email) %>
+<%= new_user_activation_url(@user, toke: @user.activation_token) %>
