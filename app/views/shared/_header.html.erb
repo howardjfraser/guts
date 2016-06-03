@@ -1,6 +1,6 @@
-<header id="nav">
+<header id="nav" class="bg-success">
 
-  <div id="nav-container" class="container p-t-1">
+  <div id="nav-container" class="container p-y-2">
 
     <% if flash[:notice] %>
       <%= render partial: 'shared/flash', locals: { msg: flash[:notice] } %>
@@ -28,17 +28,12 @@
 
     <% else %>
 
-      <div class="pull-xs-right">
-        <%= link_to "Sign up", new_signup_path %>
-      </div>
-
-      <div>
-        <%= link_to "Log in", new_session_path %>
-      </div>
+    <div class="pull-xs-right">
+      <%= link_to "Sign up", new_signup_path %>
+      <%= link_to "Log in", new_session_path %>
+    </div>
 
     <% end %>
-
-    <hr>
 
   </div>
 

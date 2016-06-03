@@ -126,7 +126,7 @@ select {
   position: relative;
   top: 50px;
   margin-top: -54px;
-  transform: rotate(-0.67deg);
+  // transform: rotate(-0.67deg);
   cursor: pointer;
 }
 
@@ -134,6 +134,20 @@ header#nav {
   a:not(:last-child) {
     padding-right: 1em;
   }
+}
+
+footer,
+header {
+  a {
+    color: #fff;
+  }
+  a:hover {
+    color: darken(#eee, 2%)
+  }
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 /* Sticky footer
