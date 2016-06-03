@@ -1,3 +1,4 @@
-<% provide(:title, "Edit #{@user.name}") %>
+<% provide :subtitle, 'Edit' %>
+<% provide :title, "#{@user.name}" %>
 
 <%= render 'form' %>

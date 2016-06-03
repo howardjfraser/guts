@@ -21,7 +21,12 @@
           <%= yield :toolbar %>
         </div>
 
-        <h1><%= yield :title %></h1>
+        <h1>
+          <span class="text-muted">
+            <%= yield :subtitle %>
+          </span>
+          <%= yield :title %>
+        </h1>
         <hr class="m-b-2">
 
         <%= yield %>

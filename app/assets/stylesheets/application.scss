@@ -17,6 +17,7 @@
 label {
   @extend .text-muted;
   margin-bottom: 2px;
+  font-weight: 500;
 }
 
 input[type="text"],
@@ -139,6 +140,7 @@ header#nav {
 footer,
 header {
   a {
+    letter-spacing: 0.033em;
     color: #fff;
   }
   a:hover {
