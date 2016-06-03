@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :root_users, only: [:update]
-  resources :companies, only: [:index, :show, :edit, :update, :destroy]
 
+  resources :companies, only: [:index, :show, :edit, :update, :destroy]
   resources :updates, only: [:index, :create]
 end
