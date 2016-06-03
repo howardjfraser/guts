@@ -37,6 +37,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def find_user
+    # TODO: find by user_id for edit / update?
     @user = User.find_by(email: params[:email])
   end
 
