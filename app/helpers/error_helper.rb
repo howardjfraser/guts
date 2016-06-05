@@ -18,6 +18,6 @@ module ErrorHelper
   end
 
   def error(msg)
-    content_tag(:span, msg, class: 'text-danger')
+    content_tag(:span, msg, class: 'text-danger strong')
   end
 end
