@@ -1,6 +1,6 @@
 <header id="nav">
 
-  <div id="nav-container" class="container p-y-2">
+  <div id="nav-container" class="container p-t-2 p-b-1">
 
     <% if flash[:notice] %>
       <%= render partial: 'shared/flash', locals: { msg: flash[:notice] } %>
@@ -9,7 +9,7 @@
     <% if logged_in? %>
 
       <% if current_user.root? %>
-        <div class="text-muted pull-xs-right">
+        <div class="text-muted pull-xs-right p-b-1">
           <%= link_to current_company.name, companies_path %>
         </div>
       <% end %>
