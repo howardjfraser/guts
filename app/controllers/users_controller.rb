@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to users_url, notice: "#{@user.name} has been deleted"
     else
-      redirect_to users_url, notice: "You can’t delete yourself"
+      redirect_to users_url, notice: 'You can’t delete yourself'
     end
   end
 

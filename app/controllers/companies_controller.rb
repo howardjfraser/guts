@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
 
   def destroy
     if @company == current_company
-      redirect_to companies_url, notice: "Can’t delete currently selected company"
+      redirect_to companies_url, notice: 'Can’t delete currently selected company'
     else
       @company.destroy
       redirect_to companies_url, notice: "#{@company.name} deleted"

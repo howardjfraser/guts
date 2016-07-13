@@ -6,11 +6,11 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     check_access(:success, @gareth, @brent, @howard) { get user_path @brent }
   end
 
-  test "can’t view user from a different company" do
+  test 'can’t view user from a different company' do
     check_access(:forbidden, @brent) { get user_path @michael }
   end
 
-  test "can’t view root user" do
+  test 'can’t view root user' do
     check_access(:forbidden, @howard) { get user_path @howard }
   end
 

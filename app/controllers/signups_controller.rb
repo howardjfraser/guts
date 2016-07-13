@@ -31,7 +31,7 @@ class SignupsController < ApplicationController
 
   def validate
     @company.valid? # runs other validations
-    @company.users[0].errors.add(:password, "can’t be empty")
+    @company.users[0].errors.add(:password, 'can’t be empty')
   end
 
   def set_up_owner
