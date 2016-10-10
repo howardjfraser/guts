@@ -1,5 +1,10 @@
 <% provide :title, 'Updates' %>
 
+<div class="alert alert-warning text-xs-center">
+  This page is a board where all users can leave short messages. It is a simple example application and not
+  part of user management.
+</div>
+
 <% unless current_user.root? %>
   <div class="row">
     <%= form_for Update.new, remote: true, authenticity_token: true do |f| %>
