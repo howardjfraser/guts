@@ -1,6 +1,5 @@
-# Ruby on Rails Tutorial: sample application
+# Guts
 
-This is the sample application for the
-[*Ruby on Rails Tutorial:
-Learn Web Development with Rails*](http://www.railstutorial.org/)
-by [Michael Hartl](http://www.michaelhartl.com/).
+A user management system for multi-tenant SaaS products. Includes sign up, user management, self service password management for users.
+
+Based on Michael Hartl’s [Rails tutorial](https://www.railstutorial.org).
