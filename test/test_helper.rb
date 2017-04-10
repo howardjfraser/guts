@@ -3,7 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 require 'minitest/reporters'
-Minitest::Reporters.use!
+reporter_options = { color: true, slow_count: 5 }
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
 
 require 'simplecov'
 SimpleCov.start 'rails'
