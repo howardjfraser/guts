@@ -36,19 +36,19 @@ class SessionsNewCreateTest < ActionDispatch::IntegrationTest
   end
 
   test 'login with remembering' do
-    post session_path, session: { email: 'david@office.com', password: 'password', remember: 1 }
+    post session_path, session: { email: 'david@office.com', password: 'password', remember_me: 1 }
     assert_equal cookies['remember_token'], assigns(:user).remember_token
   end
 
   test 'login without remembering' do
-    post session_path, session: { email: 'david@office.com', password: 'password', remember: 0 }
+    post session_path, session: { email: 'david@office.com', password: 'password', remember_me: 0 }
     assert_nil cookies['remember_token']
   end
 
   test 'login with friendly forwarding' do
     get edit_user_path(@brent)
     assert_equal edit_user_url(@brent), session[:forwarding_url]
-    post session_path, session: { email: 'david@office.com', password: 'password', remember: 0 }
+    post session_path, session: { email: 'david@office.com', password: 'password', remember_me: 0 }
     assert_redirected_to edit_user_path(@brent)
     assert_nil session[:forwarding_url]
   end
