@@ -92,6 +92,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     multi_json (1.13.1)
+    nio4r (2.5.8)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     parallel (1.12.1)
@@ -100,7 +101,8 @@ GEM
     pg (1.0.0)
     powerpack (0.1.1)
     public_suffix (3.0.2)
-    puma (3.11.4)
+    puma (4.3.9)
+      nio4r (~> 2.0)
     rack (1.6.10)
     rack-test (0.6.3)
       rack (>= 1.0)
